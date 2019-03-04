@@ -230,9 +230,9 @@ Plug 'markonm/traces.vim'
 Plug 'godlygeek/tabular'    
 let g:taabular_loaded = 1
 
-" 彩虹括号 利用区分括号配对
-Plug 'luochen1990/rainbow'
-let g:rainbow_active = 1
+" " 彩虹括号 利用区分括号配对
+" Plug 'luochen1990/rainbow'
+" let g:rainbow_active = 1
 
 " }}}
 
