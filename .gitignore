@@ -1,0 +1,53 @@
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+# Debug files
+*.dSYM/
+
+# commtary file
+doc
+syntax
+
+# OS X 
+.DS_Store
+
+# generate file
+.vim/.netrwhist
+.vim/autoload/plug.vim
+
+# the not need of dir
+# the bundle of vim
+bundle
+.tmux/plugins
+.tmux/resurrect
+
+
+# tags file
+tags
