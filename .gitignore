@@ -41,6 +41,7 @@ syntax
 # generate file
 .vim/.netrwhist
 .vim/autoload/plug.vim
+.vim/plugin
 
 # the not need of dir
 # the bundle of vim
