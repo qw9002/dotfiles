@@ -82,6 +82,9 @@ augroup filetype_indent
 augroup END
 " }}}
 
+set background=dark
+colorscheme dracula
+
 " 使用标签来折叠vim配置文件
 augroup filetype_vim
     autocmd!

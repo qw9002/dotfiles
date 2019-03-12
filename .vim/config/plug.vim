@@ -221,9 +221,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " 界面颜色主题{{{
 
-" dracula{{{
 Plug 'dracula/vim', { 'as': 'dracula' }
-" }}}
 
 " }}}
 
