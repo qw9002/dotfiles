@@ -83,30 +83,6 @@ Plug 'nelstrom/vim-qargs'
 
 " 语法高亮检测、自动补全及扩展高亮显示{{{
 
-" YouCompleteme智能补全{{{
-" let options = ' --clang-completer --go-completer'
-Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --clang-completer' }
-" 触发快捷键设置
-let g:ycm_key_list_select_completion   = ['<C-n>']
-let g:ycm_key_list_previous_completion = ['<C-p>']
-let g:SuperTabDefaultCompletionType    = '<C-n>'
-" 不显示load python 提示
-let g:ycm_confirm_extra_conf=0
-" 通过ycm语法检测显示错误符号和警告符号
-let g:ycm_error_symbol   = '✗'
-let g:ycm_warning_symbol = '⚠'
-
-" 显示 quickfix 列表和 location 列表
-Plug 'Valloric/ListToggle'
-let g:lt_location_list_toggle_map = '<leader>l'
-let g:lt_quickfix_list_toggle_map = '<leader>q'
-let g:lt_height = 10        
-let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
-" }}}
-
-" 绝大多数语言语法高亮支持
-" Plug 'sheerun/vim-polyglot'
-
 " 语法检测{{{
 Plug 'w0rp/ale'
 " c 或 c++ 需要指定语法分析工具，否则会显示重复的两条数据
@@ -119,55 +95,6 @@ let g:ale_linters = {
 " 错误提示符及警告提示符
 let g:ale_sign_error='✗'
 let g:ale_sign_warning='⚠'                   
-
-" }}}
-
-" 标签文件自动生成 {{{
-" 需要下载Ctags brew install --HEAD universal-ctags/universal-ctags/universal-ctags
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'skywind3000/gutentags_plus'
-
-" 第一个 GTAGSLABEL 告诉 gtags 默认 C/C++/Java 等六种原生支持的代码直接使用
-" gtags 本地分析器，而其他语言使用 pygments 模块。
-" pip/pip3 install pygments ，ubuntu 下需要再安装 apt-get install python-pygments
-let g:gtagsconf_dir = expand('~/.gtags.conf')
-let $GTAGSLABEL = 'native-pygments'
-let $GTAGSCONF = g:gtagsconf_dir
-
-" gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
-let g:gutentags_project_root = [ '.root', '.svn', '.git', '.hg', '.project' ]
-
-" 去除生成标签的文件夹
-let g:gutentags_ctags_exclude = [ '*.min.js', '*.min.css', 'build', 'vendor', '.git', '*.vim/bundle/*', '.tmux' ]
-
-" 所生成的数据文件的名称
-let g:gutentags_ctags_tagfile = '.tags'
-
-" 同时开启 ctags 和 gtags 支持：
-let g:gutentags_modules = []
-if executable('ctags')
-    let g:gutentags_modules += ['ctags']
-endif
-if executable('gtags-cscope') && executable('gtags')
-    let g:gutentags_modules += ['gtags_cscope']
-endif
-
-" 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录
-let g:gutentags_cache_dir = expand('~/.cache/tags')
-
-" 配置 ctags 的参数
-let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extras=+q']
-let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
-let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
-
-" 如果使用 universal ctags 需要增加下面一行
-let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
-
-" 禁用 gutentags 自动加载 gtags 数据库的行为
-let g:gutentags_auto_add_gtags_cscope = 0
-
-" 用于调试
-" let g:gutentags_trace = 1
 
 " }}}
 
@@ -193,10 +120,6 @@ Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 let g:Lf_ShortcutF = '<nop>'
 let g:Lf_ShortcutB = '<nop>'
 nnoremap f :LeaderfFile<cr>
-nnoremap b :LeaderfBuffer<cr>
-nnoremap p :LeaderfFunction<cr>
-nnoremap t :LeaderfTag<cr>
-nnoremap m :LeaderfMru<cr>
 
 " }}}
 
