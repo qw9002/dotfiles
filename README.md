@@ -1,4 +1,11 @@
-## vim 及 zsh 配置安装
+# 使用 vim 及 zsh 配置安装
+
+在centos、ubuntu、mac中安装 vim
+```bash
+$ yum install vim       # centos
+$ apt-get install vim   # ubuntu
+$ brew install vim      # mac：需要安装 brew 命令行工具
+```
 
 如果你不想自己单独配置，或嫌配置麻烦，可以通过下面代码运行（不包括$）。
 
@@ -6,6 +13,7 @@
 $ git clone https://github.com/qw9002/dotfiles.git ~/ # 配置文件下载
 $ cd ~/dotfiles                                       # 进入配置文件
 $ ./install                                           # 环境所需软件安装、配置
+$ vim +PlugUpdate +qall # 安装 vim 配置插件
 ```
 `说明`：
 
