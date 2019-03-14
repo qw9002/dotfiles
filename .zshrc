@@ -81,16 +81,12 @@ done
 plugins=(
 git                     # git 命令别名alias
 github                  # 为github gem 添加自动补全功能，可以通过gem install github安装
-jira
-osx                     # cdf 切换命令行目录到finder显示目录，ofd 打开命令行地址到目录，pfs 返回finder选择的文件或目录。pfd返回最先打开的finder的位置，showfiles，hidefiles，quick-look， man-preview
 pip3
-proxychains4            # brew 代理下载，解决网络问题
 python                  # python解释器的补全
 sudo                    # 通过双击 ESC 在命令最前面添加 sudo
-vagrant                 # 可以为你提供可配置、可再生、便携的工作环境
 web-search              # [baidu|google|bing|ddg] 用什么搜索引擎[百度|谷歌|必应|duckduckgo]
 zsh-autosuggestions     # 智能提示输入 ctrl-f 确认补全, alt-f 补全单词
-zsh-completions
+zsh-completions         # 参数补全
 zsh-syntax-highlighting # 命令高亮插件
 )
 

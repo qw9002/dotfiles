@@ -95,17 +95,14 @@ let g:ycm_confirm_extra_conf=0
 " 通过ycm语法检测显示错误符号和警告符号
 let g:ycm_error_symbol   = '✗'
 let g:ycm_warning_symbol = '⚠'
+let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
 
 " 显示 quickfix 列表和 location 列表
 Plug 'Valloric/ListToggle'
 let g:lt_location_list_toggle_map = '<leader>l'
 let g:lt_quickfix_list_toggle_map = '<leader>q'
 let g:lt_height = 10        
-let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
 " }}}
-
-" 绝大多数语言语法高亮支持
-" Plug 'sheerun/vim-polyglot'
 
 " 语法检测{{{
 Plug 'w0rp/ale'
@@ -237,8 +234,8 @@ Plug 'godlygeek/tabular'
 let g:taabular_loaded = 1
 
 " " 彩虹括号 利用区分括号配对
-" Plug 'luochen1990/rainbow'
-" let g:rainbow_active = 1
+Plug 'luochen1990/rainbow'
+let g:rainbow_active = 1
 
 " }}}
 
