@@ -33,7 +33,6 @@ done
 
 # 引入 soft 中的dotfiles变量
 dotfiles=(
-.eslintrc.js       # eslint（关于javascript 语法规则错误提示）配置文件
 .gtags.conf        # 支持解析标签
 .vim               # vim 插件目录
 .vimrc             # vim 编辑器配置文件
