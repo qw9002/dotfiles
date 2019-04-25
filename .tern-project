@@ -1,0 +1,13 @@
+{
+  "libs": [
+    "ecmascript"
+  ],
+  "loadEagerly": [],
+  "plugins": {
+    "requirejs": {
+      "baseURL": "./",
+      "paths": {}
+    }
+  }
+}
+

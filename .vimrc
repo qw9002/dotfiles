@@ -11,9 +11,9 @@ runtime ftplugin/man.vim
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 " 编码设置
 set encoding=utf-8
-
 " 插件安装配置文件和提高效率小技巧--------------------------------------------
 
+set ts=4 sw=4 sts=4
 " 跳转到该文件，通过游标聚焦在bundles.vim路径上按gf键跳转至文件，再通过C-O回跳
 " 插件的配置文件，把基本配置和插件配置分开
 source ~/.vim/config/plug.vim
