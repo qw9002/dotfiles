@@ -40,6 +40,8 @@ let g:ycm_complete_in_strings=1
 " let g:ycm_key_invoke_completion = '<c-z>'
 set completeopt=menu,menuone
 
+map gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
 " 触发语义补全
 let g:ycm_semantic_triggers = {
             \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
