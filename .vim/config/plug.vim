@@ -3,7 +3,7 @@ set nocompatible
 filetype off
 
 " 插件的存放的根文件夹一律在~/.vim/bundle/下
-" pulg管理插件软件开始运行
+" plug管理插件软件开始运行
 call plug#begin('~/.vim/bundle')
 
 " vim中文说明文档 ./vimcdoc.sh -i安装
@@ -168,19 +168,6 @@ let g:gutentags_auto_add_gtags_cscope = 0
 
 " }}}
 
-" snippets 片段扩展 {{{
-" 通过 VimL 语言的支持
-Plug 'honza/vim-snippets'
-" 需要通过 Python 的支持
-Plug 'SirVer/ultisnips'
-let g:UltiSnipsSnippetDirectories  = ["UltiSnips"]
-let g:UltiSnipsSnippetsDir         = ["mysnips"] " '~/.vim/bundle/ultisnips/mysnips'
-let g:UltiSnipsExpandTrigger       = "<Tab>"
-let g:UltiSnipsListSnippets        = '<C-Tab>'
-let g:UltiSnipsJumpForwardTrigger  = "<Tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<S-Tab>"
-" }}}
-
 " }}}
 
 " 文件搜索，匹配，定位 {{{
@@ -236,6 +223,19 @@ let g:taabular_loaded = 1
 " " 彩虹括号 利用区分括号配对
 Plug 'luochen1990/rainbow'
 let g:rainbow_active = 1
+
+" snippets 片段扩展 {{{
+" 通过 VimL 语言的支持
+Plug 'honza/vim-snippets'
+" 需要通过 Python 的支持
+Plug 'SirVer/ultisnips'
+let g:UltiSnipsSnippetDirectories  = ["UltiSnips"]
+let g:UltiSnipsSnippetsDir         = ["mysnips"] " '~/.vim/bundle/ultisnips/mysnips'
+let g:UltiSnipsExpandTrigger       = "<Tab>"
+let g:UltiSnipsListSnippets        = '<C-Tab>'
+let g:UltiSnipsJumpForwardTrigger  = "<Tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<S-Tab>"
+" }}}
 
 " }}}
 
