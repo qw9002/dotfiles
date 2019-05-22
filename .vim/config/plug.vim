@@ -98,28 +98,9 @@ let g:ale_sign_warning='⚠'
 
 " }}}
 
-" snippets 片段扩展 {{{
-" 通过 VimL 语言的支持
-Plug 'honza/vim-snippets'
-" 需要通过 Python 的支持
-Plug 'SirVer/ultisnips'
-let g:UltiSnipsSnippetDirectories  = ["UltiSnips"]
-let g:UltiSnipsSnippetsDir         = ["mysnips"] " '~/.vim/bundle/ultisnips/mysnips'
-let g:UltiSnipsExpandTrigger       = "<Tab>"
-let g:UltiSnipsListSnippets        = '<C-Tab>'
-let g:UltiSnipsJumpForwardTrigger  = "<Tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<S-Tab>"
-" }}}
-
 " }}}
 
 " 文件搜索，匹配，定位 {{{
-
-" 快速查查文件，缓存，函数等
-Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
-let g:Lf_ShortcutF = '<nop>'
-let g:Lf_ShortcutB = '<nop>'
-nnoremap f :LeaderfFile<cr>
 
 " }}}
 
