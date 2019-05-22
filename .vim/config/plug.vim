@@ -6,9 +6,6 @@ filetype off
 " plug管理插件软件开始运行
 call plug#begin('~/.vim/bundle')
 
-" vim中文说明文档 ./vimcdoc.sh -i安装
-Plug 'yianwillis/vimcdoc', { 'do': './vimcdoc.sh -i' }
-
 " 打开关闭折叠效果 za
 "  基本文本操作功能的增强 {{{
 
