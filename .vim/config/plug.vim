@@ -3,7 +3,7 @@ set nocompatible
 filetype off
 
 " 插件的存放的根文件夹一律在~/.vim/bundle/下
-" pulg管理插件软件开始运行
+" plug管理插件软件开始运行
 call plug#begin('~/.vim/bundle')
 
 " vim中文说明文档 ./vimcdoc.sh -i安装

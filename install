@@ -9,13 +9,17 @@ if [[ ! -e ~/.oh-my-zsh ]]; then
     curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
 fi
 
+if [[ ! -e ~/antigen.zsh ]]; then
+    curl -L git.io/antigen > ~/.antigen.zsh
+fi
+
 #######################################################################
 #                          需要创建的文件目录                         #
 #######################################################################
 
 dires=(
-${dotfileDir}/.vim/bundle/. # 创建插件安装文件夹
-~/backup/.                  # 创建备份配置文件夹
+    ${dotfileDir}/.vim/bundle/. # 创建插件安装文件夹
+    ~/backup/.                  # 创建备份配置文件夹
 )
 
 for dir in ${dires[@]}; do
@@ -33,13 +37,11 @@ done
 
 # 引入 soft 中的dotfiles变量
 dotfiles=(
-.eslintrc.js       # eslint（关于javascript 语法规则错误提示）配置文件
-.gtags.conf
-.tern-project      # javascript 语义补全配置文件
-.vim               # vim 插件目录
-.vimrc             # vim 编辑器配置文件
-.ycm_extra_conf.py # c 语言语义补全配置文件
-.zshrc             # zsh 的配置文件
+    .gtags.conf        # 支持解析标签
+    .vim               # vim 插件目录
+    .vimrc             # vim 编辑器配置文件
+    .ycm_extra_conf.py # c 语言语义补全配置文件
+    .zshrc             # zsh 的配置文件
 )
 
 # 匹配的进行删除

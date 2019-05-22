@@ -7,25 +7,9 @@ if [[ -L ${SOURCE} ]]; then
 fi
 dotfileDir=${SOURCE%/*}
 
-# ZSH的环境变量 oh-my-zsh 安装位置
-export ZSH=$HOME/.oh-my-zsh
-
 #######################################################################
-#                              主题设置                               #
+#                           ohmyzsh 设置                              #
 #######################################################################
-# 主题列表在 ~/.oh-my-zsh/themes/
-# 详情请看 https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-# 如果设置为 "random", 每次开启都会是不同的主题。例如 agnoster pygmalion。
-# 在tmux配置文件中设置set -g default-terminal "screen-256color"
-# 打开tmux 后TERM 的值就会是screen-256color
-# xterm-256color 是在 iterm2 中设置返回终端类型
-# "$TERM" = "screen-256color" || -n "$TMUX" || "$TERM" = "xterm-256color"
-ZSH_THEME="pygmalion"
-
-# 设置 ZSH_THEME = random 这个变量加载的主题列表
-# 从这个数组变量中加载 zsh 主题而不是一个空数组
-# ZSH_THEME_RANDOM_CANDIDATES=( "agnoster" "bullet-train" )
-
 # 取消注释以下行以区分大小写。
 # CASE_SENSITIVE="true"
 
@@ -60,41 +44,30 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # 有三种方式: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 HIST_STAMPS="yyyy-mm-dd"
 
-# zsh插件安装，方便在各个系统环境中安装
-zshPlugins=(
-zsh-autosuggestions     # zsh 智能提示
-zsh-completions         # zsh 补全
-zsh-syntax-highlighting # zsh 高亮插件
-)
-
-for plugin in ${zshPlugins[@]}; do
-    grep -q git `which git`
-    if [[ $? -eq 0 && ! -e $ZSH/plugins/${plugin} ]]; then
-        git clone https://github.com/zsh-users/${plugin} $ZSH/plugins/${plugin}
-    fi
-done
+source $HOME/.antigen.zsh
+# 加载 oh-my-zsh 库.
+antigen use oh-my-zsh
 
 # 任何你想要加载的插件 (可在 ~/.oh-my-zsh/plugins/* 中找到)
-# 自定义插件可能被添加到 ~/.oh-my-zsh/custom/plugins/
-# 例子格式: plugins=(rails git textmate ruby lighthouse)
 # 终端插件启用 enable ，如果添加太多启动速度会比较慢
-plugins=(
-git                     # git 命令别名alias
-github                  # 为github gem 添加自动补全功能，可以通过gem install github安装
-jira
-osx                     # cdf 切换命令行目录到finder显示目录，ofd 打开命令行地址到目录，pfs 返回finder选择的文件或目录。pfd返回最先打开的finder的位置，showfiles，hidefiles，quick-look， man-preview
-pip3
-proxychains4            # brew 代理下载，解决网络问题
-python                  # python解释器的补全
-sudo                    # 通过双击 ESC 在命令最前面添加 sudo
-vagrant                 # 可以为你提供可配置、可再生、便携的工作环境
-web-search              # [baidu|google|bing|ddg] 用什么搜索引擎[百度|谷歌|必应|duckduckgo]
-zsh-autosuggestions     # 智能提示输入 ctrl-f 确认补全, alt-f 补全单词
-zsh-completions
-zsh-syntax-highlighting # 命令高亮插件
-)
+antigen bundle git                     # git 命令别名alias
+antigen bundle npm
+antigen bundle python                  # python解释器的补全
+antigen bundle sudo                    # 通过双击 ESC 在命令最前面添加 sudo
+# antigen bundle vagrant                 # 可以为你提供可配置、可再生、便携的工作环境
 
-source $ZSH/oh-my-zsh.sh
+# Syntax highlighting bundle.
+antigen bundle zsh-users/zsh-autosuggestions     # 智能提示输入 ctrl-f 确认补全, alt-f 补全单词
+antigen bundle zsh-users/zsh-completions
+antigen bundle zsh-users/zsh-syntax-highlighting # 命令高亮插件
+antigen bundle skywind3000/z.lua # 命令高亮插件
+
+# 加载主题所需列表在 ~/.oh-my-zsh/themes/
+# 详情请看 https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+antigen theme robbyrussell
+
+# 告诉 Antigen 完成工作.
+antigen apply
 
 # 用户配置
 
@@ -108,10 +81,10 @@ export LESSCHARSET=utf-8
 
 # 本地和远程会话的首选编辑器
 # if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+    #   export EDITOR='vim'
+    # else
+        #   export EDITOR='mvim'
+        # fi
 
 # 编译标志
 # export ARCHFLAGS="-arch x86_64"
@@ -137,6 +110,12 @@ alias ll='ls -l'
 alias tmux='tmux -2'
 alias vi='vim'
 alias pdf='mupdf-gl'
+
+# z 命令别名
+alias zc='z -c' # 严格匹配当前路径的子路径
+alias zz='z -i' # 使用交互式选择模式
+alias zf='z -I' # 使用 fzf 对多个结果进行选择
+alias zb='z -b' # 快速回到父目录
 
 # 在命令行直接输入文件名后缀，会在 vim 中打开 ----------------------------------
 
@@ -171,3 +150,4 @@ function mkcd() { mkdir -p "$@" && cd "$_"; }
 
 # macvim 中启用终端模拟器的时候，解决智能提示白色的问题
 export TERM=xterm-256color
+
