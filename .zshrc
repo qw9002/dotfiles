@@ -44,7 +44,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # 有三种方式: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 HIST_STAMPS="yyyy-mm-dd"
 
-source $HOME/antigen.zsh
+source $HOME/.antigen.zsh
 # 加载 oh-my-zsh 库.
 antigen use oh-my-zsh
 
