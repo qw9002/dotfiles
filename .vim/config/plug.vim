@@ -239,6 +239,15 @@ let g:UltiSnipsJumpBackwardTrigger = "<S-Tab>"
 
 " }}}
 
+" 内容匹配 Ag 类似grep
+Plug 'rking/ag.vim'
+let g:ag_prg="/usr/local/bin/ag --vimgrep"
+" let g:ag_prg="/usr/local/bin/ag --vimgrep --smart-case"
+" 搜索通过项目目录代替当前目录
+let g:ag_working_path_mode="r"
+let g:ag_highlight=1
+let g:ag_format="%f:%l:%m"
+
 call plug#end()
 
 filetype plugin indent on
