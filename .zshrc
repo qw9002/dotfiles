@@ -4,19 +4,20 @@ source $HOME/.antigen.zsh
 # 加载 oh-my-zsh 库.
 antigen use oh-my-zsh
 
-# 任何你想要加载的插件 (可在 ~/.oh-my-zsh/plugins/* 中找到)
+# 任何你想要加载的插件
+# (可在 ~/.antigen/bundles/robbyrussell/oh-my-zsh/plugins/* 中找到)
 # 终端插件启用 enable ，如果添加太多启动速度会比较慢
-antigen bundle git                     # git 命令别名alias
+antigen bundle git     # git 命令别名alias
 antigen bundle npm
-antigen bundle python                  # python解释器的补全
-antigen bundle sudo                    # 通过双击 ESC 在命令最前面添加 sudo
-# antigen bundle vagrant                 # 可以为你提供可配置、可再生、便携的工作环境
+antigen bundle python  # python解释器的补全
+antigen bundle sudo    # 通过双击 ESC 在命令最前面添加 sudo
+antigen bundle vagrant # 可以为你提供可配置、可再生、便携的工作环境
 
 # Syntax highlighting bundle.
 antigen bundle zsh-users/zsh-autosuggestions     # 智能提示输入 ctrl-f 确认补全, alt-f 补全单词
-antigen bundle zsh-users/zsh-completions
+antigen bundle zsh-users/zsh-completions         # 命令智能补全
 antigen bundle zsh-users/zsh-syntax-highlighting # 命令高亮插件
-antigen bundle skywind3000/z.lua # 命令高亮插件
+antigen bundle skywind3000/z.lua                 # 智能目录跳转
 
 # 加载主题所需列表在 ~/.oh-my-zsh/themes/
 # 详情请看 https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
