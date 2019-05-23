@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 
-# 安装 oh-my-zsh 插件
-if [[ ! -e $HOME/.oh-my-zsh ]]; then
-    curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
-fi
-
+# 通过 antigen 管理 oh-my-zsh
 if [[ ! -e $HOME/.antigen.zsh ]]; then
     curl -L git.io/antigen > $HOME/.antigen.zsh
 fi
