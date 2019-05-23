@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 source $HOME/.antigen.zsh
 # 加载 oh-my-zsh 库.
 antigen use oh-my-zsh
