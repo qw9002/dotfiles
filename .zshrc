@@ -16,9 +16,9 @@ antigen bundle sudo    # 通过双击 ESC 在命令最前面添加 sudo
 
 # Syntax highlighting bundle.
 antigen bundle zsh-users/zsh-autosuggestions     # 智能提示输入 ctrl-f 确认补全, alt-f 补全单词
-antigen bundle zsh-users/zsh-completions
+antigen bundle zsh-users/zsh-completions         # 命令补全
 antigen bundle zsh-users/zsh-syntax-highlighting # 命令高亮插件
-antigen bundle skywind3000/z.lua # 命令高亮插件
+antigen bundle skywind3000/z.lua                 # 快速跳转到想要去到目录
 
 # 加载主题所需列表在 ~/.oh-my-zsh/themes/
 # 详情请看 https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
@@ -116,7 +116,6 @@ alias zb='z -b' # 快速回到父目录
 # 用什么编辑器打开
 export EDITOR='vim'
 
-alias envconfig="${EDITOR} ${dotfileDir}/env.sh"
 alias zshconfig="${EDITOR} ~/.zshrc"
 alias ohmyzsh="${EDITOR} ~/.oh-my-zsh"
 
