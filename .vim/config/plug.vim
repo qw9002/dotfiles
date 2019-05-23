@@ -78,8 +78,6 @@ Plug 'nelstrom/vim-qargs'
 
 " }}}
 
-" 语法高亮检测、自动补全及扩展高亮显示{{{
-
 " 语法检测{{{
 Plug 'w0rp/ale'
 " c 或 c++ 需要指定语法分析工具，否则会显示重复的两条数据
@@ -91,34 +89,25 @@ let g:ale_linters = {
             \}
 " 错误提示符及警告提示符
 let g:ale_sign_error='✗'
-let g:ale_sign_warning='⚠'                   
-
-" }}}
-
-" }}}
-
-" 文件搜索，匹配，定位 {{{
+let g:ale_sign_warning='⚠'
 
 " }}}
 
 " 窗口显示管理，美化布置 {{{
 
-" 状态栏效果显示 airline {{{
+" 状态栏效果显示 airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 let g:airline_powerline_fonts = 1
 let g:airline_theme='papercolor'
-" }}}
 
-" 目录管理nerdtree{{{
+" 目录管理nerdtree
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-" 设置显示／隐藏标签列表 
-nnoremap <leader>8 :NERDTreeToggle<cr> 
+" 设置显示／隐藏标签列表
+nnoremap <leader>8 :NERDTreeToggle<cr>
 
 " nerdtree 插件显示修改状态
 Plug 'Xuyuanp/nerdtree-git-plugin'
-
-" }}}
 
 " }}}
 
