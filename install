@@ -1,29 +1,31 @@
 #!/usr/bin/env bash
 
 # 安装 oh-my-zsh 插件
-if [[ ! -e ~/.oh-my-zsh ]]; then
+if [[ ! -e $HOME/.oh-my-zsh ]]; then
     curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
 fi
 
-if [[ ! -e ~/.antigen.zsh ]]; then
-    curl -L git.io/antigen > ~/.antigen.zsh
+if [[ ! -e $HOME/.antigen.zsh ]]; then
+    curl -L git.io/antigen > $HOME/.antigen.zsh
 fi
 
 #######################################################################
 #                          需要创建的文件目录                         #
 #######################################################################
 
+# 配置目录
+dotfileDir=$HOME/dotfiles
 dires=(
     ${dotfileDir}/.vim/bundle/. # 创建插件安装文件夹
-    ~/backup/.                  # 创建备份配置文件夹
+    $HOME/backup/.                  # 创建备份配置文件夹
 )
 
 for dir in ${dires[@]}; do
     if [[ ! -e ${dir%/*} ]]; then
         mkdir -p ${dir%/*}
     fi
-    if [[ ${dir##*/} != . && ! -e ~/${dir} ]]; then
-        ln -s ${dotfileDir}/${dir##*/} ~/${dir}
+    if [[ ${dir##*/} != . && ! -e $HOME/${dir} ]]; then
+        ln -s ${dotfileDir}/${dir##*/} $HOME/${dir}
     fi
 done
 
@@ -46,18 +48,18 @@ dotfiles=(
 # ${var([#%]|##|%%)pattern} * 万用符
 # 如果配置文件在安装之前存在放入备份文件夹
 for dotfile in ${dotfiles[@]}; do
-    if [[ -L ~/${dotfile##*/} && -L ~/backup/${dotfile##*/} ]]; then
-        echo "删除 ~/backup/${dotfile##*/} 文件"
-        rm ~/backup/${dotfile##*/}
-        echo "移动 ~/${dotfile##*/} 文件到 backup 文件夹"
-        mv ~/${dotfile##*/} ~/backup
-    elif [[ -L ~/${dotfile##*/} || -e ~/${dotfile##*/} && ! -L ~/backup/${dotfile##*/} ]]; then
-        echo "移动 ~/${dotfile##*/} 文件到 backup 文件夹"
-        mv ~/${dotfile##*/} ~/backup
+    if [[ -L $HOME/${dotfile##*/} && -L $HOME/backup/${dotfile##*/} ]]; then
+        echo "删除 $HOME/backup/${dotfile##*/} 文件"
+        rm $HOME/backup/${dotfile##*/}
+        echo "移动 $HOME/${dotfile##*/} 文件到 backup 文件夹"
+        mv $HOME/${dotfile##*/} $HOME/backup
+    elif [[ -L $HOME/${dotfile##*/} || -e $HOME/${dotfile##*/} && ! -L $HOME/backup/${dotfile##*/} ]]; then
+        echo "移动 $HOME/${dotfile##*/} 文件到 backup 文件夹"
+        mv $HOME/${dotfile##*/} $HOME/backup
     fi
-    echo -e "软链接配置文件 ${dotfileDir}/${dotfile} 到 ~/${dotfile##*/}\n"
+    echo -e "软链接配置文件 ${dotfileDir}/${dotfile} 到 $HOME/${dotfile##*/}\n"
     ## 把配置文件软链接到用户主目录中
-    ln -s ${dotfileDir}/${dotfile} ~/${dotfile##*/}
+    ln -s ${dotfileDir}/${dotfile} $HOME/${dotfile##*/}
 done
 
 #######################################################################
@@ -65,18 +67,18 @@ done
 #######################################################################
 
 if [[ `uname -s` == 'MSYS_NT-6.1' || `uname -s` == 'MINGW64_NT-6.1' ]]; then
-    if [[ ! -e ~/vimfiles/autoload/plug.vim ]]; then
-        curl -fLo ~/vimfiles/autoload/plug.vim --create-dirs \
+    if [[ ! -e $HOME/vimfiles/autoload/plug.vim ]]; then
+        curl -fLo $HOME/vimfiles/autoload/plug.vim --create-dirs \
             https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     fi
 elif [[ `uname -s` == 'Darwin' ]]; then
-    if [[ ! -e ~/.vim/autoload/plug.vim ]]; then
-        curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    if [[ ! -e $HOME/.vim/autoload/plug.vim ]]; then
+        curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
             https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     fi
 elif [[ `uname -s` == 'Linux' ]]; then
-    if [[ ! -e ~/.vim/autoload/plug.vim ]]; then
-        curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    if [[ ! -e $HOME/.vim/autoload/plug.vim ]]; then
+        curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
             https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     fi
 else
