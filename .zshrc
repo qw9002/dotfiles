@@ -1,11 +1,27 @@
-SOURCE_NAME=${(%):-%N}
-SOURCE=$( cd "$( dirname ${SOURCE_NAME} )" && pwd )
-SOURCE_NAME=${SOURCE_NAME##*/}
-SOURCE=${SOURCE}/${SOURCE_NAME}
-if [[ -L ${SOURCE} ]]; then
-    SOURCE=$(readlink ${SOURCE})
-fi
-dotfileDir=${SOURCE%/*}
+source $HOME/.antigen.zsh
+# 加载 oh-my-zsh 库.
+antigen use oh-my-zsh
+
+# 任何你想要加载的插件 (可在 ~/.oh-my-zsh/plugins/* 中找到)
+# 终端插件启用 enable ，如果添加太多启动速度会比较慢
+antigen bundle git                     # git 命令别名alias
+antigen bundle npm
+antigen bundle python                  # python解释器的补全
+antigen bundle sudo                    # 通过双击 ESC 在命令最前面添加 sudo
+# antigen bundle vagrant                 # 可以为你提供可配置、可再生、便携的工作环境
+
+# Syntax highlighting bundle.
+antigen bundle zsh-users/zsh-autosuggestions     # 智能提示输入 ctrl-f 确认补全, alt-f 补全单词
+antigen bundle zsh-users/zsh-completions
+antigen bundle zsh-users/zsh-syntax-highlighting # 命令高亮插件
+antigen bundle skywind3000/z.lua # 命令高亮插件
+
+# 加载主题所需列表在 ~/.oh-my-zsh/themes/
+# 详情请看 https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+antigen theme robbyrussell
+
+# 告诉 Antigen 完成工作.
+antigen apply
 
 #######################################################################
 #                           ohmyzsh 设置                              #
@@ -43,31 +59,6 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # 历史命令日期显示格式
 # 有三种方式: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 HIST_STAMPS="yyyy-mm-dd"
-
-source $HOME/.antigen.zsh
-# 加载 oh-my-zsh 库.
-antigen use oh-my-zsh
-
-# 任何你想要加载的插件 (可在 ~/.oh-my-zsh/plugins/* 中找到)
-# 终端插件启用 enable ，如果添加太多启动速度会比较慢
-antigen bundle git                     # git 命令别名alias
-antigen bundle npm
-antigen bundle python                  # python解释器的补全
-antigen bundle sudo                    # 通过双击 ESC 在命令最前面添加 sudo
-# antigen bundle vagrant                 # 可以为你提供可配置、可再生、便携的工作环境
-
-# Syntax highlighting bundle.
-antigen bundle zsh-users/zsh-autosuggestions     # 智能提示输入 ctrl-f 确认补全, alt-f 补全单词
-antigen bundle zsh-users/zsh-completions
-antigen bundle zsh-users/zsh-syntax-highlighting # 命令高亮插件
-antigen bundle skywind3000/z.lua # 命令高亮插件
-
-# 加载主题所需列表在 ~/.oh-my-zsh/themes/
-# 详情请看 https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-antigen theme robbyrussell
-
-# 告诉 Antigen 完成工作.
-antigen apply
 
 # 用户配置
 
@@ -122,7 +113,6 @@ alias zb='z -b' # 快速回到父目录
 # 用什么编辑器打开
 export EDITOR='vim'
 
-alias envconfig="${EDITOR} ${dotfileDir}/env.sh"
 alias zshconfig="${EDITOR} ~/.zshrc"
 alias ohmyzsh="${EDITOR} ~/.oh-my-zsh"
 
