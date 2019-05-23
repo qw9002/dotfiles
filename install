@@ -4,8 +4,8 @@
 dotfileDir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
 # 通过 antigen 管理 oh-my-zsh
-if [[ ! -e $dotfileDir/antigen.zsh ]]; then
-    curl -L git.io/antigen > $dotfileDir/antigen.zsh
+if [[ ! -e $HOME/.antigen.zsh ]]; then
+    curl -L git.io/antigen > $HOME/.antigen.zsh
 fi
 
 #######################################################################
