@@ -141,6 +141,7 @@ function r() { grep "$1" ${@:2} -R . }
 
 # mkdir and cd
 function mkcd() { mkdir -p "$@" && cd "$_"; }
+eval "$(lua ~/.antigen/bundles/skywind3000/z.lua/z.lua  --init zsh once enhanced)"
 
 # macvim 中启用终端模拟器的时候，解决智能提示白色的问题
 export TERM=xterm-256color
