@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 
-# 根据系统创建相关目录
-# 配置文件放置目录
-dotfileDir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-
 # 安装 oh-my-zsh 插件
 if [[ ! -e ~/.oh-my-zsh ]]; then
     curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh

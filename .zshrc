@@ -1,12 +1,3 @@
-SOURCE_NAME=${(%):-%N}
-SOURCE=$( cd "$( dirname ${SOURCE_NAME} )" && pwd )
-SOURCE_NAME=${SOURCE_NAME##*/}
-SOURCE=${SOURCE}/${SOURCE_NAME}
-if [[ -L ${SOURCE} ]]; then
-    SOURCE=$(readlink ${SOURCE})
-fi
-dotfileDir=${SOURCE%/*}
-
 #######################################################################
 #                           ohmyzsh 设置                              #
 #######################################################################
@@ -110,9 +101,7 @@ alias grep="grep --color=auto"
 alias javac="javac -J-Dfile.encoding=utf8"
 alias la='ls -a'
 alias ll='ls -l'
-alias tmux='tmux -2'
 alias vi='vim'
-alias pdf='mupdf-gl'
 
 # z 命令别名
 alias zc='z -c' # 严格匹配当前路径的子路径
