@@ -6,9 +6,6 @@ filetype off
 " plug管理插件软件开始运行
 call plug#begin('~/.vim/bundle')
 
-" vim中文说明文档 ./vimcdoc.sh -i安装
-Plug 'yianwillis/vimcdoc', { 'do': './vimcdoc.sh -i' }
-
 " 打开关闭折叠效果 za
 "  基本文本操作功能的增强 {{{
 
@@ -170,30 +167,14 @@ let g:gutentags_auto_add_gtags_cscope = 0
 
 " }}}
 
-" 文件搜索，匹配，定位 {{{
-
-" 快速查查文件，缓存，函数等
+" 快速查找文件，缓存，函数等
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 let g:Lf_ShortcutF = '<nop>'
 let g:Lf_ShortcutB = '<nop>'
 nnoremap f :LeaderfFile<cr>
-nnoremap b :LeaderfBuffer<cr>
-nnoremap p :LeaderfFunction<cr>
-nnoremap t :LeaderfTag<cr>
-nnoremap m :LeaderfMru<cr>
-
-" }}}
 
 " 窗口显示管理，美化布置 {{{
 
-" 状态栏效果显示 airline {{{
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-let g:airline_powerline_fonts = 1
-let g:airline_theme='papercolor'
-" }}}
-
-" 目录管理nerdtree{{{
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 " 设置显示／隐藏标签列表 
 nnoremap <leader>8 :NERDTreeToggle<cr> 
@@ -201,13 +182,14 @@ nnoremap <leader>8 :NERDTreeToggle<cr>
 " nerdtree 插件显示修改状态
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
-" }}}
+" 状态栏效果显示 airline
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+let g:airline_powerline_fonts = 1
+let g:airline_theme='papercolor'
 
-" 界面颜色主题{{{
-
+" 界面颜色主题
 Plug 'dracula/vim', { 'as': 'dracula' }
-
-" }}}
 
 " }}}
 
@@ -238,15 +220,6 @@ let g:UltiSnipsJumpBackwardTrigger = "<S-Tab>"
 " }}}
 
 " }}}
-
-" 内容匹配 Ag 类似grep
-Plug 'rking/ag.vim'
-let g:ag_prg="/usr/local/bin/ag --vimgrep"
-" let g:ag_prg="/usr/local/bin/ag --vimgrep --smart-case"
-" 搜索通过项目目录代替当前目录
-let g:ag_working_path_mode="r"
-let g:ag_highlight=1
-let g:ag_format="%f:%l:%m"
 
 call plug#end()
 
