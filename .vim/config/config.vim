@@ -76,6 +76,7 @@ augroup filetype_indent
     autocmd filetype html        setlocal ts=2 sw=2 sts=2
     autocmd filetype java        setlocal ts=4 sw=4 sts=4
     autocmd filetype javascript  setlocal ts=2 sw=2 sts=2
+    autocmd filetype typescript  setlocal ts=2 sw=2 sts=2
     autocmd filetype json        setlocal ts=2 sw=2 sts=2
     autocmd filetype make        setlocal ts=4 sw=4 sts=4
     autocmd filetype python      setlocal ts=2 sw=2 sts=2
