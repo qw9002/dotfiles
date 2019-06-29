@@ -26,6 +26,14 @@ nnoremap [g :tabprevious<cr>
 nnoremap [G :tabfirst<cr>
 nnoremap ]G :tablast<cr>
 
+" 添加文件到缓冲中时不加入下列类型文件
+set wildignore=*.swp,*.bak " 临时文件
+set wildignore+=*.pyc,*.class,*.sln,*.Master,*.csproj,*.csproj.user,*.cache,*.dll,*.pdb,*.min.*,*.o " 编译文件
+set wildignore+=*/.git/**/*,*/.hg/**/*,*/.svn/**/* " 版本控制文件
+set wildignore+=tags " 标签文件
+set wildignore+=*.tar.* " 压缩文件
+
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                插件自定义                                  "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -68,6 +76,7 @@ let g:ycm_filetype_whitelist = {
 " 缩进控制 ts{tabstop} sw{shiftwidth} sts{softtabstop} {{{
 augroup filetype_indent
     autocmd!
+
     autocmd filetype c           setlocal ts=4 sw=4 sts=4
     autocmd filetype cpp         setlocal ts=4 sw=4 sts=4
     autocmd filetype css         setlocal ts=2 sw=2 sts=2
@@ -84,6 +93,17 @@ augroup filetype_indent
     autocmd filetype sql         setlocal ts=4 sw=4 sts=4
     autocmd filetype vim         setlocal ts=4 sw=4 sts=4
     autocmd filetype zsh         setlocal ts=4 sw=4 sts=4
+augroup END
+" }}}
+
+" {{{ 跳转到对应语言项目中
+augroup file_jump
+  autocmd!
+
+  autocmd BufLeave *.c    normal! mC
+  autocmd BufLeave *.html normal! mH
+  autocmd BufLeave *.js   normal! mJ
+  autocmd BufLeave *.ts   normal! mT
 augroup END
 " }}}
 
