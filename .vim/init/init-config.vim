@@ -140,7 +140,7 @@ augroup InitFileTypesGroup
     au!
 
     " C/C++ 文件使用 // 作为注释
-    au FileType c,cpp setlocal commentstring=//\ %s
+    au FileType cpp setlocal commentstring=//\ %s
 
     " markdown 允许自动换行
     au FileType markdown setlocal wrap
