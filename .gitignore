@@ -46,9 +46,11 @@ syntax
 # the not need of dir
 # the bundle of vim
 bundle
+bundles
 .tmux/plugins
 .tmux/resurrect
 
 
 # tags file
 tags
+cache
