@@ -18,28 +18,28 @@ elseif &ttimeoutlen > 80 || &ttimeoutlen <= 0
 endif
 
 
-"----------------------------------------------------------------------
-" 终端下允许 ALT，详见：http://www.skywind.me/blog/archives/2021
-" 记得设置 ttimeout （见 init-basic.vim） 和 ttimeoutlen （上面）
-"----------------------------------------------------------------------
-if has('nvim') == 0 && has('gui_running') == 0
-    function! s:metacode(key)
-        exec "set <M-".a:key.">=\e".a:key
-    endfunc
-    for i in range(10)
-        call s:metacode(nr2char(char2nr('0') + i))
-    endfor
-    for i in range(26)
-        call s:metacode(nr2char(char2nr('a') + i))
-        call s:metacode(nr2char(char2nr('A') + i))
-    endfor
-    for c in [',', '.', '/', ';', '{', '}']
-        call s:metacode(c)
-    endfor
-    for c in ['?', ':', '-', '_', '+', '=', "'"]
-        call s:metacode(c)
-    endfor
-endif
+""----------------------------------------------------------------------
+"" 终端下允许 ALT，详见：http://www.skywind.me/blog/archives/2021
+"" 记得设置 ttimeout （见 init-basic.vim） 和 ttimeoutlen （上面）
+""----------------------------------------------------------------------
+"if has('nvim') == 0 && has('gui_running') == 0
+"    function! s:metacode(key)
+"        exec "set <M-".a:key.">=\e".a:key
+"    endfunc
+"    for i in range(10)
+"        call s:metacode(nr2char(char2nr('0') + i))
+"    endfor
+"    for i in range(26)
+"        call s:metacode(nr2char(char2nr('a') + i))
+"        call s:metacode(nr2char(char2nr('A') + i))
+"    endfor
+"    for c in [',', '.', '/', ';', '{', '}']
+"        call s:metacode(c)
+"    endfor
+"    for c in ['?', ':', '-', '_', '+', '=', "'"]
+"        call s:metacode(c)
+"    endfor
+"endif
 
 
 "----------------------------------------------------------------------
@@ -178,8 +178,8 @@ augroup FileJump
 augroup END
 
 " Vim自动把默认剪贴板和系统剪贴板的内容同步
-set clipboard+=unnamed
-packadd termdebug
+" set clipboard+=unnamed
+" packadd termdebug
 
 " 设置鼠标功能
 set mouse=a
