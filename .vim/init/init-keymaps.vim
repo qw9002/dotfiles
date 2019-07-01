@@ -19,8 +19,6 @@
 "----------------------------------------------------------------------
 " INSERT 模式下使用 EMACS 键位
 "----------------------------------------------------------------------
-inoremap <c-b> <left>
-inoremap <c-f> <right>
 inoremap <c-a> <home>
 inoremap <c-e> <end>
 inoremap <c-d> <del>
@@ -173,6 +171,7 @@ noremap <m-l> w
 inoremap <m-h> <c-left>
 inoremap <m-l> <c-right>
 
+
 " ALT+j/k 逻辑跳转下一行/上一行（按 wrap 逻辑换行进行跳转） 
 noremap <m-j> gj
 noremap <m-k> gk
@@ -229,7 +228,7 @@ endif
 "----------------------------------------------------------------------
 
 " 自动打开 quickfix window ，高度为 6
-let g:asyncrun_open = 6
+let g:asyncrun_open = 10
 
 " 任务结束时候响铃提醒
 let g:asyncrun_bell = 1

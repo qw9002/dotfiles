@@ -18,28 +18,28 @@ elseif &ttimeoutlen > 80 || &ttimeoutlen <= 0
 endif
 
 
-""----------------------------------------------------------------------
-"" 终端下允许 ALT，详见：http://www.skywind.me/blog/archives/2021
-"" 记得设置 ttimeout （见 init-basic.vim） 和 ttimeoutlen （上面）
-""----------------------------------------------------------------------
-"if has('nvim') == 0 && has('gui_running') == 0
-"    function! s:metacode(key)
-"        exec "set <M-".a:key.">=\e".a:key
-"    endfunc
-"    for i in range(10)
-"        call s:metacode(nr2char(char2nr('0') + i))
-"    endfor
-"    for i in range(26)
-"        call s:metacode(nr2char(char2nr('a') + i))
-"        call s:metacode(nr2char(char2nr('A') + i))
-"    endfor
-"    for c in [',', '.', '/', ';', '{', '}']
-"        call s:metacode(c)
-"    endfor
-"    for c in ['?', ':', '-', '_', '+', '=', "'"]
-"        call s:metacode(c)
-"    endfor
-"endif
+"----------------------------------------------------------------------
+" 终端下允许 ALT，详见：http://www.skywind.me/blog/archives/2021
+" 记得设置 ttimeout （见 init-basic.vim） 和 ttimeoutlen （上面）
+"----------------------------------------------------------------------
+if has('nvim') == 0 && has('gui_running') == 0
+    function! s:metacode(key)
+        exec "set <M-".a:key.">=\e".a:key
+    endfunc
+    for i in range(10)
+        call s:metacode(nr2char(char2nr('0') + i))
+    endfor
+    for i in range(26)
+        call s:metacode(nr2char(char2nr('a') + i))
+        call s:metacode(nr2char(char2nr('A') + i))
+    endfor
+    for c in [',', '.', '/', ';', '{', '}']
+        call s:metacode(c)
+    endfor
+    for c in ['?', ':', '-', '_', '+', '=', "'"]
+        call s:metacode(c)
+    endfor
+endif
 
 
 "----------------------------------------------------------------------
@@ -183,3 +183,13 @@ augroup END
 
 " 设置鼠标功能
 set mouse=a
+
+" 设置通用前缀空格键
+let mapleader="\<Space>"
+
+" 保存配置，并实时加载到系统环境当中去----------------------------------------
+nnoremap <silent> <leader>sv :source $MYVIMRC<cr>
+
+" 调用man程序在vim内部查看命令
+runtime ftplugin/man.vim
+
