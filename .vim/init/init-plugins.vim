@@ -231,7 +231,7 @@ if index(g:bundle_group, 'tags') >= 0
     let g:gutentags_project_root = [ '.root', '.svn', '.git', '.hg', '.project' ]
 
     " 去除生成标签的文件夹
-    let g:gutentags_ctags_exclude = [ '*.min.js', '*.min.css', 'build', 'vendor', '.git', '*.vim/bundles/*', '.tmux' ]
+    let g:gutentags_ctags_exclude = [ '*.min.js', '*.min.css', 'build', 'vendor', '.git', '.tmux' ]
 
     " 所生成的数据文件的名称
     let g:gutentags_ctags_tagfile = '.tags'
