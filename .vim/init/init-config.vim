@@ -178,7 +178,11 @@ augroup FileJump
 augroup END
 
 " Vim自动把默认剪贴板和系统剪贴板的内容同步
-" set clipboard+=unnamed
+
+if has('clipboard')
+    set clipboard+=unnamed
+endif
+
 " packadd termdebug
 
 " 设置鼠标功能
