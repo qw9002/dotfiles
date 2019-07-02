@@ -2,21 +2,9 @@
 "
 " init-plugins.vim - 
 "
-" Created by skywind on 2018/05/31
-" Last Modified: 2018/06/10 23:11
-"
 "======================================================================
 " vim: set ts=4 sw=4 tw=78 noet :
 
-
-" 设置通用前缀空格键
-let mapleader="\<Space>"
-
-" 保存配置，并实时加载到系统环境当中去----------------------------------------
-nnoremap <silent> <leader>sv :source $MYVIMRC<cr>
-
-" 调用man程序在vim内部查看命令
-runtime ftplugin/man.vim
 
 "----------------------------------------------------------------------
 " 默认情况下的分组，可以再前面覆盖之
@@ -690,10 +678,6 @@ endif
 if index(g:bundle_group, 'tool') >= 0
     " 预览命令行命令效果
     Plug 'markonm/traces.vim'
-
-    " 方式对齐
-    Plug 'godlygeek/tabular'
-    let g:taabular_loaded = 1
 
     " 彩虹括号 利用区分括号配对
     Plug 'luochen1990/rainbow'
