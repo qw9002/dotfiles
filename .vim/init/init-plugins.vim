@@ -107,7 +107,7 @@ if index(g:bundle_group, 'basic') >= 0
 
     " 根据 quickfix 中匹配到的错误信息，高亮对应文件的错误行
     " 使用 :RemoveErrorMarkers 命令或者 <space>ha 清除错误
-    " Plug 'mh21/errormarker.vim'
+    Plug 'mh21/errormarker.vim'
 
     " 使用 ALT+e 会在不同窗口/标签上显示 A/B/C 等编号，然后字母直接跳转
     Plug 't9md/vim-choosewin'
