@@ -626,6 +626,7 @@ if index(g:bundle_group, 'ycm') >= 0
                     \ "python":1,
                     \ "java":1,
                     \ "javascript":1,
+                    \ "typescript":1,
                     \ "coffee":1,
                     \ "vim":1, 
                     \ "go":1,
