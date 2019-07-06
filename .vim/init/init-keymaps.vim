@@ -9,8 +9,6 @@
 "   - 编译运行
 "   - 符号搜索
 "
-" Created by skywind on 2018/05/30
-" Last Modified: 2018/05/30 17:59:31
 "
 "======================================================================
 " vim: set ts=4 sw=4 tw=78 noet :
@@ -19,9 +17,12 @@
 "----------------------------------------------------------------------
 " INSERT 模式下使用 EMACS 键位
 "----------------------------------------------------------------------
+inoremap <c-b> <left>
+inoremap <c-f> <right>
 inoremap <c-a> <home>
 inoremap <c-e> <end>
-inoremap <c-d> <del>
+inoremap <m-f> <c-right>
+inoremap <m-b> <c-left>
 inoremap <c-_> <c-k>
 
 
@@ -30,6 +31,7 @@ inoremap <c-_> <c-k>
 " 使用 SecureCRT/XShell 等终端软件需设置：Backspace sends delete
 " 详见：http://www.skywind.me/blog/archives/2021
 "----------------------------------------------------------------------
+
 noremap <C-h> <left>
 noremap <C-j> <down>
 noremap <C-k> <up>
@@ -44,16 +46,12 @@ inoremap <C-l> <right>
 "----------------------------------------------------------------------
 " 命令模式的快速移动
 "----------------------------------------------------------------------
-cnoremap <c-h> <left>
-cnoremap <c-j> <down>
-cnoremap <c-k> <up>
-cnoremap <c-l> <right>
+cnoremap <c-f> <right>
+cnoremap <c-b> <left>
 cnoremap <c-a> <home>
 cnoremap <c-e> <end>
-cnoremap <c-f> <c-d>
-cnoremap <c-b> <left>
-cnoremap <c-d> <del>
-cnoremap <c-_> <c-k>
+cnoremap <m-f> <c-right>
+cnoremap <m-b> <c-left>
 
 
 "----------------------------------------------------------------------
@@ -114,6 +112,7 @@ cnoremap <m-l> <c-right>
 " ALT+y 删除到行末
 noremap <m-y> d$
 inoremap <m-y> <c-\><c-o>d$
+" cnoremap <m-y> <c-\><c-o>d$
 
 
 "----------------------------------------------------------------------
@@ -140,6 +139,8 @@ if has('terminal') && exists(':terminal') == 2 && has('patch-8.1.1')
     tnoremap <m-J> <c-_>j
     tnoremap <m-K> <c-_>k
     tnoremap <m-q> <c-\><c-n>
+    tnoremap <m-f> <c-right>
+    tnoremap <m-b> <c-left>
 elseif has('nvim')
     " neovim 没有 termwinkey 支持，必须把 terminal 切换回 normal 模式
     tnoremap <m-H> <c-\><c-n><c-w>h
