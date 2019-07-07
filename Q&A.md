@@ -78,3 +78,16 @@ git config --global color.branch auto
 git config --global color.interactive auto
 
 #### gdb 编译安装
+
+
+#### 修改，可视区域标记
+
+使用 ' ` 跳转位置
+
+```
+' 跳转前的位置
+" 最后修改(离开缓冲区)的位置
+[ 修改开始的位置
+] 修改结束的位置
+
+```

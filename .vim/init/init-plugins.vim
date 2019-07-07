@@ -100,7 +100,7 @@ if index(g:bundle_group, 'basic') >= 0
     Plug 'xolox/vim-misc'
 
     " 用于在侧边符号栏显示 marks （ma-mz 记录的位置）
-    Plug 'kshenoy/vim-signature'
+    " Plug 'kshenoy/vim-signature'
 
     " 用于在侧边符号栏显示 git/svn 的 diff
     Plug 'mhinz/vim-signify'
