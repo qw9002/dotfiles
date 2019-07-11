@@ -32,10 +32,10 @@ inoremap <c-_> <c-k>
 " 详见：http://www.skywind.me/blog/archives/2021
 "----------------------------------------------------------------------
 
-noremap <C-h> <left>
-noremap <C-j> <down>
-noremap <C-k> <up>
-noremap <C-l> <right>
+" noremap <C-h> <left>
+" noremap <C-j> <down>
+" noremap <C-k> <up>
+" noremap <C-l> <right>
 
 inoremap <C-h> <left>
 inoremap <C-j> <down>
