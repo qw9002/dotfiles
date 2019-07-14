@@ -4,12 +4,16 @@
 dotfileDir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
 # 通过 antigen 管理 oh-my-zsh
+if [[ ! -e ~/.zplug ]]; then
+    git clone https://github.com/zplug/zplug ~/.zplug
+fi
+
 zsh=`which zsh`
 bash=`which bash`
 if [[ ${zsh##*/} == "zsh" && ! -e $HOME/.antigen.zsh ]]; then
     curl -L git.io/antigen > $HOME/.antigen.zsh
-# elif [[ ${bash##*/} == "bash" ]]; then
-#     eval "$(lua ~/.antigen/bundles/skywind3000/z.lua/z.lua  --init bash once enhanced)"
+elif [[ ${bash##*/} == "bash" ]]; then
+    eval "$(lua ~/.antigen/bundles/skywind3000/z.lua/z.lua  --init bash once enhanced)"
 fi
 
 #######################################################################
