@@ -7,7 +7,10 @@ rm var/db/.applesetupdone
 reboot **
 ```
 
-reboot（重启）完成后，创建一个新的用户，按照提示操作。新用户创建后，打开 系统偏好设置 -> 用户与群组 点击原来的普通用户，右侧有个“允许用户管理这台电脑”， 打勾然后重启。这样就可以以管理员的身份登录到你原来的系统，再把刚新创建的管理员账户删除就可以了。
+reboot（重启）完成后，创建一个新的用户，按照提示操作。新用户创建后，打开 系统偏
+好设置 -> 用户与群组 点击原来的普通用户，右侧有个“允许用户管理这台电脑”， 打勾
+然后重启。这样就可以以管理员的身份登录到你原来的系统，再把刚新创建的管理员账户
+删除就可以了。
 
 ### centos ubuntu 系统下安装编译vim
 
@@ -22,18 +25,17 @@ reboot（重启）完成后，创建一个新的用户，按照提示操作。�
 ./configure --with-features=huge \
 --enable-multibyte \
 --enable-python3interp=yes \
---with-python-config-dir=/usr/python3/lib/python3.6/config-3.6m-x86_64-linux-gnu \
+--with-python3-config-dir=/usr/lib/python3.7/config-3.7m-x86_64-linux-gnu \
 --prefix=/usr/local
 
-make
-make install 
+make && make install 
 
 #### global 6.6.3 (gtags gtags-scope) 安装编译
 
 centos 需要
 autoconf automake bison flex gperf libtool libtool-ltdl-devel texinfo
 
-ubuntu 需要
+ubuntu, debian 需要
 autoconf automake bison flex gperf libtool-bin texinfo
 
 ```bash
