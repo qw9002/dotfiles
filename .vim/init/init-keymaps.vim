@@ -188,7 +188,7 @@ nnoremap <silent> <leader>4 :AsyncRun -cwd=<root> cmake . <cr>
 nnoremap <silent> <leader>3 :AsyncRun gcc -Og -c "$(VIM_FILEPATH)" <cr>
 
 " 反汇编
-nnoremap <silent> <leader>1 :vertical terminal objdump -d %:r.o <cr>
+nnoremap <silent> <leader>1 :vertical terminal objdump -d %:r.o<cr>
 
 " Windows 下支持直接打开新 cmd 窗口运行
 if has('win32') || has('win64')
