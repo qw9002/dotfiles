@@ -157,7 +157,7 @@ endif
 " 详细见：http://www.skywind.me/blog/archives/2084
 "----------------------------------------------------------------------
 
-" 自动打开 quickfix window ，高度为 6
+" 自动打开 quickfix window ，高度为 10
 let g:asyncrun_open = 10
 
 " 任务结束时候响铃提醒
@@ -169,20 +169,26 @@ nnoremap <leader>10 :call asyncrun#quickfix_toggle(6)<cr>
 " F9 编译 C/C++ 文件
 nnoremap <silent> <leader>9 :AsyncRun gcc -Wall -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
 
-" F5 运行文件
-nnoremap <silent> <leader>5 :call ExecuteFile()<cr>
+" F8 运行项目
+nnoremap <silent> <leader>8 :AsyncRun -cwd=<root> -raw make run <cr>
 
 " F7 编译项目
 nnoremap <silent> <leader>7 :AsyncRun -cwd=<root> make <cr>
 
-" F8 运行项目
-nnoremap <silent> <leader>8 :AsyncRun -cwd=<root> -raw make run <cr>
-
 " F6 测试项目
 nnoremap <silent> <leader>6 :AsyncRun -cwd=<root> -raw make test <cr>
 
+" F5 运行文件
+nnoremap <silent> <leader>5 :call ExecuteFile()<cr>
+
 " 更新 cmake
 nnoremap <silent> <leader>4 :AsyncRun -cwd=<root> cmake . <cr>
+
+" 生成o 文件
+nnoremap <silent> <leader>3 :AsyncRun gcc -Og -c "$(VIM_FILEPATH)" <cr>
+
+" 反汇编
+nnoremap <silent> <leader>1 :vertical terminal objdump -d %:r.o <cr>
 
 " Windows 下支持直接打开新 cmd 窗口运行
 if has('win32') || has('win64')
