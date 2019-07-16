@@ -175,7 +175,6 @@ augroup FileJump
 augroup END
 
 " Vim自动把默认剪贴板和系统剪贴板的内容同步
-
 if has('clipboard')
     set clipboard+=unnamed
 endif

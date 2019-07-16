@@ -164,29 +164,29 @@ let g:asyncrun_open = 10
 let g:asyncrun_bell = 1
 
 " 设置 F10 打开/关闭 Quickfix 窗口
-nnoremap <F10> :call asyncrun#quickfix_toggle(6)<cr>
+nnoremap <leader>10 :call asyncrun#quickfix_toggle(6)<cr>
 
 " F9 编译 C/C++ 文件
-nnoremap <silent> <F9> :AsyncRun gcc -Wall -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
+nnoremap <silent> <leader>9 :AsyncRun gcc -Wall -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
 
 " F5 运行文件
-nnoremap <silent> <F5> :call ExecuteFile()<cr>
+nnoremap <silent> <leader>5 :call ExecuteFile()<cr>
 
 " F7 编译项目
-nnoremap <silent> <F7> :AsyncRun -cwd=<root> make <cr>
+nnoremap <silent> <leader>7 :AsyncRun -cwd=<root> make <cr>
 
 " F8 运行项目
-nnoremap <silent> <F8> :AsyncRun -cwd=<root> -raw make run <cr>
+nnoremap <silent> <leader>8 :AsyncRun -cwd=<root> -raw make run <cr>
 
 " F6 测试项目
-nnoremap <silent> <F6> :AsyncRun -cwd=<root> -raw make test <cr>
+nnoremap <silent> <leader>6 :AsyncRun -cwd=<root> -raw make test <cr>
 
 " 更新 cmake
-nnoremap <silent> <F4> :AsyncRun -cwd=<root> cmake . <cr>
+nnoremap <silent> <leader>4 :AsyncRun -cwd=<root> cmake . <cr>
 
 " Windows 下支持直接打开新 cmd 窗口运行
 if has('win32') || has('win64')
-    nnoremap <silent> <F8> :AsyncRun -cwd=<root> -mode=4 make run <cr>
+    nnoremap <silent> <leader>8 :AsyncRun -cwd=<root> -mode=4 make run <cr>
 endif
 
 
@@ -244,16 +244,16 @@ endfunc
 " 下面进行 grep，这样能方便的对相关项目进行搜索
 "----------------------------------------------------------------------
 if executable('rg')
-    noremap <silent><F2> :AsyncRun! -cwd=<root> rg -n --no-heading 
+    noremap <silent><leader>2 :AsyncRun! -cwd=<root> rg -n --no-heading 
                 \ --color never -g *.h -g *.c* -g *.py -g *.js -g *.vim 
                 \ <C-R><C-W> "<root>" <cr>
 elseif has('win32') || has('win64')
-    noremap <silent><F2> :AsyncRun! -cwd=<root> findstr /n /s /C:"<C-R><C-W>" 
+    noremap <silent><leader>2 :AsyncRun! -cwd=<root> findstr /n /s /C:"<C-R><C-W>" 
                 \ "\%CD\%\*.h" "\%CD\%\*.c*" "\%CD\%\*.py" "\%CD\%\*.js"
                 \ "\%CD\%\*.vim"
                 \ <cr>
 else
-    noremap <silent><F2> :AsyncRun! -cwd=<root> grep -n -s -R <C-R><C-W> 
+    noremap <silent><leader>2 :AsyncRun! -cwd=<root> grep -n -s -R <C-R><C-W> 
                 \ --include='*.h' --include='*.c*' --include='*.py' 
                 \ --include='*.js' --include='*.vim'
                 \ '<root>' <cr>
