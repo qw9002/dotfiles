@@ -321,6 +321,7 @@ if index(g:bundle_group, 'filetypes') >= 0
     Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 
     " vim org-mode 
+    Plug 'tpope/vim-speeddating', { 'for': 'org' }
     Plug 'jceb/vim-orgmode', { 'for': 'org' }
 endif
 
