@@ -605,6 +605,8 @@ if index(g:bundle_group, 'ycm') >= 0
         let g:ycm_key_invoke_completion = '<c-z>'
         set completeopt=menu,menuone,noselect
 
+        " 默认展示代码片段
+        " let g:ycm_use_ultisnips_completer = 1
         nnoremap gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
         " noremap <c-z> <NOP>
@@ -690,12 +692,8 @@ if index(g:bundle_group, 'tool') >= 0
     Plug 'honza/vim-snippets'
     " 需要通过 Python 的支持
     Plug 'SirVer/ultisnips'
-    let g:UltiSnipsSnippetsDir         = expand('~/.vim/mysnippets')
     let g:UltiSnipsSnippetDirectories  = ["UltiSnips", "mysnippets"]
     let g:UltiSnipsExpandTrigger       = "<tab>"
-    let g:UltiSnipsListSnippets        = '<c-tab>'
-    let g:UltiSnipsJumpForwardTrigger  = "<tab>"
-    let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
     " emmet高速编写网页类代码 {{{
     Plug 'mattn/emmet-vim'
