@@ -690,8 +690,8 @@ if index(g:bundle_group, 'tool') >= 0
     Plug 'honza/vim-snippets'
     " 需要通过 Python 的支持
     Plug 'SirVer/ultisnips'
-    let g:UltiSnipsSnippetDirectories  = ["UltiSnips"]
-    let g:UltiSnipsSnippetsDir         = ["mysnips"] " '~/.vim/bundles/ultisnips/mysnips'
+    let g:UltiSnipsSnippetsDir         = expand('~/.vim/mysnippets')
+    let g:UltiSnipsSnippetDirectories  = ["UltiSnips", "mysnippets"]
     let g:UltiSnipsExpandTrigger       = "<tab>"
     let g:UltiSnipsListSnippets        = '<c-tab>'
     let g:UltiSnipsJumpForwardTrigger  = "<tab>"
