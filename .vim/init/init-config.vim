@@ -186,6 +186,7 @@ set mouse=a
 
 " 设置通用前缀空格键
 let mapleader="\<Space>"
+let maplocalleader="\<Space>"
 
 " 保存配置，并实时加载到系统环境当中去----------------------------------------
 nnoremap <silent> <leader>sv :source $MYVIMRC<cr>

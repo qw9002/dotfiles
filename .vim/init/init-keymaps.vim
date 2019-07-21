@@ -167,7 +167,7 @@ let g:asyncrun_bell = 1
 nnoremap <leader>10 :call asyncrun#quickfix_toggle(6)<cr>
 
 " F9 编译 C/C++ 文件
-nnoremap <silent> <leader>9 :AsyncRun gcc -Wall -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
+nnoremap <silent> <leader>9 :AsyncRun gcc -std=c99 -Wall -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
 
 " F8 运行项目
 nnoremap <silent> <leader>8 :AsyncRun -cwd=<root> -raw make run <cr>
@@ -185,7 +185,7 @@ nnoremap <silent> <leader>5 :call ExecuteFile()<cr>
 nnoremap <silent> <leader>4 :AsyncRun -cwd=<root> cmake . <cr>
 
 " 生成o 文件
-nnoremap <silent> <leader>3 :AsyncRun gcc -Og -c "$(VIM_FILEPATH)" <cr>
+nnoremap <silent> <leader>3 :AsyncRun gcc -std=c99 -Og -c "$(VIM_FILEPATH)" <cr>
 
 " 反汇编
 nnoremap <silent> <leader>1 :vertical terminal objdump -d %:r.o<cr>
