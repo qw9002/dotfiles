@@ -694,6 +694,8 @@ if index(g:bundle_group, 'tool') >= 0
     Plug 'SirVer/ultisnips'
     let g:UltiSnipsSnippetDirectories  = ["UltiSnips", "mysnippets"]
     let g:UltiSnipsExpandTrigger       = "<tab>"
+    let g:UltiSnipsJumpForwardTrigger  = "<tab>"
+    let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
     " emmet高速编写网页类代码 {{{
     Plug 'mattn/emmet-vim'
