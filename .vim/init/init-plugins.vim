@@ -13,7 +13,7 @@ if !exists('g:bundle_group')
     let g:bundle_group = ['basic', 'tags', 'enhanced', 'filetypes', 'textobj']
     let g:bundle_group += ['tags', 'airline', 'nerdtree', 'ale', 'echodoc']
     let g:bundle_group += ['leaderf', 'ycm']
-    let g:bundle_group += ['tool']
+    let g:bundle_group += ['tool', 'debugs']
 endif
 
 
@@ -45,7 +45,10 @@ map <leader> <plug>(easymotion-prefix)
 Plug 'justinmk/vim-dirvish'
 
 " 表格对齐，使用命令 Tabularize
-Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
+" Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
+Plug 'junegunn/vim-easy-align'
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 
 " Diff 增强，支持 histogram / patience 等更科学的 diff 算法
 Plug 'chrisbra/vim-diff-enhanced'
@@ -703,6 +706,10 @@ if index(g:bundle_group, 'tool') >= 0
 
     " 帮助emmet显示snippets提示
     Plug 'jceb/emmet.snippets'
+endif
+
+if index(g:bundle_group, 'debugs') >= 0
+    Plug 'jayli/vim-easydebugger'
 endif
 
 "----------------------------------------------------------------------

@@ -49,7 +49,7 @@ bundle
 bundles
 .tmux/plugins
 .tmux/resurrect
-
+*.old
 
 # tags file
 tags
