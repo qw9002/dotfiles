@@ -38,11 +38,12 @@ call plug#begin(get(g:, 'bundle_home', '~/.vim/bundles'))
 "----------------------------------------------------------------------
 
 " 全文快速移动, <leader>f{char} 即可触发
-Plug 'easymotion/vim-easymotion'
+" Plug 'easymotion/vim-easymotion'
+Plug 'easymotion/vim-easymotion', { 'on': '<plug>(easymotion-prefix)' }
 map <leader> <plug>(easymotion-prefix)
 
 " 文件浏览器，代替 netrw
-Plug 'justinmk/vim-dirvish'
+" Plug 'justinmk/vim-dirvish'
 
 " 表格对齐，使用命令 Tabularize
 " Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
