@@ -119,6 +119,7 @@ if index(g:bundle_group, 'basic') >= 0
 
     " 使用 ALT+e 会在不同窗口/标签上显示 A/B/C 等编号，然后字母直接跳转
     Plug 't9md/vim-choosewin'
+    nmap <m-e> <Plug>(choosewin)
 
     " 提供基于 TAGS 的定义预览，函数参数预览，quickfix 预览
     Plug 'skywind3000/vim-preview'
@@ -148,9 +149,6 @@ if index(g:bundle_group, 'basic') >= 0
 
     " 筛选符合条件的 argslist 文件并保存到 args 中去, 使用 argdo 处理匹配文件
     Plug 'nelstrom/vim-qargs'
-
-    " 使用 ALT+E 来选择窗口
-    nmap <m-e> <Plug>(choosewin)
 
     " 默认不显示 startify
     let g:startify_disable_at_vimenter = 1
