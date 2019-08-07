@@ -39,10 +39,10 @@ call plug#begin(get(g:, 'bundle_home', '~/.vim/bundles'))
 
 " Plug 'easymotion/vim-easymotion' 全文快速移动,按需使用移动命令
 Plug 'easymotion/vim-easymotion', { 'on': ['<plug>(easymotion-f)', '<plug>(easymotion-F)', '<plug>(easymotion-j)', '<plug>(easymotion-k)'] }
-nmap <leader>f <plug>(easymotion-f)
-nmap <leader>F <plug>(easymotion-F)
-nmap <leader>j <plug>(easymotion-j)
-nmap <leader>k <plug>(easymotion-k)
+map <leader>f <plug>(easymotion-f)
+map <leader>F <plug>(easymotion-F)
+map <leader>j <plug>(easymotion-j)
+map <leader>k <plug>(easymotion-k)
 " 忽略大小写
 let g:EasyMotion_smartcase = 1
 
