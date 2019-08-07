@@ -101,6 +101,23 @@ if index(g:bundle_group, 'basic') >= 0
     " 展示开始画面，显示最近编辑过的文件
     Plug 'mhinz/vim-startify'
 
+    " 默认不显示 startify
+    let g:startify_disable_at_vimenter = 1
+    let g:startify_session_dir = '~/.vim/session'
+
+    " signify 调优
+    let g:signify_vcs_list = ['git', 'svn']
+    let g:signify_sign_add               = '+'
+    let g:signify_sign_delete            = '_'
+    let g:signify_sign_delete_first_line = '‾'
+    let g:signify_sign_change            = '~'
+    let g:signify_sign_changedelete      = g:signify_sign_change
+
+    " git 仓库使用 histogram 算法进行 diff
+    let g:signify_vcs_cmds = {
+                \ 'git': 'git diff --no-color --diff-algorithm=histogram --no-ext-diff -U0 -- %f',
+                \}
+
     " 一次性安装一大堆 colorscheme
     Plug 'flazz/vim-colorschemes'
 
@@ -116,6 +133,9 @@ if index(g:bundle_group, 'basic') >= 0
     " 根据 quickfix 中匹配到的错误信息，高亮对应文件的错误行
     " 使用 :RemoveErrorMarkers 命令或者 <space>ha 清除错误
     Plug 'mh21/errormarker.vim'
+
+    " 使用 <space>ha 清除 errormarker 标注的错误
+    noremap <silent><space>ha :RemoveErrorMarkers<cr>
 
     " 使用 ALT+e 会在不同窗口/标签上显示 A/B/C 等编号，然后字母直接跳转
     Plug 't9md/vim-choosewin'
@@ -150,25 +170,6 @@ if index(g:bundle_group, 'basic') >= 0
     " 筛选符合条件的 argslist 文件并保存到 args 中去, 使用 argdo 处理匹配文件
     Plug 'nelstrom/vim-qargs'
 
-    " 默认不显示 startify
-    let g:startify_disable_at_vimenter = 1
-    let g:startify_session_dir = '~/.vim/session'
-
-    " 使用 <space>ha 清除 errormarker 标注的错误
-    noremap <silent><space>ha :RemoveErrorMarkers<cr>
-
-    " signify 调优
-    let g:signify_vcs_list = ['git', 'svn']
-    let g:signify_sign_add               = '+'
-    let g:signify_sign_delete            = '_'
-    let g:signify_sign_delete_first_line = '‾'
-    let g:signify_sign_change            = '~'
-    let g:signify_sign_changedelete      = g:signify_sign_change
-
-    " git 仓库使用 histogram 算法进行 diff
-    let g:signify_vcs_cmds = {
-                \ 'git': 'git diff --no-color --diff-algorithm=histogram --no-ext-diff -U0 -- %f',
-                \}
 endif
 
 
