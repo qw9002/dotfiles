@@ -156,7 +156,7 @@ if index(g:bundle_group, 'basic') >= 0
     nmap <m-e> <Plug>(choosewin)
 
     " 默认不显示 startify
-    let g:startify_disable_at_vimenter = 0
+    let g:startify_disable_at_vimenter = 1
     let g:startify_session_dir = '~/.vim/session'
 
     " signify 调优
