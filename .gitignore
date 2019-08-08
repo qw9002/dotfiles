@@ -50,6 +50,7 @@ bundles
 .tmux/plugins
 .tmux/resurrect
 *.old
+session
 
 # tags file
 tags
