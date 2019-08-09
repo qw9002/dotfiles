@@ -156,8 +156,15 @@ if index(g:bundle_group, 'basic') >= 0
     nmap <m-e> <Plug>(choosewin)
 
     " 默认不显示 startify
-    let g:startify_disable_at_vimenter = 1
+    let g:startify_disable_at_vimenter = 0
     let g:startify_session_dir = '~/.vim/session'
+    let g:startify_session_persistence = 1
+    let g:startify_session_delete_buffers = 1
+    let g:startify_session_autoload = 0
+    let g:startify_bookmarks = [ {'c': '~/.vimrc'}, '~/.zshrc' ]
+    let g:startify_change_to_dir = 1
+
+    nmap <leader>p :Startify<cr>
 
     " signify 调优
     let g:signify_vcs_list = ['git', 'svn']
@@ -717,5 +724,15 @@ endif
 " 结束插件安装
 "----------------------------------------------------------------------
 call plug#end()
+
+let g:ascii = [
+            \ '        __',
+            \ '.--.--.|__|.--------.',
+            \ '|  |  ||  ||        |',
+            \ ' \___/ |__||__|__|__|',
+            \ ''
+            \]
+let g:startify_custom_header =
+            \ 'map(g:ascii + startify#fortune#boxed(), "\"   \".v:val")'
 
 packadd! termdebug
