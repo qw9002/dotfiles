@@ -211,6 +211,8 @@ function! ExecuteFile()
         let cmd = 'python "$(VIM_FILEPATH)"'
     elseif &ft == 'javascript'
         let cmd = 'node "$(VIM_FILEPATH)"'
+    elseif &ft == 'typescript'
+        let cmd = 'ts-node "$(VIM_FILEPATH)"'
     elseif &ft == 'perl'
         let cmd = 'perl "$(VIM_FILEPATH)"'
     elseif &ft == 'ruby'
