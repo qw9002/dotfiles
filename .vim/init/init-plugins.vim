@@ -150,7 +150,7 @@ if index(g:bundle_group, 'basic') >= 0
     Plug 'nelstrom/vim-visual-star-search'
 
     " 筛选符合条件的 argslist 文件并保存到 args 中去, 使用 argdo 处理匹配文件
-    Plug 'nelstrom/vim-qargs'
+    " Plug 'nelstrom/vim-qargs'
 
     " 使用 ALT+e 会在不同窗口/标签上显示 A/B/C 等编号，然后字母直接跳转
     nmap <m-e> <Plug>(choosewin)
@@ -362,8 +362,7 @@ if index(g:bundle_group, 'airline') >= 0
     let g:airline_powerline_fonts = 1
     let g:airline_exclude_preview = 1
     let g:airline_section_b = '%n'
-    let g:airline_theme='papercolor'
-    " let g:airline_theme='deus'
+    let g:airline_theme='deus'
     let g:airline#extensions#branch#enabled = 0
     let g:airline#extensions#syntastic#enabled = 0
     let g:airline#extensions#fugitiveline#enabled = 0
