@@ -156,12 +156,17 @@ if index(g:bundle_group, 'basic') >= 0
     nmap <m-e> <Plug>(choosewin)
 
     " 默认不显示 startify
-    let g:startify_disable_at_vimenter = 0
+    let g:startify_disable_at_vimenter = 1
     let g:startify_session_dir = '~/.vim/session'
     let g:startify_session_persistence = 1
     let g:startify_session_delete_buffers = 1
     let g:startify_session_autoload = 0
-    let g:startify_bookmarks = [ {'c': '~/.vimrc'}, '~/.zshrc', {'do': '~/plant.md'} ]
+    let g:startify_bookmarks = [
+                \{'c': '~/.vimrc'},
+                \'~/.zshrc',
+                \{'to': '~/todo.org'},
+                \{'p': '~/plant.md'}
+                \]
     let g:startify_change_to_dir = 1
 
     nmap <leader>p :Startify<cr>
