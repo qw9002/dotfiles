@@ -217,6 +217,14 @@ if index(g:bundle_group, 'enhanced') >= 0
     " 配对括号和引号自动补全
     " Plug 'Raimondi/delimitMate'
     Plug 'jiangmiao/auto-pairs'
+    let g:AutoPairsFlyMode = 1
+    let g:AutoPairsShortcutBackInsert = '<M-z>'
+    let g:AutoPairsShortcutToggle = 'yoa'
+    let g:AutoPairsShortcutFastWrap = '<Nop>'
+    let g:AutoPairsMapCh = 0
+    let g:AutoPairsMoveCharacter = '<Nop>'
+    let g:AutoPairsShortcutJump = '<Nop>'
+
 
     " 提供 gist 接口
     Plug 'lambdalisue/vim-gista', { 'on': 'Gista' }
