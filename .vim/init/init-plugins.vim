@@ -739,6 +739,8 @@ if index(g:bundle_group, 'tool') >= 0
 
     " 帮助emmet显示snippets提示
     Plug 'jceb/emmet.snippets'
+
+    Plug 'sillybun/vim-repl'
 endif
 
 "----------------------------------------------------------------------
