@@ -741,7 +741,6 @@ if index(g:bundle_group, 'tool') >= 0
     Plug 'jceb/emmet.snippets'
 
     Plug 'sillybun/vim-repl'
-    Plug 'sillybun/vim-repl'
     let g:repl_program = {
                 \   'python': 'ipython',
                 \   'default': 'zsh',
@@ -750,6 +749,17 @@ if index(g:bundle_group, 'tool') >= 0
                 \   'r': 'R',
                 \   'lua': 'lua',
                 \   }
+
+    let g:repl_exit_commands = {
+                \   'python': 'quit()',
+                \   'bash': 'exit',
+                \   'zsh': 'exit',
+                \   'node': '.exit',
+                \   "ts-node": '.exit',
+                \   'jshell': '/exit',
+                \   'default': 'exit',
+                \   }
+
     let g:repl_predefine_python = {
                 \   'numpy': 'import numpy as np',
                 \   'matplotlib': 'from matplotlib import pyplot as plt'
@@ -762,7 +772,7 @@ if index(g:bundle_group, 'tool') >= 0
     " autocmd Filetype python nnoremap <F10> <Esc>:REPLPDBN<Cr>
     " autocmd Filetype python nnoremap <F11> <Esc>:REPLPDBS<Cr>
     let g:repl_position = 3
-    let g:repl_stayatrepl_when_open = 1
+    let g:repl_stayatrepl_when_open = 0
 endif
 
 "----------------------------------------------------------------------
