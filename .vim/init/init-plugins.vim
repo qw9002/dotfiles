@@ -222,7 +222,7 @@ if index(g:bundle_group, 'enhanced') >= 0
     let g:AutoPairsShortcutToggle = 'yoa'
     let g:AutoPairsShortcutFastWrap = '<Nop>'
     let g:AutoPairsMapCh = 0
-    let g:AutoPairsMoveCharacter = '<Nop>'
+    " let g:AutoPairsMoveCharacter = '<Nop>'
     let g:AutoPairsShortcutJump = '<Nop>'
 
 
