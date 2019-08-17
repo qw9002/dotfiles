@@ -219,7 +219,7 @@ if index(g:bundle_group, 'enhanced') >= 0
     Plug 'jiangmiao/auto-pairs'
     let g:AutoPairsFlyMode = 1
     let g:AutoPairsShortcutBackInsert = '<M-z>'
-    let g:AutoPairsShortcutToggle = 'yoa'
+    let g:AutoPairsShortcutToggle = '<M-a>'
     " let g:AutoPairsShortcutFastWrap = '<Nop>'
     let g:AutoPairsMapCh = 0
     let g:AutoPairsMoveCharacter = '<Nop>'
