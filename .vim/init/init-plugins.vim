@@ -49,11 +49,35 @@ let g:EasyMotion_smartcase = 1
 " 文件浏览器，代替 netrw
 " Plug 'justinmk/vim-dirvish'
 
-" 表格对齐，使用命令 Tabularize
-" Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
+" 对齐
 Plug 'junegunn/vim-easy-align'
+vmap <Enter> <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
+let g:easy_align_delimiters = {
+            \ '>': { 'pattern': '>>\|=>\|>' },
+            \ '/': {
+            \     'pattern':         '//\+\|/\*\|\*/',
+            \     'delimiter_align': 'l',
+            \     'ignore_groups':   ['!Comment'] },
+            \ ']': {
+            \     'pattern':       '[[\]]',
+            \     'left_margin':   0,
+            \     'right_margin':  0,
+            \     'stick_to_left': 0
+            \   },
+            \ ')': {
+            \     'pattern':       '[()]',
+            \     'left_margin':   0,
+            \     'right_margin':  0,
+            \     'stick_to_left': 0
+            \   },
+            \ 'd': {
+            \     'pattern':      ' \(\S\+\s*[;=]\)\@=',
+            \     'left_margin':  0,
+            \     'right_margin': 0
+            \   }
+            \ }
 
 " Diff 增强，支持 histogram / patience 等更科学的 diff 算法
 Plug 'chrisbra/vim-diff-enhanced'
@@ -743,11 +767,11 @@ if index(g:bundle_group, 'tool') >= 0
     Plug 'sillybun/vim-repl'
     let g:repl_program = {
                 \   'python': 'ipython',
-                \   'default': 'zsh',
                 \   'javascript': 'node',
                 \   'typescript': 'ts-node',
                 \   'r': 'R',
                 \   'lua': 'lua',
+                \   'default': 'zsh',
                 \   }
 
     let g:repl_exit_commands = {
