@@ -188,8 +188,7 @@ if index(g:bundle_group, 'basic') >= 0
     let g:startify_bookmarks = [
                 \{'c': '~/.vimrc'},
                 \'~/.zshrc',
-                \{'to': '~/dotfiles/plant/todo.org'},
-                \{'p': '~/dotfiles/plant/plant.md'}
+                \{'p': '~/docs/plant.md'}
                 \]
     let g:startify_change_to_dir = 1
 
