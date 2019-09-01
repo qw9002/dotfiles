@@ -635,9 +635,9 @@ if index(g:bundle_group, 'ycm') >= 0
     let g:lt_height = 10
 
     if has('python3')
-        Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --clang-completer --ts-completer' }
+        Plug 'ycm-core/YouCompleteMe', { 'do': 'python3 install.py --clang-completer --ts-completer' }
     elseif has('python')
-        Plug 'Valloric/YouCompleteMe', { 'do': 'python install.py --clang-completer --ts-completer' }
+        Plug 'ycm-core/YouCompleteMe', { 'do': 'python install.py --clang-completer --ts-completer' }
     endif
 
     if has('python3') || has('python')
