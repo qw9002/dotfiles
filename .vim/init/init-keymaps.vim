@@ -13,16 +13,30 @@
 "======================================================================
 " vim: set ts=4 sw=4 tw=78 noet :
 
+"----------------------------------------------------------------------
+" NORMAL 模式
+"----------------------------------------------------------------------
+
+" ALT+h/l 快速左右按单词移动
+" ALT+j/k 逻辑跳转下一行/上一行（按 wrap 逻辑换行进行跳转） 
+noremap <m-h> b
+noremap <m-l> w
+noremap <m-j> gj
+noremap <m-k> gk
+
 
 "----------------------------------------------------------------------
 " INSERT 模式下使用 EMACS 键位
 "----------------------------------------------------------------------
-inoremap <c-b> <left>
+
 inoremap <c-f> <right>
+inoremap <c-b> <left>
 inoremap <c-a> <home>
 inoremap <c-e> <end>
 inoremap <m-f> <c-right>
 inoremap <m-b> <c-left>
+
+" vim原组合键 使用 <c-_> 代替
 inoremap <c-_> <c-k>
 
 
@@ -32,20 +46,22 @@ inoremap <c-_> <c-k>
 " 详见：http://www.skywind.me/blog/archives/2021
 "----------------------------------------------------------------------
 
-" noremap <C-h> <left>
-" noremap <C-j> <down>
-" noremap <C-k> <up>
-" noremap <C-l> <right>
-
 inoremap <C-h> <left>
 inoremap <C-j> <down>
 inoremap <C-k> <up>
 inoremap <C-l> <right>
 
+" ALT 键移动增强
+inoremap <m-j> <c-\><c-o>gj
+inoremap <m-k> <c-\><c-o>gk
+inoremap <m-h> <c-left>
+inoremap <m-l> <c-right>
+
 
 "----------------------------------------------------------------------
 " 命令模式的快速移动
 "----------------------------------------------------------------------
+
 cnoremap <c-f> <right>
 cnoremap <c-b> <left>
 cnoremap <c-a> <home>
@@ -53,20 +69,25 @@ cnoremap <c-e> <end>
 cnoremap <m-f> <c-right>
 cnoremap <m-b> <c-left>
 
+" ALT 键移动增强
+cnoremap <m-h> <c-left>
+cnoremap <m-l> <c-right>
+
+" ALT+y 删除到行末
+noremap <m-y> d$
+inoremap <m-y> <c-\><c-o>d$
+cnoremap <m-y> <c-\><c-o>d$
+
 
 "----------------------------------------------------------------------
 " TAB：创建，关闭，上一个，下一个，首个，末个，左移，右移，
 "----------------------------------------------------------------------
 
 " 快速切换tab 使用标签 参考unimparied
-noremap <silent> <c-w>tc :tabnew<cr>
-noremap <silent> <c-w>tq :tabclose<cr>
-noremap <silent> <c-w>to :tabonly<cr>
 nnoremap ]g :tabnext<cr>
 nnoremap [g :tabprevious<cr>
 nnoremap [G :tabfirst<cr>
 nnoremap ]G :tablast<cr>
-
 
 " 左移 tab
 function! Tab_MoveLeft()
@@ -84,42 +105,18 @@ function! Tab_MoveRight()
     endif
 endfunc
 
-noremap <silent><c-w>th :call Tab_MoveLeft()<cr>
-noremap <silent><c-w>tl :call Tab_MoveRight()<cr>
-
-
-"----------------------------------------------------------------------
-" ALT 键移动增强
-"----------------------------------------------------------------------
-
-" ALT+h/l 快速左右按单词移动（正常模式+插入模式）
-noremap <m-h> b
-noremap <m-l> w
-inoremap <m-h> <c-left>
-inoremap <m-l> <c-right>
-
-
-" ALT+j/k 逻辑跳转下一行/上一行（按 wrap 逻辑换行进行跳转） 
-noremap <m-j> gj
-noremap <m-k> gk
-inoremap <m-j> <c-\><c-o>gj
-inoremap <m-k> <c-\><c-o>gk
-
-" 命令模式下的相同快捷
-cnoremap <m-h> <c-left>
-cnoremap <m-l> <c-right>
-
-" ALT+y 删除到行末
-noremap <m-y> d$
-inoremap <m-y> <c-\><c-o>d$
-" cnoremap <m-y> <c-\><c-o>d$
-
+noremap <silent> <c-w>tc :tabnew<cr>
+noremap <silent> <c-w>tq :tabclose<cr>
+noremap <silent> <c-w>to :tabonly<cr>
+noremap <silent> <c-w>th :call Tab_MoveLeft()<cr>
+noremap <silent> <c-w>tl :call Tab_MoveRight()<cr>
 
 "----------------------------------------------------------------------
 " 窗口切换：ALT+SHIFT+hjkl
 " 传统的 CTRL+hjkl 移动窗口不适用于 vim 8.1 的终端模式，CTRL+hjkl 在
 " bash/zsh 及带文本界面的程序中都是重要键位需要保留，不能 tnoremap 的
 "----------------------------------------------------------------------
+
 noremap <m-H> <c-w>h
 noremap <m-L> <c-w>l
 noremap <m-J> <c-w>j
@@ -141,6 +138,10 @@ if has('terminal') && exists(':terminal') == 2 && has('patch-8.1.1')
     tnoremap <m-q> <c-\><c-n>
     tnoremap <m-f> <c-right>
     tnoremap <m-b> <c-left>
+    " tab 切换
+    tnoremap [g <c-_>gT
+    tnoremap ]g <c-_>gt
+
 elseif has('nvim')
     " neovim 没有 termwinkey 支持，必须把 terminal 切换回 normal 模式
     tnoremap <m-H> <c-\><c-n><c-w>h
