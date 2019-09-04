@@ -189,7 +189,7 @@ let mapleader="\<Space>"
 let maplocalleader="\<Space>"
 
 " 保存配置，并实时加载到系统环境当中去----------------------------------------
-nnoremap <silent> <leader>sv :source $MYVIMRC<cr>
+" nnoremap <silent> <leader>sv :source $MYVIMRC<cr>
 
 " 调用man程序在vim内部查看命令
 runtime ftplugin/man.vim
