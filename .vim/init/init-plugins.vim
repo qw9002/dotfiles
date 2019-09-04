@@ -185,12 +185,12 @@ if index(g:bundle_group, 'basic') >= 0
     let g:startify_session_persistence    = 1
     let g:startify_session_delete_buffers = 1
     let g:startify_session_autoload       = 0
+    let g:startify_change_to_dir          = 1
     let g:startify_bookmarks              = [
                 \{'c': '~/.vimrc'},
                 \'~/.zshrc',
                 \{'p': '~/docs/plant.md'}
                 \]
-    let g:startify_change_to_dir          = 1
 
     nmap <leader>p :Startify<cr>
 
