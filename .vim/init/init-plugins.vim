@@ -10,7 +10,7 @@
 " 默认情况下的分组，可以再前面覆盖之
 "----------------------------------------------------------------------
 if !exists('g:bundle_group')
-    let g:bundle_group = ['basic', 'tags', 'enhanced', 'filetypes', 'textobj']
+    let g:bundle_group  = ['basic', 'tags', 'enhanced', 'filetypes', 'textobj']
     let g:bundle_group += ['tags', 'airline', 'nerdtree', 'ale', 'echodoc']
     let g:bundle_group += ['leaderf', 'ycm']
     let g:bundle_group += ['tool']
@@ -180,22 +180,22 @@ if index(g:bundle_group, 'basic') >= 0
     nmap <m-e> <Plug>(choosewin)
 
     " 默认不显示 startify
-    let g:startify_disable_at_vimenter = 1
-    let g:startify_session_dir = '~/.vim/session'
-    let g:startify_session_persistence = 1
+    let g:startify_disable_at_vimenter    = 1
+    let g:startify_session_dir            = '~/.vim/session'
+    let g:startify_session_persistence    = 1
     let g:startify_session_delete_buffers = 1
-    let g:startify_session_autoload = 0
-    let g:startify_bookmarks = [
+    let g:startify_session_autoload       = 0
+    let g:startify_bookmarks              = [
                 \{'c': '~/.vimrc'},
                 \'~/.zshrc',
                 \{'p': '~/docs/plant.md'}
                 \]
-    let g:startify_change_to_dir = 1
+    let g:startify_change_to_dir          = 1
 
     nmap <leader>p :Startify<cr>
 
     " signify 调优
-    let g:signify_vcs_list = ['git', 'svn']
+    let g:signify_vcs_list               = ['git', 'svn']
     let g:signify_sign_add               = '+'
     let g:signify_sign_delete            = '_'
     let g:signify_sign_delete_first_line = '‾'
@@ -240,13 +240,12 @@ if index(g:bundle_group, 'enhanced') >= 0
     " 配对括号和引号自动补全
     " Plug 'Raimondi/delimitMate'
     Plug 'jiangmiao/auto-pairs'
-    let g:AutoPairsFlyMode = 1
+    let g:AutoPairsFlyMode            = 1
     let g:AutoPairsShortcutBackInsert = '<M-z>'
-    let g:AutoPairsShortcutToggle = '<M-a>'
-    " let g:AutoPairsShortcutFastWrap = '<Nop>'
-    let g:AutoPairsMapCh = 0
-    let g:AutoPairsMoveCharacter = '<Nop>'
-    let g:AutoPairsShortcutJump = '<Nop>'
+    let g:AutoPairsShortcutToggle     = '<M-a>'
+    let g:AutoPairsMapCh              = 0
+    let g:AutoPairsMoveCharacter      = '<Nop>'
+    let g:AutoPairsShortcutJump       = '<Nop>'
 
 
     " 提供 gist 接口
@@ -305,7 +304,7 @@ if index(g:bundle_group, 'tags') >= 0
     let g:gutentags_plus_switch = 1
 
     " 设置 ctags 的参数
-    let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extras=+q']
+    let g:gutentags_ctags_extra_args  = ['--fields=+niazS', '--extras=+q']
     let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
     let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 
@@ -392,19 +391,19 @@ endif
 if index(g:bundle_group, 'airline') >= 0
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
-    let g:airline_left_sep = ''
-    let g:airline_left_alt_sep = ''
-    let g:airline_right_sep = ''
-    let g:airline_right_alt_sep = ''
-    let g:airline_powerline_fonts = 1
-    let g:airline_exclude_preview = 1
-    let g:airline_section_b = '%n'
-    let g:airline_theme='deus'
-    let g:airline#extensions#branch#enabled = 0
-    let g:airline#extensions#syntastic#enabled = 0
+    let g:airline_left_sep                        = ''
+    let g:airline_left_alt_sep                    = ''
+    let g:airline_right_sep                       = ''
+    let g:airline_right_alt_sep                   = ''
+    let g:airline_powerline_fonts                 = 1
+    let g:airline_exclude_preview                 = 1
+    let g:airline_section_b                       = '%n'
+    let g:airline_theme                           = 'deus'
+    let g:airline#extensions#branch#enabled       = 0
+    let g:airline#extensions#syntastic#enabled    = 0
     let g:airline#extensions#fugitiveline#enabled = 0
-    let g:airline#extensions#csv#enabled = 0
-    let g:airline#extensions#vimagit#enabled = 0
+    let g:airline#extensions#csv#enabled          = 0
+    let g:airline#extensions#vimagit#enabled      = 0
 endif
 
 
@@ -449,9 +448,9 @@ if index(g:bundle_group, 'ale') >= 0
 
     " 设定延迟和提示信息
     let g:ale_completion_delay = 500
-    let g:ale_echo_delay = 20
-    let g:ale_lint_delay = 500
-    let g:ale_echo_msg_format = '[%linter%] %code: %%s'
+    let g:ale_echo_delay       = 20
+    let g:ale_lint_delay       = 500
+    let g:ale_echo_msg_format  = '[%linter%] %code: %%s'
 
     " 设定检测的时机：normal 模式文字改变，或者离开 insert模式
     " 禁用默认 INSERT 模式下改变文字也触发的设置，太频繁外，还会让补全窗闪烁
@@ -475,12 +474,13 @@ if index(g:bundle_group, 'ale') >= 0
                 \ 'go': ['go build', 'gofmt'],
                 \ 'java': ['javac'],
                 \ 'javascript': ['eslint'],
+                \ 'typescript': ['eslint'],
                 \ }
 
 
     " 获取 pylint, flake8 的配置文件，在 vim-init/tools/conf 下面
     function s:lintcfg(name)
-        let conf = s:path('tools/conf/')
+        let conf  = s:path('tools/conf/')
         let path1 = conf . a:name
         let path2 = expand('~/.vim/linter/'. a:name)
         if filereadable(path2)
@@ -490,25 +490,25 @@ if index(g:bundle_group, 'ale') >= 0
     endfunc
 
     " 设置 flake8/pylint 的参数
-    let g:ale_python_flake8_options = '--conf='.s:lintcfg('flake8.conf')
-    let g:ale_python_pylint_options = '--rcfile='.s:lintcfg('pylint.conf')
-    let g:ale_python_pylint_options .= ' --disable=W'
-    let g:ale_c_gcc_options = '-Wall -O2 -std=c99'
-    let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++14'
-    let g:ale_c_cppcheck_options = ''
-    let g:ale_cpp_cppcheck_options = ''
+    let g:ale_python_flake8_options  = '--conf='.s:lintcfg('flake8.conf')
+    let g:ale_python_pylint_options  = '--rcfile='.s:lintcfg('pylint.conf')
+    let g:ale_python_pylint_options  = ' --disable=W'
+    let g:ale_c_gcc_options          = '-Wall -O2 -std=c99'
+    let g:ale_cpp_gcc_options        = '-Wall -O2 -std=c++14'
+    let g:ale_c_cppcheck_options     = ''
+    let g:ale_cpp_cppcheck_options   = ''
 
     let g:ale_linters.text = ['textlint', 'write-good', 'languagetool']
 
     " 如果没有 gcc 只有 clang 时（FreeBSD）
     if executable('clang') == 0 && executable('gcc')
-        let g:ale_linters.c += ['gcc', 'cppcheck']
+        let g:ale_linters.c   += ['gcc', 'cppcheck']
         let g:ale_linters.cpp += ['gcc', 'cppcheck']
     endif
 
     " 错误提示符及警告提示符
-    let g:ale_sign_error='✗'
-    let g:ale_sign_warning='⚠'
+    let g:ale_sign_error   = '✗'
+    let g:ale_sign_warning = '⚠'
 endif
 
 
@@ -558,10 +558,10 @@ if index(g:bundle_group, 'leaderf') >= 0
         let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
 
         " 如何识别项目目录，从当前文件目录向父目录递归知道碰到下面的文件/目录
-        let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
+        let g:Lf_RootMarkers          = ['.project', '.root', '.svn', '.git']
         let g:Lf_WorkingDirectoryMode = 'Ac'
-        let g:Lf_WindowHeight = 0.30
-        let g:Lf_CacheDirectory = expand('~/.vim/cache')
+        let g:Lf_WindowHeight         = 0.30
+        let g:Lf_CacheDirectory       = expand('~/.vim/cache')
 
         " 显示绝对路径
         let g:Lf_ShowRelativePath = 0
@@ -812,5 +812,3 @@ let g:ascii = [
             \]
 let g:startify_custom_header =
             \ 'map(g:ascii + startify#fortune#boxed(), "\"   \".v:val")'
-
-packadd! termdebug

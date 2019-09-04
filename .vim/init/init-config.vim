@@ -179,7 +179,7 @@ if has('clipboard')
     set clipboard+=unnamed
 endif
 
-" packadd termdebug
+packadd! termdebug
 
 " 设置鼠标功能
 set mouse=a
