@@ -108,6 +108,7 @@ endfunc
 noremap <silent> <c-w>tn :tabnew<cr>
 noremap <silent> <c-w>tc :tabclose<cr>
 noremap <silent> <c-w>to :tabonly<cr>
+noremap <silent> <c-w>tt :tab terminal<cr>
 noremap <silent> <c-w>th :call Tab_MoveLeft()<cr>
 noremap <silent> <c-w>tl :call Tab_MoveRight()<cr>
 
