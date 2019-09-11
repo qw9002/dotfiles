@@ -48,9 +48,6 @@ map <leader>k <plug>(easymotion-k)
 " 忽略大小写
 let g:EasyMotion_smartcase = 1
 
-" 文件浏览器，代替 netrw
-" Plug 'justinmk/vim-dirvish'
-
 " 对齐
 Plug 'junegunn/vim-easy-align'
 vmap <Enter> <Plug>(EasyAlign)
@@ -86,39 +83,6 @@ Plug 'chrisbra/vim-diff-enhanced'
 
 Plug 'skywind3000/asyncrun.vim'
 
-
-"----------------------------------------------------------------------
-" Dirvish 设置：自动排序并隐藏文件，同时定位到相关文件
-" 这个排序函数可以将目录排在前面，文件排在后面，并且按照字母顺序排序
-" 比默认的纯按照字母排序更友好点。
-"----------------------------------------------------------------------
-function! s:setup_dirvish()
-    if &buftype != 'nofile' && &filetype != 'dirvish'
-        return
-    endif
-    if has('nvim')
-        return
-    endif
-    " 取得光标所在行的文本（当前选中的文件名）
-    let text = getline('.')
-    if ! get(g:, 'dirvish_hide_visible', 0)
-        exec 'silent keeppatterns g@\v[\/]\.[^\/]+[\/]?$@d _'
-    endif
-    " 排序文件名
-    exec 'sort ,^.*[\/],'
-    let name = '^' . escape(text, '.*[]~\') . '[/*|@=|\\*]\=\%($\|\s\+\)'
-    " 定位到之前光标处的文件
-    call search(name, 'wc')
-    noremap <silent><buffer> ~ :Dirvish ~<cr>
-    noremap <buffer> % :e %
-endfunc
-
-augroup MyPluginSetup
-    autocmd!
-    autocmd FileType dirvish call s:setup_dirvish()
-augroup END
-
-
 "----------------------------------------------------------------------
 " 基础插件
 "----------------------------------------------------------------------
@@ -133,9 +97,6 @@ if index(g:bundle_group, 'basic') >= 0
     " 支持库，给其他插件用的函数库
     Plug 'xolox/vim-misc'
 
-    " 用于在侧边符号栏显示 marks （ma-mz 记录的位置）
-    " Plug 'kshenoy/vim-signature'
-
     " 用于在侧边符号栏显示 git/svn 的 diff
     Plug 'mhinz/vim-signify'
 
@@ -144,10 +105,7 @@ if index(g:bundle_group, 'basic') >= 0
     Plug 'mh21/errormarker.vim'
 
     " 使用 <space>ha 清除 errormarker 标注的错误
-    noremap <silent><space>ha :RemoveErrorMarkers<cr>
-
-    " 使用 ALT+e 会在不同窗口/标签上显示 A/B/C 等编号，然后字母直接跳转
-    Plug 't9md/vim-choosewin'
+    noremap <silent> <space>ha :RemoveErrorMarkers<cr>
 
     " 提供基于 TAGS 的定义预览，函数参数预览，quickfix 预览
     Plug 'skywind3000/vim-preview'
@@ -174,12 +132,6 @@ if index(g:bundle_group, 'basic') >= 0
 
     " 可视模式下用 * 号匹配字符串
     Plug 'nelstrom/vim-visual-star-search'
-
-    " 筛选符合条件的 argslist 文件并保存到 args 中去, 使用 argdo 处理匹配文件
-    " Plug 'nelstrom/vim-qargs'
-
-    " 使用 ALT+e 会在不同窗口/标签上显示 A/B/C 等编号，然后字母直接跳转
-    nmap <m-e> <Plug>(choosewin)
 
     " 默认不显示 startify
     let g:startify_disable_at_vimenter    = 1
@@ -224,25 +176,25 @@ endif
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'enhanced') >= 0
 
-    " 用 v 选中一个区域后，ALT_+/- 按分隔符扩大/缩小选区
-    Plug 'terryma/vim-expand-region'
+    " " 用 v 选中一个区域后，ALT_+/- 按分隔符扩大/缩小选区
+    " Plug 'terryma/vim-expand-region'
 
-    " 快速文件搜索
-    Plug 'junegunn/fzf'
+    " " 快速文件搜索
+    " Plug 'junegunn/fzf'
 
     " 给不同语言提供字典补全，插入模式下 c-x c-k 触发
     Plug 'asins/vim-dict'
 
-    " 使用 :FlyGrep 命令进行实时 grep
-    Plug 'wsdjeg/FlyGrep.vim'
+    " " 使用 :FlyGrep 命令进行实时 grep
+    " Plug 'wsdjeg/FlyGrep.vim'
 
-    " 使用 :CtrlSF 命令进行模仿 sublime 的 grep
-    Plug 'dyng/ctrlsf.vim'
+    " " 使用 :CtrlSF 命令进行模仿 sublime 的 grep
+    " Plug 'dyng/ctrlsf.vim'
 
     " 配对括号和引号自动补全
     " Plug 'Raimondi/delimitMate'
     Plug 'jiangmiao/auto-pairs'
-    let g:AutoPairsFlyMode            = 1
+    let g:AutoPairsFlyMode            = 0
     let g:AutoPairsShortcutBackInsert = '<M-z>'
     let g:AutoPairsShortcutToggle     = '<M-a>'
     let g:AutoPairsMapCh              = 0
@@ -253,9 +205,9 @@ if index(g:bundle_group, 'enhanced') >= 0
     " 提供 gist 接口
     Plug 'lambdalisue/vim-gista', { 'on': 'Gista' }
 
-    " ALT_+/- 用于按分隔符扩大缩小 v 选区
-    map <m-=> <Plug>(expand_region_expand)
-    map <m--> <Plug>(expand_region_shrink)
+    " " ALT_+/- 用于按分隔符扩大缩小 v 选区
+    " map <m-=> <Plug>(expand_region_expand)
+    " map <m--> <Plug>(expand_region_shrink)
 endif
 
 
@@ -363,11 +315,11 @@ endif
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'filetypes') >= 0
 
-    " powershell 脚本文件的语法高亮
-    Plug 'pprovost/vim-ps1', { 'for': 'ps1' }
+    " " powershell 脚本文件的语法高亮
+    " Plug 'pprovost/vim-ps1', { 'for': 'ps1' }
 
-    " lua 语法高亮增强
-    Plug 'tbastos/vim-lua', { 'for': 'lua' }
+    " " lua 语法高亮增强
+    " Plug 'tbastos/vim-lua', { 'for': 'lua' }
 
     " C++ 语法高亮增强，支持 11/14/17 标准
     Plug 'octol/vim-cpp-enhanced-highlight', { 'for': ['c', 'cpp'] }
@@ -378,12 +330,12 @@ if index(g:bundle_group, 'filetypes') >= 0
     " python 语法文件增强
     Plug 'vim-python/python-syntax', { 'for': ['python'] }
 
-    " rust 语法增强
-    Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+    " " rust 语法增强
+    " Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 
     " vim org-mode 
-    Plug 'tpope/vim-speeddating'
-    Plug 'jceb/vim-orgmode', { 'for': 'org' }
+    " Plug 'tpope/vim-speeddating'
+    " Plug 'jceb/vim-orgmode', { 'for': 'org' }
 endif
 
 
@@ -429,16 +381,16 @@ endif
 " LanguageTool 语法检查
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'grammer') >= 0
-    Plug 'rhysd/vim-grammarous'
-    noremap <space>rg :GrammarousCheck --lang=en-US --no-move-to-first-error --no-preview<cr>
-    map <space>rr <Plug>(grammarous-open-info-window)
-    map <space>rv <Plug>(grammarous-move-to-info-window)
-    map <space>rs <Plug>(grammarous-reset)
-    map <space>rx <Plug>(grammarous-close-info-window)
-    map <space>rm <Plug>(grammarous-remove-error)
-    map <space>rd <Plug>(grammarous-disable-rule)
-    map <space>rn <Plug>(grammarous-move-to-next-error)
-    map <space>rp <Plug>(grammarous-move-to-previous-error)
+    " Plug 'rhysd/vim-grammarous'
+    " noremap <space>rg :GrammarousCheck --lang=en-US --no-move-to-first-error --no-preview<cr>
+    " map <space>rr <Plug>(grammarous-open-info-window)
+    " map <space>rv <Plug>(grammarous-move-to-info-window)
+    " map <space>rs <Plug>(grammarous-reset)
+    " map <space>rx <Plug>(grammarous-close-info-window)
+    " map <space>rm <Plug>(grammarous-remove-error)
+    " map <space>rd <Plug>(grammarous-disable-rule)
+    " map <space>rn <Plug>(grammarous-move-to-next-error)
+    " map <space>rp <Plug>(grammarous-move-to-previous-error)
 endif
 
 
@@ -805,12 +757,5 @@ endif
 "----------------------------------------------------------------------
 call plug#end()
 
-let g:ascii = [
-            \ '        __',
-            \ '.--.--.|__|.--------.',
-            \ '|  |  ||  ||        |',
-            \ ' \___/ |__||__|__|__|',
-            \ ''
-            \]
 let g:startify_custom_header =
             \ 'map(g:ascii + startify#fortune#boxed(), "\"   \".v:val")'
