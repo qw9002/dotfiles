@@ -52,7 +52,6 @@ let g:EasyMotion_smartcase = 1
 Plug 'junegunn/vim-easy-align'
 vmap <Enter> <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
 let g:easy_align_delimiters = {
             \ '>': { 'pattern': '>>\|=>\|>' },
             \ '/': {
