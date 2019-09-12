@@ -17,6 +17,8 @@
 " NORMAL 模式
 "----------------------------------------------------------------------
 
+nnoremap <silent> * :keepjumps normal! mi*`i<CR>
+
 " ALT+h/l 快速左右按单词移动
 " ALT+j/k 逻辑跳转下一行/上一行（按 wrap 逻辑换行进行跳转）
 noremap <m-h> b
