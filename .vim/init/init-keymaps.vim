@@ -75,6 +75,9 @@ cnoremap <c-e> <end>
 cnoremap <m-f> <c-right>
 cnoremap <m-b> <c-left>
 
+" 使用 ctrl-_ 打开命令、查询等历史窗口
+cnoremap <c-_> <c-f>
+
 " ALT 键移动增强
 cnoremap <m-h> <c-left>
 cnoremap <m-l> <c-right>
