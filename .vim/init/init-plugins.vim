@@ -126,6 +126,9 @@ if index(g:bundle_group, 'basic') >= 0
     " 添加／删除／改变成对符号 ds, ys, cs, 可视模式使用 S 作为前缀
     Plug 'tpope/vim-surround'
 
+    " 交换两个或更多的单词
+    Plug 'tpope/vim-abolish'
+
     " Git 支持
     Plug 'tpope/vim-fugitive'
 
