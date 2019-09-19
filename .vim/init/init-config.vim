@@ -15,6 +15,8 @@ if has('clipboard')
 endif
 
 packadd! termdebug
+" 标签跳转
+packadd! matchit
 
 " 设置鼠标功能
 if has('mouse')
