@@ -115,7 +115,7 @@ set listchars=tab:\|\ ,trail:.,extends:>,precedes:<
 
 " 设置 tags：当前文件所在目录往上向根目录搜索直到碰到 .tags 文件
 " 或者 Vim 当前目录包含 .tags 文件
-set tags=./.tags;,.tags
+set tags=./.tags;,.tags,tags
 
 " 如遇Unicode值大于255的文本，不必等到空格再折行
 set formatoptions+=m
