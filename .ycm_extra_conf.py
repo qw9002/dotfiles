@@ -44,7 +44,7 @@ flags = [
 '/usr/include',
 '-isystem',
 '/usr/local/include',
-# 使用终端命令, 查询头文件地址
+# use terminal command, search file head address
 # echo | clang -v -E -x c++ -
 '-isystem',
 '/Library/Developer/CommandLineTools/usr/include/c++/v1',
