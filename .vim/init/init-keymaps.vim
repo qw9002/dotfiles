@@ -181,7 +181,7 @@ let g:asyncrun_bell = 1
 " nnoremap <leader>10 :call asyncrun#quickfix_toggle(6)<cr>
 
 " F9 编译 C/C++ 文件
-nnoremap <silent> <leader>9 :AsyncRun gcc -Wall -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
+nnoremap <silent> <leader>9 :AsyncRun gcc -std=c99 -Wall -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
 
 " F8 运行项目
 nnoremap <silent> <leader>8 :AsyncRun -cwd=<root> -raw make run <cr>
