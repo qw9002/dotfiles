@@ -60,23 +60,7 @@ let g:easy_align_delimiters = {
             \ '/': {
             \     'pattern':         '//\+\|/\*\|\*/',
             \     'delimiter_align': 'l',
-            \     'ignore_groups':   ['!Comment'] },
-            \ ']': {
-            \     'pattern':       '[[\]]',
-            \     'left_margin':   0,
-            \     'right_margin':  0,
-            \     'stick_to_left': 0
-            \   },
-            \ ')': {
-            \     'pattern':       '[()]',
-            \     'left_margin':   0,
-            \     'right_margin':  0,
-            \     'stick_to_left': 0
-            \   },
-            \ 'd': {
-            \     'pattern':      ' \(\S\+\s*[;=]\)\@=',
-            \     'left_margin':  0,
-            \     'right_margin': 0
+            \     'ignore_groups':   ['!Comment']
             \   }
             \ }
 
@@ -98,10 +82,6 @@ if index(g:bundle_group, 'basic') >= 0
 
     " 用于在侧边符号栏显示 git/svn 的 diff
     Plug 'mhinz/vim-signify'
-
-    " 根据 quickfix 中匹配到的错误信息，高亮对应文件的错误行
-    " 使用 :RemoveErrorMarkers 命令或者 <space>ha 清除错误
-    Plug 'mh21/errormarker.vim'
 
     " 提供基于 TAGS 的定义预览，函数参数预览，quickfix 预览
     Plug 'skywind3000/vim-preview'
@@ -135,19 +115,6 @@ if index(g:bundle_group, 'basic') >= 0
     " 筛选符合条件的 argslist 文件并保存到 args 中去, 使用 argdo 处理匹配文件
     Plug 'nelstrom/vim-qargs'
 
-    " 使用 <space>ha 清除 errormarker 标注的错误
-    noremap <silent><space>ha :RemoveErrorMarkers<cr>
-
-    " 默认不显示 startify
-    let g:startify_disable_at_vimenter    = 1
-    let g:startify_session_dir            = '~/.vim/session'
-    let g:startify_session_persistence    = 1
-    let g:startify_session_delete_buffers = 1
-    let g:startify_session_autoload       = 0
-    let g:startify_change_to_dir          = 1
-    let g:startify_bookmarks              = [ {'c': '~/.vimrc'}, '~/.zshrc', {'do': '~/plant.md'} ]
-    noremap <leader>p :Startify<cr>
-
     " signify 调优
     let g:signify_vcs_list               = ['git', 'svn']
     let g:signify_sign_add               = '+'
@@ -177,20 +144,8 @@ endif
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'enhanced') >= 0
 
-    " 用 v 选中一个区域后，ALT_+/- 按分隔符扩大/缩小选区
-    Plug 'terryma/vim-expand-region'
-
-    " 快速文件搜索
-    Plug 'junegunn/fzf'
-
-    " 给不同语言提供字典补全，插入模式下 c-x c-k 触发
+    " 给不同语言提供字典补全，插入模式下 <c-x><c-k> 触发
     Plug 'asins/vim-dict'
-
-    " 使用 :FlyGrep 命令进行实时 grep
-    Plug 'wsdjeg/FlyGrep.vim'
-
-    " 使用 :CtrlSF 命令进行模仿 sublime 的 grep
-    Plug 'dyng/ctrlsf.vim'
 
     " 配对括号和引号自动补全
     Plug 'jiangmiao/auto-pairs'
@@ -203,10 +158,6 @@ if index(g:bundle_group, 'enhanced') >= 0
 
     " 提供 gist 接口
     Plug 'lambdalisue/vim-gista', { 'on': 'Gista' }
-
-    " ALT_+/- 用于按分隔符扩大缩小 v 选区
-    map <m-=> <Plug>(expand_region_expand)
-    map <m--> <Plug>(expand_region_shrink)
 endif
 
 
@@ -315,10 +266,10 @@ endif
 if index(g:bundle_group, 'filetypes') >= 0
 
     " powershell 脚本文件的语法高亮
-    " Plug 'pprovost/vim-ps1', { 'for': 'ps1' }
+    Plug 'pprovost/vim-ps1', { 'for': 'ps1' }
 
     " lua 语法高亮增强
-    " Plug 'tbastos/vim-lua', { 'for': 'lua' }
+    Plug 'tbastos/vim-lua', { 'for': 'lua' }
 
     " C++ 语法高亮增强，支持 11/14/17 标准
     Plug 'octol/vim-cpp-enhanced-highlight', { 'for': ['c', 'cpp'] }
@@ -330,10 +281,11 @@ if index(g:bundle_group, 'filetypes') >= 0
     Plug 'vim-python/python-syntax', { 'for': ['python'] }
 
     " rust 语法增强
-    " Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+    Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 
     " vim org-mode 
-    " Plug 'jceb/vim-orgmode', { 'for': 'org' }
+    Plug 'jceb/vim-orgmode', { 'for': 'org' }
+
 endif
 
 
@@ -372,23 +324,6 @@ if index(g:bundle_group, 'nerdtree') >= 0
     noremap <space>no :NERDTreeFocus<cr>
     noremap <space>nm :NERDTreeMirror<cr>
     noremap <space>nt :NERDTreeToggle<cr>
-endif
-
-
-"----------------------------------------------------------------------
-" LanguageTool 语法检查
-"----------------------------------------------------------------------
-if index(g:bundle_group, 'grammer') >= 0
-    Plug 'rhysd/vim-grammarous'
-    noremap <space>rg :GrammarousCheck --lang=en-US --no-move-to-first-error --no-preview<cr>
-    map <space>rr <Plug>(grammarous-open-info-window)
-    map <space>rv <Plug>(grammarous-move-to-info-window)
-    map <space>rs <Plug>(grammarous-reset)
-    map <space>rx <Plug>(grammarous-close-info-window)
-    map <space>rm <Plug>(grammarous-remove-error)
-    map <space>rd <Plug>(grammarous-disable-rule)
-    map <space>rn <Plug>(grammarous-move-to-next-error)
-    map <space>rp <Plug>(grammarous-move-to-previous-error)
 endif
 
 
@@ -543,40 +478,6 @@ if index(g:bundle_group, 'leaderf') >= 0
                     \ "BufTag": [["<ESC>", ':exec g:Lf_py "bufTagExplManager.quit()"<cr>']],
                     \ "Function": [["<ESC>", ':exec g:Lf_py "functionExplManager.quit()"<cr>']],
                     \ }
-
-    else
-        " 不支持 python ，使用 CtrlP 代替
-        Plug 'ctrlpvim/ctrlp.vim'
-
-        " 显示函数列表的扩展插件
-        Plug 'tacahiroy/ctrlp-funky'
-
-        " 忽略默认键位
-        let g:ctrlp_map = ''
-
-        " 模糊匹配忽略
-        let g:ctrlp_custom_ignore = {
-                    \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-                    \ 'file': '\v\.(exe|so|dll|mp3|wav|sdf|suo|mht)$',
-                    \ 'link': 'some_bad_symbolic_links',
-                    \ }
-
-        " 项目标志
-        let g:ctrlp_root_markers = ['.project', '.root', '.svn', '.git']
-        let g:ctrlp_working_path = 0
-
-        " CTRL+p 打开文件模糊匹配
-        noremap <c-p> :CtrlP<cr>
-
-        " CTRL+n 打开最近访问过的文件的匹配
-        noremap <c-n> :CtrlPMRUFiles<cr>
-
-        " ALT+p 显示当前文件的函数列表
-        noremap <m-p> :CtrlPFunky<cr>
-
-        " ALT+n 匹配 buffer
-        noremap <m-n> :CtrlPBuffer<cr>
-    endif
 endif
 
 if index(g:bundle_group, 'ycm') >= 0
