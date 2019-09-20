@@ -39,9 +39,6 @@ call plug#begin(get(g:, 'bundle_home', '~/.vim/bundles'))
 " 默认插件 
 "----------------------------------------------------------------------
 
-" vim中文说明文档 ./vimcdoc.sh -i安装
-Plug 'yianwillis/vimcdoc', { 'do': './vimcdoc.sh -i' }
-
 " 全文快速移动, <leader>f{char} 即可触发
 Plug 'easymotion/vim-easymotion', { 'on': ['<plug>(easymotion-f)', '<plug>(easymotion-F)', '<plug>(easymotion-j)', '<plug>(easymotion-k)'] }
 map <leader>f <plug>(easymotion-f)
@@ -478,6 +475,8 @@ if index(g:bundle_group, 'leaderf') >= 0
                     \ "BufTag": [["<ESC>", ':exec g:Lf_py "bufTagExplManager.quit()"<cr>']],
                     \ "Function": [["<ESC>", ':exec g:Lf_py "functionExplManager.quit()"<cr>']],
                     \ }
+
+    endif
 endif
 
 if index(g:bundle_group, 'ycm') >= 0
