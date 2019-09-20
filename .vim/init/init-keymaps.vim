@@ -9,7 +9,6 @@
 "   - 编译运行
 "   - 符号搜索
 "
-"
 "======================================================================
 " vim: set ts=4 sw=4 tw=78 noet :
 
@@ -42,7 +41,7 @@ inoremap <c-e> <end>
 inoremap <m-f> <c-right>
 inoremap <m-b> <c-left>
 
-" vim原组合键 使用 <c-_> 代替
+" vim 原组合键 使用 <c-_> 代替
 inoremap <c-_> <c-k>
 
 
@@ -121,6 +120,7 @@ noremap <silent> <c-w>tt :tab terminal<cr>
 noremap <silent> <c-w>th :call Tab_MoveLeft()<cr>
 noremap <silent> <c-w>tl :call Tab_MoveRight()<cr>
 
+
 "----------------------------------------------------------------------
 " 窗口切换：ALT+SHIFT+hjkl
 " 传统的 CTRL+hjkl 移动窗口不适用于 vim 8.1 的终端模式，CTRL+hjkl 在
@@ -163,7 +163,6 @@ elseif has('nvim')
     tnoremap <m-K> <c-\><c-n><c-w>k
     tnoremap <m-q> <c-\><c-n>
 endif
-
 
 
 "----------------------------------------------------------------------
@@ -256,7 +255,6 @@ function! ExecuteFile()
         exec 'AsyncRun -cwd=$(VIM_FILEDIR) -raw -save=2 -mode=0 '. cmd
     endif
 endfunc
-
 
 
 "----------------------------------------------------------------------

@@ -1,6 +1,6 @@
 "======================================================================
 "
-" init-plugins.vim - 
+" init-plugins.vim -
 "
 "======================================================================
 " vim: set ts=4 sw=4 tw=78 noet :
@@ -178,23 +178,10 @@ endif
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'enhanced') >= 0
 
-    " " 用 v 选中一个区域后，ALT_+/- 按分隔符扩大/缩小选区
-    " Plug 'terryma/vim-expand-region'
-
-    " " 快速文件搜索
-    " Plug 'junegunn/fzf'
-
     " 给不同语言提供字典补全，插入模式下 c-x c-k 触发
     Plug 'asins/vim-dict'
 
-    " " 使用 :FlyGrep 命令进行实时 grep
-    " Plug 'wsdjeg/FlyGrep.vim'
-
-    " " 使用 :CtrlSF 命令进行模仿 sublime 的 grep
-    " Plug 'dyng/ctrlsf.vim'
-
     " 配对括号和引号自动补全
-    " Plug 'Raimondi/delimitMate'
     Plug 'jiangmiao/auto-pairs'
     let g:AutoPairsFlyMode            = 0
     let g:AutoPairsShortcutBackInsert = '<M-z>'
@@ -203,13 +190,8 @@ if index(g:bundle_group, 'enhanced') >= 0
     let g:AutoPairsMoveCharacter      = '<Nop>'
     let g:AutoPairsShortcutJump       = '<Nop>'
 
-
     " 提供 gist 接口
     Plug 'lambdalisue/vim-gista', { 'on': 'Gista' }
-
-    " " ALT_+/- 用于按分隔符扩大缩小 v 选区
-    " map <m-=> <Plug>(expand_region_expand)
-    " map <m--> <Plug>(expand_region_shrink)
 endif
 
 
@@ -334,10 +316,6 @@ if index(g:bundle_group, 'filetypes') >= 0
 
     " " rust 语法增强
     " Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-
-    " vim org-mode 
-    " Plug 'tpope/vim-speeddating'
-    " Plug 'jceb/vim-orgmode', { 'for': 'org' }
 endif
 
 
@@ -383,16 +361,16 @@ endif
 " LanguageTool 语法检查
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'grammer') >= 0
-    " Plug 'rhysd/vim-grammarous'
-    " noremap <space>rg :GrammarousCheck --lang=en-US --no-move-to-first-error --no-preview<cr>
-    " map <space>rr <Plug>(grammarous-open-info-window)
-    " map <space>rv <Plug>(grammarous-move-to-info-window)
-    " map <space>rs <Plug>(grammarous-reset)
-    " map <space>rx <Plug>(grammarous-close-info-window)
-    " map <space>rm <Plug>(grammarous-remove-error)
-    " map <space>rd <Plug>(grammarous-disable-rule)
-    " map <space>rn <Plug>(grammarous-move-to-next-error)
-    " map <space>rp <Plug>(grammarous-move-to-previous-error)
+    Plug 'rhysd/vim-grammarous'
+    noremap <space>rg :GrammarousCheck --lang=en-US --no-move-to-first-error --no-preview<cr>
+    map <space>rr <Plug>(grammarous-open-info-window)
+    map <space>rv <Plug>(grammarous-move-to-info-window)
+    map <space>rs <Plug>(grammarous-reset)
+    map <space>rx <Plug>(grammarous-close-info-window)
+    map <space>rm <Plug>(grammarous-remove-error)
+    map <space>rd <Plug>(grammarous-disable-rule)
+    map <space>rn <Plug>(grammarous-move-to-next-error)
+    map <space>rp <Plug>(grammarous-move-to-previous-error)
 endif
 
 
