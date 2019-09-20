@@ -23,7 +23,7 @@ set et
 set softtabstop=4
 
 
-augroup PythonTab
+augroup FileTypeTab
     au!
     " 如果你需要 python 里用 tab，那么反注释下面这行字，否则vim会在打开py文件
     " 时自动设置成空格缩进。

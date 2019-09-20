@@ -12,7 +12,7 @@ runtime ftplugin/man.vim
 " 默认情况下的分组，可以再前面覆盖之
 "----------------------------------------------------------------------
 if !exists('g:bundle_group')
-    let g:bundle_group  = ['basic', 'tags', 'enhanced', 'filetypes', 'textobj']
+    let g:bundle_group  = ['basic', 'tags', 'filetypes', 'textobj']
     let g:bundle_group += ['tags', 'airline', 'nerdtree', 'ale', 'echodoc']
     let g:bundle_group += ['leaderf', 'ycm']
     let g:bundle_group += ['tool']
@@ -279,9 +279,6 @@ if index(g:bundle_group, 'filetypes') >= 0
 
     " rust 语法增强
     Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-
-    " vim org-mode 
-    Plug 'jceb/vim-orgmode', { 'for': 'org' }
 
 endif
 
