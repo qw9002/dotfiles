@@ -3,16 +3,12 @@
 # 配置文件放置目录
 dotfileDir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
-# 通过 antigen 管理 oh-my-zsh
-if [[ ! -e ~/.zplug ]]; then
-    git clone https://github.com/zplug/zplug ~/.zplug
-fi
-
 zsh=`which zsh`
 bash=`which bash`
+lua=`which lua`
 if [[ ${zsh##*/} == "zsh" && ! -e $HOME/.antigen.zsh ]]; then
     curl -L git.io/antigen > $HOME/.antigen.zsh
-elif [[ ${bash##*/} == "bash" ]]; then
+elif [[ ${bash##*/} == "bash" && ${lua##*/} == "lua" ]]; then
     eval "$(lua ~/.antigen/bundles/skywind3000/z.lua/z.lua  --init bash once enhanced)"
 fi
 
@@ -22,7 +18,7 @@ fi
 
 dires=(
     ${dotfileDir}/.vim/bundles/. # 创建插件安装文件夹
-    $HOME/backup/.                  # 创建备份配置文件夹
+    $HOME/backup/.               # 创建备份配置文件夹
 )
 
 for dir in ${dires[@]}; do
@@ -40,6 +36,7 @@ done
 
 # 引入 soft 中的dotfiles变量
 dotfiles=(
+    .eslintrc.js
     .gtags.conf        # 支持解析标签
     .vim               # vim 插件目录
     .vimrc             # vim 编辑器配置文件
