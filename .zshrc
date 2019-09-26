@@ -28,9 +28,10 @@ zplug "junegunn/fzf-bin", \
 # # Supports oh-my-zsh plugins and the like
 
 # git 命令别名alias
-zplug "plugins/git",     from:oh-my-zsh
-zplug "plugins/docker",  from:oh-my-zsh
-zplug "plugins/python",  from:oh-my-zsh
+zplug "plugins/git",    from:oh-my-zsh
+zplug "plugins/docker", from:oh-my-zsh
+zplug "plugins/python", from:oh-my-zsh
+zplug "plugins/yarn",   from:oh-my-zsh
 # cdf 切换命令行目录到 finder 显示目录
 # ofd 打开命令行地址到目录
 # pfs 返回finder选择的文件或目录
