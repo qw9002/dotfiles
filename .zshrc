@@ -1,30 +1,132 @@
 #!/usr/bin/env zsh
 
-source $HOME/.antigen.zsh
-# 加载 oh-my-zsh 库.
-antigen use oh-my-zsh
+source ~/.zplug/init.zsh
+# Make sure to use double quotes
+zplug "zsh-users/zsh-autosuggestions"     # 智能提示输入 ctrl-f 确认补全, alt-f 补全单词
+zplug "zsh-users/zsh-completions"         # 命令补全
+zplug "zsh-users/zsh-syntax-highlighting" # 命令高亮插件
+zplug "skywind3000/z.lua"                 # 智能目录调整
 
-# 任何你想要加载的插件
-# (可在 ~/.antigen/bundles/robbyrussell/oh-my-zsh/plugins/* 中找到)
-# 终端插件启用 enable ，如果添加太多启动速度会比较慢
-antigen bundle git     # git 命令别名alias
-antigen bundle npm
-antigen bundle python  # python解释器的补全
-antigen bundle sudo    # 通过双击 ESC 在命令最前面添加 sudo
-antigen bundle vagrant # 可以为你提供可配置、可再生、便携的工作环境
+# Use the package as a command
+# And accept glob patterns (e.g., brace, wildcard, ...)
+# zplug "Jxck/dotfiles", as:command, use:"bin/{histuniq,color}"
 
-# Syntax highlighting bundle.
-antigen bundle zsh-users/zsh-autosuggestions     # 智能提示输入 ctrl-f 确认补全, alt-f 补全单词
-antigen bundle zsh-users/zsh-completions         # 命令智能补全
-antigen bundle zsh-users/zsh-syntax-highlighting # 命令高亮插件
-antigen bundle skywind3000/z.lua                 # 智能目录跳转
+# Can manage everything e.g., other person's zshrc
+# zplug "tcnksm/docker-alias", use:zshrc
 
-# 加载主题所需列表在 ~/.oh-my-zsh/themes/
-# 详情请看 https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-antigen theme robbyrussell
+# Disable updates using the "frozen" tag
+# zplug "k4rthik/git-cal", as:command, frozen:1
 
-# 告诉 Antigen 完成工作.
-antigen apply
+# Grab binaries from GitHub Releases
+# and rename with the "rename-to:" tag
+zplug "junegunn/fzf-bin", \
+    from:gh-r, \
+    as:command, \
+    rename-to:fzf, \
+    use:"*darwin*amd64*"
+
+# # Supports oh-my-zsh plugins and the like
+
+# git 命令别名alias
+zplug "plugins/brew",     from:oh-my-zsh
+zplug "plugins/git",     from:oh-my-zsh
+zplug "plugins/docker",  from:oh-my-zsh
+zplug "plugins/python",  from:oh-my-zsh
+# cdf 切换命令行目录到finder显示目录
+# ofd 打开命令行地址到目录
+# pfs 返回finder选择的文件或目录
+# pfd返回最先打开的finder的位置
+# 显示/隐藏文件 showfiles, hidefiles
+# quick-look, man-preview
+zplug "plugins/osx",     from:oh-my-zsh
+zplug "plugins/sudo",    from:oh-my-zsh
+# ta: tmux attach -t
+# tad: tmux attach -d -t
+# tkss: tmux kill-session -t
+# tksv: tmux kill-server
+# tl: tmux list-sessions
+# ts: tmux new-session -s
+zplug "plugins/tmux",     from:oh-my-zsh
+zplug "plugins/npm",     from:oh-my-zsh
+# [baidu|google|bing|ddg] 用什么搜索引擎[百度|谷歌|必应|duckduckgo]
+# zplug "plugins/web-search",     from:oh-my-zsh
+
+# 为github gem 添加自动补全功能，可以通过gem install github安装
+# antigen bundle github
+
+# Also prezto
+# zplug "modules/prompt", from:prezto
+
+# Load if "if" tag returns true
+# zplug "lib/clipboard", from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
+
+# Run a command after a plugin is installed/updated
+# Provided, it requires to set the variable like the following:
+# ZPLUG_SUDO_PASSWORD="********"
+# zplug "jhawthorn/fzy", \
+#     as:command, \
+#     rename-to:fzy, \
+#     hook-build:"make && sudo make install"
+
+# Supports checking out a specific branch/tag/commit
+# zplug "b4b4r07/enhancd", at:v1
+# zplug "mollifier/anyframe", at:4c23cb60
+
+# Can manage gist file just like other packages
+# zplug "b4b4r07/79ee61f7c140c63d2786", \
+#     from:gist, \
+#     as:command, \
+#     use:get_last_pane_path.sh
+
+# Support bitbucket
+# zplug "b4b4r07/hello_bitbucket", \
+#     from:bitbucket, \
+#     as:command, \
+#     use:"*.sh"
+
+# Rename a command with the string captured with `use` tag
+# zplug "b4b4r07/httpstat", \
+#     as:command, \
+#     use:'(*).sh', \
+#     rename-to:'$1'
+
+# Group dependencies
+# # Load "emoji-cli" if "jq" is installed in this example
+# zplug "stedolan/jq", \
+#     from:gh-r, \
+#     as:command, \
+#     rename-to:jq
+
+# zplug "b4b4r07/emoji-cli", \
+#     on:"stedolan/jq"
+
+# Note: To specify the order in which packages should be loaded, use the defer
+#       tag described in the next section
+
+# Set the priority when loading
+# e.g., zsh-syntax-highlighting must be loaded
+# after executing compinit command and sourcing other plugins
+# (If the defer tag is given 2 or above, run after compinit command)
+# zplug "zsh-users/zsh-syntax-highlighting", defer:2
+
+# Can manage local plugins
+# zplug "~/.zsh", from:local
+
+# Load theme file
+zplug 'dracula/zsh', as:theme
+
+# Install plugins if there are plugins that have not been installed
+    if ! zplug check --verbose; then
+        printf "Install? [y/N]: "
+        if read -q; then
+            echo; zplug install
+        fi
+    fi
+
+# Then, source plugins and add commands to $PATH
+zplug load
+
+ZPLUG=~/.zplug/repos
 
 #######################################################################
 #                           ohmyzsh 设置                              #
