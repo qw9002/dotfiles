@@ -14,19 +14,22 @@ reboot（重启）完成后，创建一个新的用户，按照提示操作。�
 
 ### centos ubuntu 系统下安装编译vim
 
-支持python
+```bash
+# 支持python
 ./configure --with-features=huge \
 --enable-multibyte \
 --enable-pythoninterp=yes \
 --with-python-config-dir=/usr/lib64/python2.7/config \
 --prefix=/usr/local
 
-支持python3
+# 支持python3
 ./configure --with-features=huge \
 --enable-multibyte \
 --enable-python3interp=yes \
 --with-python3-config-dir=/usr/lib/python3.7/config-3.7m-x86_64-linux-gnu \
 --prefix=/usr/local
+```
+
 
 make && make install 
 
@@ -56,7 +59,8 @@ $ ./autogen.sh
 $ #  --prefix=/where/you/want # defaults to /usr/local
 $ ./configure
 $ make
-$ make install # may require extra privileges depending on where to install
+$ # may require extra privileges depending on where to install
+$ make install
 ```
 
 ### docker
