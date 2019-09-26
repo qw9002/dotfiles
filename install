@@ -3,13 +3,11 @@
 # 配置文件放置目录
 dotfileDir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
-zsh=`which zsh`
-bash=`which bash`
-lua=`which lua`
-if [[ ${zsh##*/} == "zsh" && ! -e $HOME/.antigen.zsh ]]; then
-    curl -L git.io/antigen > $HOME/.antigen.zsh
-elif [[ ${bash##*/} == "bash" && ${lua##*/} == "lua" ]]; then
+if [[ `which lua` =~ lua$ ]]; then
     eval "$(lua ~/.antigen/bundles/skywind3000/z.lua/z.lua  --init bash once enhanced)"
+    # eval "$(lua /path/to/z.lua  --init bash once enhanced)"   # BASH 初始化
+    # eval "$(lua /path/to/z.lua  --init zsh once enhanced)"    # ZSH 初始化
+    # eval "$(lua /path/to/z.lua  --init posix once enhanced)"  # Posix shell 初始化
 fi
 
 #######################################################################
