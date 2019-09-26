@@ -39,7 +39,7 @@ call plug#begin(get(g:, 'bundle_home', '~/.vim/bundles'))
 " 默认插件
 "----------------------------------------------------------------------
 
-" Plug 'easymotion/vim-easymotion' 全文快速移动,按需使用移动命令
+" 全文快速移动,按需使用移动命令
 Plug 'easymotion/vim-easymotion', { 'on': ['<plug>(easymotion-f)', '<plug>(easymotion-F)', '<plug>(easymotion-j)', '<plug>(easymotion-k)'] }
 map <leader>f <plug>(easymotion-f)
 map <leader>F <plug>(easymotion-F)
@@ -134,6 +134,9 @@ if index(g:bundle_group, 'basic') >= 0
 
     " 可视模式下用 * 号匹配字符串
     Plug 'nelstrom/vim-visual-star-search'
+
+    " 筛选符合条件的 argslist 文件并保存到 args 中去, 使用 argdo 处理匹配文件
+    Plug 'nelstrom/vim-qargs'
 
     " 默认不显示 startify
     let g:startify_disable_at_vimenter    = 1
