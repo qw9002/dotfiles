@@ -185,7 +185,7 @@ if index(g:bundle_group, 'enhanced') >= 0
     Plug 'asins/vim-dict'
 
     " 配对括号和引号自动补全
-    Plug 'jiangmiao/auto-pairs'
+    Plug 'jiangmiao/auto-pairs', { 'for': [ 'c', 'cpp', 'java', 'python', 'javascript', 'typescript' ] }
     let g:AutoPairsFlyMode            = 0
     let g:AutoPairsShortcutBackInsert = '<M-z>'
     let g:AutoPairsShortcutToggle     = '<M-a>'
