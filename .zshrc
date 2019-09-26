@@ -187,9 +187,9 @@ export LESSCHARSET=utf-8
 # ssh
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 
-# if [[ -e $ZPLUG/robbyrussell/oh-my-zsh/oh-my-zsh.sh ]]; then
-#     source $ZPLUG/robbyrussell/oh-my-zsh/oh-my-zsh.sh
-# fi
+if [[ -e $ZPLUG/robbyrussell/oh-my-zsh/oh-my-zsh.sh ]]; then
+    source $ZPLUG/robbyrussell/oh-my-zsh/oh-my-zsh.sh
+fi
 eval "$(lua $ZPLUG/skywind3000/z.lua/z.lua  --init zsh once enhanced)"
 
 #######################################################################
