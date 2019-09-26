@@ -3,9 +3,9 @@
 source ~/.zplug/init.zsh
 # Make sure to use double quotes
 zplug "zsh-users/zsh-autosuggestions"     # 智能提示输入 ctrl-f 确认补全, alt-f 补全单词
-zplug "zsh-users/zsh-completions"         # 命令补全
+zplug "zsh-users/zsh-completions"         # 命令补全，通过 tab 键
 zplug "zsh-users/zsh-syntax-highlighting" # 命令高亮插件
-zplug "skywind3000/z.lua"                 # 智能目录调整
+zplug "skywind3000/z.lua"                 # 智能目录跳转
 
 # Use the package as a command
 # And accept glob patterns (e.g., brace, wildcard, ...)
