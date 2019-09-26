@@ -48,20 +48,6 @@ map <leader>k <plug>(easymotion-k)
 " 忽略大小写
 let g:EasyMotion_smartcase = 1
 
-" 对齐
-Plug 'junegunn/vim-easy-align'
-vmap <Enter> <Plug>(EasyAlign)
-xmap ga <Plug>(EasyAlign)
-let g:easy_align_delimiters = {
-            \ '>': { 'pattern': '>>\|=>\|>' },
-            \ '/': {
-            \     'pattern':         '//\+\|/\*\|\*/',
-            \     'delimiter_align': 'l',
-            \     'ignore_groups':   ['!Comment']
-            \   }
-            \ }
-
-
 " Diff 增强，支持 histogram / patience 等更科学的 diff 算法
 Plug 'chrisbra/vim-diff-enhanced'
 
@@ -586,6 +572,20 @@ if index(g:bundle_group, 'ycm') >= 0
 endif
 
 if index(g:bundle_group, 'tool') >= 0
+    " 对齐
+    Plug 'junegunn/vim-easy-align'
+    vmap <Enter> <Plug>(EasyAlign)
+    xmap ga <Plug>(EasyAlign)
+    let g:easy_align_delimiters = {
+                \ '>': { 'pattern': '>>\|=>\|>' },
+                \ '/': {
+                \     'pattern':         '//\+\|/\*\|\*/',
+                \     'delimiter_align': 'l',
+                \     'ignore_groups':   ['!Comment']
+                \   }
+                \ }
+
+
     " 预览命令行命令效果
     Plug 'markonm/traces.vim'
 
