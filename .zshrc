@@ -31,7 +31,7 @@ zplug "junegunn/fzf-bin", \
 zplug "plugins/git",     from:oh-my-zsh
 zplug "plugins/docker",  from:oh-my-zsh
 zplug "plugins/python",  from:oh-my-zsh
-# cdf 切换命令行目录到finder显示目录
+# cdf 切换命令行目录到 finder 显示目录
 # ofd 打开命令行地址到目录
 # pfs 返回finder选择的文件或目录
 # pfd返回最先打开的finder的位置
@@ -178,7 +178,7 @@ export LESSCHARSET=utf-8
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
 # else
-#   export EDITOR='mvim'
+#   export EDITOR='nvim'
 # fi
 
 # 编译标志
@@ -187,9 +187,9 @@ export LESSCHARSET=utf-8
 # ssh
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 
-if [[ -e $ZPLUG/robbyrussell/oh-my-zsh/oh-my-zsh.sh ]]; then
-    source $ZPLUG/robbyrussell/oh-my-zsh/oh-my-zsh.sh
-fi
+# if [[ -e $ZPLUG/robbyrussell/oh-my-zsh/oh-my-zsh.sh ]]; then
+#     source $ZPLUG/robbyrussell/oh-my-zsh/oh-my-zsh.sh
+# fi
 eval "$(lua $ZPLUG/skywind3000/z.lua/z.lua  --init zsh once enhanced)"
 
 #######################################################################
