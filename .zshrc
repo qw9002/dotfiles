@@ -28,7 +28,6 @@ zplug "junegunn/fzf-bin", \
 # # Supports oh-my-zsh plugins and the like
 
 # git 命令别名alias
-zplug "plugins/brew",     from:oh-my-zsh
 zplug "plugins/git",     from:oh-my-zsh
 zplug "plugins/docker",  from:oh-my-zsh
 zplug "plugins/python",  from:oh-my-zsh
@@ -38,7 +37,6 @@ zplug "plugins/python",  from:oh-my-zsh
 # pfd返回最先打开的finder的位置
 # 显示/隐藏文件 showfiles, hidefiles
 # quick-look, man-preview
-zplug "plugins/osx",     from:oh-my-zsh
 zplug "plugins/sudo",    from:oh-my-zsh
 # ta: tmux attach -t
 # tad: tmux attach -d -t
@@ -46,7 +44,6 @@ zplug "plugins/sudo",    from:oh-my-zsh
 # tksv: tmux kill-server
 # tl: tmux list-sessions
 # ts: tmux new-session -s
-zplug "plugins/tmux",     from:oh-my-zsh
 zplug "plugins/npm",     from:oh-my-zsh
 # [baidu|google|bing|ddg] 用什么搜索引擎[百度|谷歌|必应|duckduckgo]
 # zplug "plugins/web-search",     from:oh-my-zsh
@@ -113,7 +110,6 @@ zplug "plugins/npm",     from:oh-my-zsh
 # zplug "~/.zsh", from:local
 
 # Load theme file
-zplug 'dracula/zsh', as:theme
 
 # Install plugins if there are plugins that have not been installed
     if ! zplug check --verbose; then
