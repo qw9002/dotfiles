@@ -3,11 +3,8 @@
 # 配置文件放置目录
 dotfileDir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
-if [[ `which lua` =~ lua$ ]]; then
-    eval "$(lua ~/.antigen/bundles/skywind3000/z.lua/z.lua  --init bash once enhanced)"
-    # eval "$(lua /path/to/z.lua  --init bash once enhanced)"   # BASH 初始化
-    # eval "$(lua /path/to/z.lua  --init zsh once enhanced)"    # ZSH 初始化
-    # eval "$(lua /path/to/z.lua  --init posix once enhanced)"  # Posix shell 初始化
+if [[ `which zsh` =~ zsh$ && ! -e ~/.zplug ]]; then
+    git clone https://github.com/zplug/zplug ~/.zplug
 fi
 
 #######################################################################
