@@ -68,12 +68,12 @@ if [[ `uname -s` =~ ^MSYS_NT || `uname -s` =~ ^MINGW64_NT ]]; then
         curl -fLo $HOME/vimfiles/autoload/plug.vim --create-dirs \
             https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     fi
-elif [[ `uname -s` == 'Darwin' ]]; then
+elif [[ `uname -s` =~ Darwin ]]; then
     if [[ ! -e $HOME/.vim/autoload/plug.vim ]]; then
         curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
             https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     fi
-elif [[ `uname -s` == 'Linux' ]]; then
+elif [[ `uname -s` =~ Linux ]]; then
     if [[ ! -e $HOME/.vim/autoload/plug.vim ]]; then
         curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
             https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
