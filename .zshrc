@@ -218,6 +218,7 @@ alias la='ls -a'
 alias ll='ls -l'
 alias tmux='tmux -2'
 alias vi='vim --clean'
+alias v='vim -u NONE -N'
 alias lc=leetcode
 
 # z 命令别名
