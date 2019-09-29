@@ -18,10 +18,10 @@ packadd! termdebug
 " 标签跳转
 packadd! matchit
 
-" 设置鼠标功能
-if has('mouse')
-    set mouse=a
-endif
+" " 设置鼠标功能
+" if has('mouse')
+"     set mouse=a
+" endif
 
 "----------------------------------------------------------------------
 " 有 tmux 没有的功能键超时（毫秒）
@@ -184,10 +184,10 @@ augroup END
 
 " 跳转到对应语言项目中
 augroup FileJump
-    autocmd!
+    au!
 
-    autocmd BufLeave *.c    normal! mC
-    autocmd BufLeave *.html normal! mH
-    autocmd BufLeave *.js   normal! mJ
-    autocmd BufLeave *.ts   normal! mT
+    au BufLeave *.c    normal! mC
+    au BufLeave *.html normal! mH
+    au BufLeave *.js   normal! mJ
+    au BufLeave *.ts   normal! mT
 augroup END
