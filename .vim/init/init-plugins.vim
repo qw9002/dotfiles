@@ -727,7 +727,7 @@ if index(g:bundle_group, 'tool') >= 0
     let g:repl_cursor_down = 1
     let g:repl_python_automerge = 1
     let g:repl_ipython_version = '7'
-    nnoremap <leader>s :REPLToggle<Cr>
+    nnoremap <leader>r :REPLToggle<Cr>
     " autocmd Filetype python nnoremap <F12> <Esc>:REPLDebugStopAtCurrentLine<Cr>
     " autocmd Filetype python nnoremap <F10> <Esc>:REPLPDBN<Cr>
     " autocmd Filetype python nnoremap <F11> <Esc>:REPLPDBS<Cr>
