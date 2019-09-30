@@ -111,9 +111,9 @@ zplug "plugins/npm",     from:oh-my-zsh
 # zplug "~/.zsh", from:local
 
 # Load theme file
-zplug 'dracula/zsh', as:theme, if:"[[ $OSTYPE == *darwin* ]]"
-zplug "mafredri/zsh-async", from:github, use:"async.zsh", if:"[[ $OSTYPE == *linux* ]]"
+zplug "mafredri/zsh-async", from:github, use:"async.zsh"
 zplug "sindresorhus/pure", from:github, use:"pure.zsh", as:theme, if:"[[ $OSTYPE == *linux* ]]"
+# zplug "dracula/zsh", from:github, use:"dracula.zsh-theme", as:theme, if:"[[ $OSTYPE == *darwin* ]]"
 
 # Install plugins if there are plugins that have not been installed
     if ! zplug check --verbose; then
