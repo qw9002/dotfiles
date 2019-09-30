@@ -8,18 +8,19 @@
 " 设置通用前缀空格键
 let mapleader="\<Space>"
 
-" Vim自动把默认剪贴板和系统剪贴板的内容同步
+" Vim 自动把默认剪贴板和系统剪贴板的内容同步
 if has('clipboard')
-    set clipboard+=unnamed
+    " 跨平台设置
+    set clipboard^=unnamed,unnamedplus
 endif
 
 packadd! termdebug
 packadd! matchit
 
-" 设置鼠标功能
-if has('mouse')
-    set mouse=a
-endif
+" " 设置鼠标功能（开启在刚开始学习的阶段或别人要使用）
+" if has('mouse')
+"     set mouse=a
+" endif
 
 "----------------------------------------------------------------------
 " 有 tmux 没有的功能键超时（毫秒）
@@ -111,6 +112,7 @@ set noswapfile
 " 禁用 undo文件
 set noundofile
 
+
 "----------------------------------------------------------------------
 " 配置微调
 "----------------------------------------------------------------------
@@ -153,7 +155,7 @@ augroup InitFileTypesGroup
     au!
 
     " C/C++ 文件使用 // 作为注释
-    au FileType json,typescript,cpp setlocal commentstring=//\ %s
+    au FileType c,cpp,json,javascript,typescript setlocal commentstring=//\ %s
 
     " markdown 允许自动换行
     au FileType markdown setlocal wrap
@@ -182,10 +184,10 @@ augroup END
 
 " 跳转到对应语言项目中
 augroup FileJump
-    autocmd!
+    au!
 
-    autocmd BufLeave *.c    normal! mC
-    autocmd BufLeave *.html normal! mH
-    autocmd BufLeave *.js   normal! mJ
-    autocmd BufLeave *.ts   normal! mT
+    au BufLeave *.c    normal! mC
+    au BufLeave *.html normal! mH
+    au BufLeave *.js   normal! mJ
+    au BufLeave *.ts   normal! mT
 augroup END

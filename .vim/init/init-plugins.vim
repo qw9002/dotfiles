@@ -89,7 +89,7 @@ if index(g:bundle_group, 'basic') >= 0
     " 交换两个或更多的单词
     Plug 'tpope/vim-abolish'
 
-    " Git 支持
+    " Git 命令绑定支持
     Plug 'tpope/vim-fugitive'
 
     " 可视模式下用 * 号匹配字符串
@@ -178,32 +178,6 @@ if index(g:bundle_group, 'textobj') >= 0
 
     " 正则匹配单词的一部分，提供操作可以用operate + (? or i)/（正则模式类型）
     Plug 'kana/vim-textobj-lastpat'
-endif
-
-
-"----------------------------------------------------------------------
-" 文件类型扩展
-"----------------------------------------------------------------------
-if index(g:bundle_group, 'filetypes') >= 0
-
-    " powershell 脚本文件的语法高亮
-    Plug 'pprovost/vim-ps1', { 'for': 'ps1' }
-
-    " lua 语法高亮增强
-    Plug 'tbastos/vim-lua', { 'for': 'lua' }
-
-    " C++ 语法高亮增强，支持 11/14/17 标准
-    Plug 'octol/vim-cpp-enhanced-highlight', { 'for': ['c', 'cpp'] }
-
-    " 额外语法文件
-    Plug 'justinmk/vim-syntax-extra', { 'for': ['c', 'bison', 'flex', 'cpp'] }
-
-    " python 语法文件增强
-    Plug 'vim-python/python-syntax', { 'for': ['python'] }
-
-    " rust 语法增强
-    Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-
 endif
 
 

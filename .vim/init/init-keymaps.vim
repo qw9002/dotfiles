@@ -17,7 +17,7 @@
 "----------------------------------------------------------------------
 
 " 查寻高亮在首个匹配上
-nnoremap <silent> * :keepjumps normal! mi*`i<CR>
+" nnoremap <silent> * :keepjumps normal! mi*`i<CR>
 
 " 在普通和可视模式上重复上次替换
 nnoremap & :&&<CR>
@@ -180,9 +180,6 @@ let g:asyncrun_open = 10
 
 " 任务结束时候响铃提醒
 let g:asyncrun_bell = 1
-
-" " 设置 F10 打开/关闭 Quickfix 窗口
-" nnoremap <leader>10 :call asyncrun#quickfix_toggle(6)<cr>
 
 " F9 编译 C/C++ 文件
 nnoremap <silent> <leader>9 :AsyncRun gcc -Wall -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
