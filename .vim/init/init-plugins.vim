@@ -12,7 +12,7 @@ runtime ftplugin/man.vim
 " 默认情况下的分组，可以再前面覆盖之
 "----------------------------------------------------------------------
 if !exists('g:bundle_group')
-    let g:bundle_group  = ['basic', 'tags', 'filetypes', 'textobj']
+    let g:bundle_group  = ['basic', 'tags', 'textobj']
     let g:bundle_group += ['tags', 'airline', 'nerdtree', 'ale', 'echodoc']
     let g:bundle_group += ['leaderf', 'ycm']
     let g:bundle_group += ['tool']
@@ -131,7 +131,7 @@ if index(g:bundle_group, 'enhanced') >= 0
     Plug 'asins/vim-dict'
 
     " 配对括号和引号自动补全
-    Plug 'jiangmiao/auto-pairs'
+    Plug 'jiangmiao/auto-pairs', { for: [ 'c', 'cpp', 'javascript', 'typescript', 'vim' ] }
     let g:AutoPairsFlyMode            = 0
     let g:AutoPairsShortcutBackInsert = '<M-z>'
     let g:AutoPairsShortcutToggle     = '<M-a>'
@@ -141,68 +141,6 @@ if index(g:bundle_group, 'enhanced') >= 0
 
     " 提供 gist 接口
     Plug 'lambdalisue/vim-gista', { 'on': 'Gista' }
-endif
-
-
-"----------------------------------------------------------------------
-" 自动生成 ctags/gtags，并提供自动索引功能
-" 不在 git/svn 内的项目，需要在项目根目录 touch 一个空的 .root 文件
-" 详细用法见：https://zhuanlan.zhihu.com/p/36279445
-"----------------------------------------------------------------------
-if index(g:bundle_group, 'tags') >= 0
-
-    " 提供 ctags/gtags 后台数据库自动更新功能
-    Plug 'ludovicchabant/vim-gutentags'
-
-    " 提供 GscopeFind 命令并自动处理好 gtags 数据库切换
-    " 支持光标移动到符号名上：<leader>cg 查看定义，<leader>cs 查看引用
-    Plug 'skywind3000/gutentags_plus'
-
-    " 第一个 GTAGSLABEL 告诉 gtags 默认 C/C++/Java 等六种原生支持的代码直接使用
-    " gtags 本地分析器，而其他语言使用 pygments 模块。
-    let $GTAGSLABEL = 'native-pygments'
-    let $GTAGSCONF = expand('~/.gtags.conf')
-
-    " 设定项目目录标志：除了 .git/.svn 外，还有 .root 文件
-    let g:gutentags_project_root = [ '.root', '.svn', '.git', '.hg', '.project' ]
-
-    " 去除生成标签的文件夹
-    let g:gutentags_ctags_exclude = [ '*.min.js', '*.min.css', 'build', 'vendor', '.git', '.tmux' ]
-
-    " 所生成的数据文件的名称
-    let g:gutentags_ctags_tagfile = '.tags'
-
-    " 默认生成的数据文件集中到 ~/.cache/tags 避免污染项目目录，好清理
-    let g:gutentags_cache_dir = expand('~/.cache/tags')
-
-    " 默认禁用自动生成
-    let g:gutentags_modules = [] 
-
-    " 如果有 ctags 可执行就允许动态生成 ctags 文件
-    if executable('ctags')
-        let g:gutentags_modules += ['ctags']
-    endif
-
-    " 如果有 gtags 可执行就允许动态生成 gtags 数据库
-    if executable('gtags') && executable('gtags-cscope')
-        let g:gutentags_modules += ['gtags_cscope']
-    endif
-
-    let g:gutentags_plus_switch = 1
-
-    " 设置 ctags 的参数
-    let g:gutentags_ctags_extra_args  = ['--fields=+niazS', '--extras=+q']
-    let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
-    let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
-
-    " 使用 universal-ctags 的话需要下面这行，请反注释
-    let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
-
-    " 禁止 gutentags 自动链接 gtags 数据库
-    let g:gutentags_auto_add_gtags_cscope = 0
-
-    " let g:gutentags_trace = 1
-    " let g:gutentags_define_advanced_commands = 1
 endif
 
 
@@ -227,7 +165,7 @@ if index(g:bundle_group, 'textobj') >= 0
     Plug 'kana/vim-textobj-syntax'
 
     " 函数文本对象：if/af 支持 c/c++/vim/java
-    Plug 'kana/vim-textobj-function', { 'for':['c', 'cpp', 'vim', 'java'] }
+    Plug 'kana/vim-textobj-function', { 'for':[ 'c', 'cpp', 'vim', 'java' ] }
 
     " 参数文本对象：i,/a, 包括参数或者列表元素
     Plug 'sgur/vim-textobj-parameter'
@@ -468,107 +406,6 @@ if index(g:bundle_group, 'ycm') >= 0
     let g:lt_location_list_toggle_map = '<leader>l'
     let g:lt_quickfix_list_toggle_map = '<leader>q'
     let g:lt_height = 10
-
-    if has('python3')
-        Plug 'ycm-core/YouCompleteMe', { 'do': 'python3 install.py --clang-completer --ts-completer' }
-    elseif has('python')
-        Plug 'ycm-core/YouCompleteMe', { 'do': 'python install.py --clang-completer --ts-completer' }
-    endif
-
-    if has('python3') || has('python')
-        " 触发快捷键设置
-        let g:ycm_key_list_select_completion   = ['<C-n>']
-        let g:ycm_key_list_previous_completion = ['<C-p>']
-        let g:SuperTabDefaultCompletionType    = '<C-n>'
-        " 不显示load python 提示
-        let g:ycm_confirm_extra_conf=0
-        " 通过ycm语法检测显示错误符号和警告符号
-        let g:ycm_error_symbol   = '✗'
-        let g:ycm_warning_symbol = '⚠'
-        let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
-
-        " 禁用预览功能：扰乱视听
-        let g:ycm_add_preview_to_completeopt = 0
-
-        " 禁用诊断功能：我们用前面更好用的 ALE 代替
-        let g:ycm_show_diagnostics_ui = 0
-        let g:ycm_server_log_level = 'info'
-        let g:ycm_min_num_identifier_candidate_chars = 2
-        let g:ycm_collect_identifiers_from_comments_and_strings = 1
-        let g:ycm_complete_in_strings=1
-        let g:ycm_key_invoke_completion = '<c-z>'
-        set completeopt=menu,menuone,noselect
-
-        nnoremap gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-
-        " noremap <c-z> <NOP>
-
-        " 两个字符自动触发语义补全
-        let g:ycm_semantic_triggers =  {
-                    \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
-                    \ 'cs,lua,javascript,typescript': ['re!\w{2}'],
-                    \ }
-
-
-        "----------------------------------------------------------------------
-        " Ycm 白名单（非名单内文件不启用 YCM），避免打开个 1MB 的 txt 分析半天
-        "----------------------------------------------------------------------
-        let g:ycm_filetype_whitelist = { 
-                    \ "c":1,
-                    \ "cpp":1, 
-                    \ "objc":1,
-                    \ "objcpp":1,
-                    \ "python":1,
-                    \ "java":1,
-                    \ "javascript":1,
-                    \ "typescript":1,
-                    \ "coffee":1,
-                    \ "vim":1, 
-                    \ "go":1,
-                    \ "cs":1,
-                    \ "lua":1,
-                    \ "perl":1,
-                    \ "perl6":1,
-                    \ "php":1,
-                    \ "ruby":1,
-                    \ "rust":1,
-                    \ "erlang":1,
-                    \ "asm":1,
-                    \ "nasm":1,
-                    \ "masm":1,
-                    \ "tasm":1,
-                    \ "asm68k":1,
-                    \ "asmh8300":1,
-                    \ "asciidoc":1,
-                    \ "basic":1,
-                    \ "vb":1,
-                    \ "make":1,
-                    \ "cmake":1,
-                    \ "html":1,
-                    \ "css":1,
-                    \ "less":1,
-                    \ "json":1,
-                    \ "cson":1,
-                    \ "typedscript":1,
-                    \ "haskell":1,
-                    \ "lhaskell":1,
-                    \ "lisp":1,
-                    \ "scheme":1,
-                    \ "sdl":1,
-                    \ "sh":1,
-                    \ "zsh":1,
-                    \ "bash":1,
-                    \ "man":1,
-                    \ "markdown":1,
-                    \ "matlab":1,
-                    \ "maxima":1,
-                    \ "dosini":1,
-                    \ "conf":1,
-                    \ "config":1,
-                    \ "zimbu":1,
-                    \ "ps1":1,
-                    \ }
-    endif
 endif
 
 if index(g:bundle_group, 'tool') >= 0

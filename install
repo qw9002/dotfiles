@@ -4,8 +4,8 @@
 # 配置文件放置目录
 dotfileDir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
-if [[ ! -e ~/.antigen.zsh ]]; then
-    curl -L git.io/antigen > ~/.antigen.zsh
+if [[ `which zsh` =~ zsh$ && ! -e ~/.zplug ]]; then
+    git clone https://github.com/zplug/zplug ~/.zplug
 fi
 
 #######################################################################
@@ -13,7 +13,7 @@ fi
 #######################################################################
 
 dires=(
-    ${dotfileDir}/.vim/bundle/. # 创建插件安装文件夹
+    ${dotfileDir}/.vim/bundles/. # 创建插件安装文件夹
     ~/backup/.                  # 创建备份配置文件夹
 )
 
@@ -32,7 +32,7 @@ done
 
 # 引入 soft 中的dotfiles变量
 dotfiles=(
-    .eslintrc.js
+    .eslintrc.js       # javascirpt 语法检测
     .gtags.conf        # 支持解析标签
     .vimrc             # vim 编辑器配置文件
     .vim               # vim 插件目录
