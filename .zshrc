@@ -202,9 +202,8 @@ alias grep="grep --color=auto"
 alias javac="javac -J-Dfile.encoding=utf8"
 alias la='ls -a'
 alias ll='ls -l'
-alias tmux='tmux -2'
-alias vi='vim'
-alias pdf='mupdf-gl'
+alias vi='vim --clean'
+alias v='vim -u NONE -N'
 
 # z 命令别名
 alias zc='z -c' # 严格匹配当前路径的子路径
