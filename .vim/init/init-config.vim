@@ -11,11 +11,11 @@ let mapleader="\<Space>"
 
 " Vim自动把默认剪贴板和系统剪贴板的内容同步
 if has('clipboard')
-    set clipboard+=unnamed
+    set clipboard^=unnamed,unnamedplus
 endif
 
 packadd! termdebug
-" 标签跳转
+" html 标签跳转
 packadd! matchit
 
 " " 设置鼠标功能

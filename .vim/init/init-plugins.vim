@@ -694,7 +694,7 @@ if index(g:bundle_group, 'tool') >= 0
     let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
     " emmet高速编写网页类代码 {{{
-    Plug 'mattn/emmet-vim'
+    Plug 'mattn/emmet-vim', { 'for': [ 'html' ] }
     let g:emmet_html5 = 1
 
     " 帮助emmet显示snippets提示
@@ -739,6 +739,3 @@ endif
 " 结束插件安装
 "----------------------------------------------------------------------
 call plug#end()
-
-let g:startify_custom_header =
-            \ 'map(g:ascii + startify#fortune#boxed(), "\"   \".v:val")'
