@@ -280,9 +280,9 @@ if index(g:bundle_group, 'ale') >= 0
     let g:ale_linters.text = ['textlint', 'write-good', 'languagetool']
 
     " 如果没有 gcc 只有 clang 时（FreeBSD）
-    if executable('clang') == 0 && executable('gcc')
-        let g:ale_linters.c   += ['gcc', 'cppcheck']
-        let g:ale_linters.cpp += ['gcc', 'cppcheck']
+    if executable('gcc') == 0 && executable('clang')
+        let g:ale_linters.c   += ['clang', 'cppcheck']
+        let g:ale_linters.cpp += ['clang', 'cppcheck']
     endif
 
     " 错误提示符及警告提示符
