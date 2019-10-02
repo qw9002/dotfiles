@@ -16,8 +16,6 @@
 " NORMAL 模式
 "----------------------------------------------------------------------
 
-" 查寻高亮在首个匹配上
-nnoremap <silent> * :keepjumps normal! mi*`i<CR>
 " 在普通和可视模式上重复上次替换
 nnoremap & :&&<CR>
 xnoremap & :&&<CR>

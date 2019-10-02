@@ -133,6 +133,20 @@ if index(g:bundle_group, 'basic') >= 0
     Plug 'tpope/vim-fugitive'
 
     " 可视模式下用 * 号匹配字符串
+    function! s:VSetSearch()
+        let temp = @@
+        norm! gvy
+        let @/ = '\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
+        let @@ = temp
+    endfunction
+
+    vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR>
+    vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR>
+
+    " 查寻高亮在首个匹配上
+    nnoremap <silent> * :keepjumps normal! mi*`i<CR>
+
+    " 可视模式下用 * 号匹配字符串
     Plug 'nelstrom/vim-visual-star-search'
 
     " 筛选符合条件的 argslist 文件并保存到 args 中去, 使用 argdo 处理匹配文件
@@ -221,7 +235,7 @@ if index(g:bundle_group, 'tags') >= 0
     let g:gutentags_project_root = [ '.root', '.svn', '.git', '.hg', '.project' ]
 
     " 去除生成标签的文件夹
-    let g:gutentags_ctags_exclude = [ '*.min.js', '*.min.css', 'build', 'vendor', '.git', '.tmux' ]
+    let g:gutentags_ctags_exclude = [ '*.min.js', '*.min.css', 'build', 'vendor', '.git', '.tmux', 'bundles' ]
 
     " 所生成的数据文件的名称
     let g:gutentags_ctags_tagfile = '.tags'
