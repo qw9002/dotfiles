@@ -205,7 +205,7 @@ if index(g:bundle_group, 'enhanced') >= 0
     let g:AutoPairsShortcutToggle     = '<M-a>'
     let g:AutoPairsMapCh              = 0
     let g:AutoPairsMoveCharacter      = '<Nop>'
-    let g:AutoPairsShortcutJump       = '<Nop>'
+    let g:AutoPairsShortcutJump       = ''
 
     " 提供 gist 接口
     Plug 'lambdalisue/vim-gista', { 'on': 'Gista' }
