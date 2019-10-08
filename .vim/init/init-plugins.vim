@@ -747,6 +747,10 @@ if index(g:bundle_group, 'tool') >= 0
     " autocmd Filetype python nnoremap <F11> <Esc>:REPLPDBS<Cr>
     let g:repl_position = 3
     let g:repl_stayatrepl_when_open = 0
+
+    Plug 'mzlogin/vim-markdown-toc', { 'for': [ 'markdown' ] }
+    Plug 'godlygeek/tabular', { 'for': [ 'markdown' ] }
+    Plug 'plasticboy/vim-markdown', { 'for': [ 'markdown' ] }
 endif
 
 "----------------------------------------------------------------------
