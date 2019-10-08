@@ -1,7 +1,5 @@
 #!/usr/bin/env zsh
 
-dotfileDir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-
 source ~/.zplug/init.zsh
 # Make sure to use double quotes
 zplug "zsh-users/zsh-autosuggestions"     # 智能提示输入 ctrl-f 确认补全, alt-f 补全单词
@@ -216,7 +214,7 @@ alias javac="javac -J-Dfile.encoding=utf8"
 alias la='ls -a'
 alias ll='ls -l'
 alias tmux='tmux -2'
-alias vi="vim -u ${dotfileDir}/dotfiles/no_plugins.vim"
+alias vi="vim -u ~/dotfiles/no_plugins.vim"
 alias v='vim -u NONE -N'
 alias lc=leetcode
 
