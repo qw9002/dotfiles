@@ -22,6 +22,7 @@ module.exports = {
   rules: {
     semi: 'error',
     eqeqeq: ['error', 'always', { null: 'ignore', }],
+    'no-undef': 'error',
     'no-unused-vars': 1,
     'typescript/no-unused-vars': 1,
     'typescript/class-name-casing': 'error',
