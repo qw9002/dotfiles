@@ -8,7 +8,6 @@ module.exports = {
     node: true,
     es6: true,
   },
-  extends: 'eslint-config-egg',
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',

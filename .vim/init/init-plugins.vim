@@ -395,7 +395,7 @@ endif
 " ale：动态语法检查
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'ale') >= 0
-    Plug 'w0rp/ale'
+    Plug 'dense-analysis/ale'
 
     " 设定延迟和提示信息
     let g:ale_completion_delay = 500
@@ -425,7 +425,7 @@ if index(g:bundle_group, 'ale') >= 0
                 \ 'go': ['go build', 'gofmt'],
                 \ 'java': ['javac'],
                 \ 'javascript': ['eslint'],
-                \ 'typescript': ['tslint'],
+                \ 'typescript': ['eslint', 'tslint'],
                 \ }
 
 
