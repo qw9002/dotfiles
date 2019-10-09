@@ -34,7 +34,8 @@ module.exports = {
     {
       files: ['*.ts', '*.tsx'],
       rules: {
-        '@typescript-eslint/no-unused-vars': [2, { args: 'none' }], // 修复 ts 的接口类型报错
+        // 修复 ts 的问题：使用接口类型，但报未使用错误
+        '@typescript-eslint/no-unused-vars': [2, { args: 'none' }],
       }
     }
   ]

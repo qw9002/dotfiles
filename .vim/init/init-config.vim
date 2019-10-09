@@ -18,10 +18,10 @@ packadd! termdebug
 " html 标签跳转
 packadd! matchit
 
-" " 设置鼠标功能
-" if has('mouse')
-"     set mouse=a
-" endif
+" 设置鼠标功能
+if has('mouse')
+    set mouse=a
+endif
 
 "----------------------------------------------------------------------
 " 有 tmux 没有的功能键超时（毫秒）
