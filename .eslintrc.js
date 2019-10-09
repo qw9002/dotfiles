@@ -1,8 +1,10 @@
 module.exports = {
   // 支持 typscript 语法检测
   parser: '@typescript-eslint/parser',
+  extends: 'eslint-config-alloy',
   // 添加规则
   plugins: [
+    '@typescript-eslint',
     // 'typescript',
   ],
   // 运行环境
@@ -24,11 +26,9 @@ module.exports = {
   },
   rules: {
     semi: 'error',
-    eqeqeq: ['error', 'always', { null: 'ignore', }],
-    'no-undef': 'error',
+    eqeqeq: [ 2, 'always', { null: 'ignore' } ],
+    'no-undef': 2,
     'no-unused-vars': 1,
-    'typescript/no-unused-vars': 1,
-    'typescript/class-name-casing': 'error',
   },
   overrides: [
     {
