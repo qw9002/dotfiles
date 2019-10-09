@@ -1,8 +1,11 @@
 module.exports = {
+  // 支持 typscript 语法检测
   parser: '@typescript-eslint/parser',
+  // 添加规则
   plugins: [
-    'typescript',
+    // 'typescript',
   ],
+  // 运行环境
   env: {
     browser: true,
     node: true,
@@ -31,7 +34,7 @@ module.exports = {
     {
       files: ['*.ts', '*.tsx'],
       rules: {
-        '@typescript-eslint/no-unused-vars': [2, { args: 'none' }]
+        '@typescript-eslint/no-unused-vars': [2, { args: 'none' }], // 修复 ts 的接口类型报错
       }
     }
   ]
