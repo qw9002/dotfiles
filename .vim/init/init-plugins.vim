@@ -425,7 +425,7 @@ if index(g:bundle_group, 'ale') >= 0
                 \ 'go': ['go build', 'gofmt'],
                 \ 'java': ['javac'],
                 \ 'javascript': ['eslint'],
-                \ 'typescript': ['eslint', 'tslint'],
+                \ 'typescript': ['eslint'],
                 \ }
 
 

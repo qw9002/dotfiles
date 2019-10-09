@@ -27,4 +27,12 @@ module.exports = {
     'typescript/no-unused-vars': 1,
     'typescript/class-name-casing': 'error',
   },
+  overrides: [
+    {
+      files: ['*.ts', '*.tsx'],
+      rules: {
+        '@typescript-eslint/no-unused-vars': [2, { args: 'none' }]
+      }
+    }
+  ]
 };
