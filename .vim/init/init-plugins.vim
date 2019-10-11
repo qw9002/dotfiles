@@ -235,7 +235,11 @@ if index(g:bundle_group, 'tags') >= 0
     let g:gutentags_project_root = [ '.root', '.svn', '.git', '.hg', '.project' ]
 
     " 去除生成标签的文件夹
-    let g:gutentags_ctags_exclude = [ '*.min.js', '*.min.css', 'build', 'vendor', '.git', '.tmux', 'bundles' ]
+    let g:gutentags_ctags_exclude = [ '*.min.js', '*.min.css', 'build', 'vendor', '.git', '.tmux', 'bundles', 'node_modules', '*.md', '*.svg' ]
+
+    if executable('rg')
+        let g:gutentags_file_list_command = 'rg --files'
+    endif
 
     " 所生成的数据文件的名称
     let g:gutentags_ctags_tagfile = '.tags'
@@ -244,13 +248,11 @@ if index(g:bundle_group, 'tags') >= 0
     let g:gutentags_cache_dir = expand('~/.cache/tags')
 
     " 默认禁用自动生成
-    let g:gutentags_modules = [] 
-
+    let g:gutentags_modules = []
     " 如果有 ctags 可执行就允许动态生成 ctags 文件
     if executable('ctags')
         let g:gutentags_modules += ['ctags']
     endif
-
     " 如果有 gtags 可执行就允许动态生成 gtags 数据库
     if executable('gtags') && executable('gtags-cscope')
         let g:gutentags_modules += ['gtags_cscope']
@@ -418,6 +420,7 @@ if index(g:bundle_group, 'ale') >= 0
 
     " 编辑不同文件类型需要的语法检查器
     let g:ale_linters = {
+                \ 'bash': ['shellcheck'],
                 \ 'c': ['clang'],
                 \ 'cpp': ['clang'],
                 \ 'python': ['flake8', 'pylint'],
