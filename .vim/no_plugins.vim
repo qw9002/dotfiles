@@ -33,11 +33,14 @@ set rtp+=~/.vim
 " 加载基础配置
 LoadScript init/init-basic.vim
 
-" 自定义按键
-LoadScript init/init-keymaps.vim
-
 " 设定 tabsize
 LoadScript init/init-tabsize.vim
+
+" 加载扩展配置
+LoadScript init/init-config.vim
+
+" 自定义按键
+LoadScript init/init-keymaps.vim
 
 " FEATURES TO COVER:
 " - Fuzzy File Search
