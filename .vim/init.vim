@@ -2,15 +2,15 @@
 "
 "  init.vim - intialize config
 "
-"  Created by shiqf on 2019-06-29 23:00              
+"  Created by shiqf on 2019-06-29 23:00
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " 防止重复加载
 if get(s:, 'loaded', 0) != 0
-	finish
+    finish
 else
-	let s:loaded = 1
+    let s:loaded = 1
 endif
 
 " 取得本文件所在的目录

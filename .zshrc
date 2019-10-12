@@ -214,7 +214,7 @@ alias javac="javac -J-Dfile.encoding=utf8"
 alias la='ls -a'
 alias ll='ls -l'
 alias tmux='tmux -2'
-alias vi="vim -u ~/dotfiles/no_plugins.vim"
+alias vi="vim -u ~/dotfiles/.vim/no_plugins.vim"
 alias v='vim -u NONE -N'
 alias lc=leetcode
 
