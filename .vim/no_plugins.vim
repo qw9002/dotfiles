@@ -42,6 +42,53 @@ LoadScript init/init-config.vim
 " 自定义按键
 LoadScript init/init-keymaps.vim
 
+"----------------------------------------------------------------------
+" 在 ~/.vim/bundles 下安装插件
+"----------------------------------------------------------------------
+call plug#begin(get(g:, 'bundle_home', '~/.vim/bundles'))
+
+Plug 'skywind3000/asyncrun.vim'
+
+" 为其他插件提供重复操作'.'功能
+Plug 'tpope/vim-repeat'
+
+" 通过gcc添加或撤销注释
+Plug 'tpope/vim-commentary'
+
+" 提供遍历 [b 缓存,[q quickfix 快速修改,[a args 参数列表,[l location,[t tags
+" 遍历文件 [f ]f 遍历，git conflict [n ]n
+" vim常用设置项 yon 显示数字，yoh 显示高亮，yol 显示不可见字符...
+" [<space> 向上增加空行 ]<space> 向下增加空行 ]e [e 交换上下行
+" 解码或编码特殊文件字符 xml|html ]x [x   url ]u [u  c风格字符串输出格式 ]y [y
+" 普通模式 [<>=][Pp] 缩进粘贴 插入粘贴模式 y[oO] <ctrl-v> -- 不自动增加缩进 
+Plug 'tpope/vim-unimpaired'
+
+" 添加／删除／改变成对符号 ds, ys, cs, 可视模式使用 S 作为前缀
+Plug 'tpope/vim-surround'
+
+" 可视模式下用 * 号匹配字符串
+function! s:VSetSearch()
+    let temp = @@
+    norm! gvy
+    let @/ = '\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
+    let @@ = temp
+endfunction
+
+vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR>
+vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR>
+
+" 基础插件：提供让用户方便的自定义文本对象的接口
+Plug 'kana/vim-textobj-user'
+
+" 增加文件文本对象: e   dae yae cie
+Plug 'kana/vim-textobj-entire'
+
+
+"----------------------------------------------------------------------
+" 结束插件安装
+"----------------------------------------------------------------------
+call plug#end()
+
 " FEATURES TO COVER:
 " - Fuzzy File Search
 " - Tag jumping
