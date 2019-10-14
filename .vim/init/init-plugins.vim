@@ -717,6 +717,12 @@ if index(g:bundle_group, 'tool') >= 0
     " 帮助emmet显示snippets提示
     Plug 'jceb/emmet.snippets'
 
+    " 有道翻译
+    Plug 'ianva/vim-youdao-translater'
+    vnoremap <silent> <C-k> :<C-u>Ydv<CR>
+    nnoremap <silent> <C-k> :<C-u>Ydc<CR>
+    noremap <leader>yd :<C-u>Yde<CR>
+
     Plug 'sillybun/vim-repl'
     let g:repl_program = {
                 \   'python': 'python',
