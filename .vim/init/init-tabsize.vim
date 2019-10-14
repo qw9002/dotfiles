@@ -29,20 +29,20 @@ augroup FileTypeTab
     " 时自动设置成空格缩进。
     "au FileType python setlocal shiftwidth=4 tabstop=4 noexpandtab
 
-    au filetype c           setlocal ts=4 sw=4 sts=4
-    au filetype cpp         setlocal ts=4 sw=4 sts=4
-    au filetype css         setlocal ts=2 sw=2 sts=2
-    au filetype dockerfile  setlocal ts=4 sw=4 sts=4
-    au filetype graphql     setlocal ts=2 sw=2 sts=2
-    au filetype html        setlocal ts=2 sw=2 sts=2
-    au filetype java        setlocal ts=4 sw=4 sts=4
-    au filetype javascript  setlocal ts=2 sw=2 sts=2 suffixesadd=.js
-    au filetype typescript  setlocal ts=2 sw=2 sts=2 suffixesadd=.ts
-    au filetype json        setlocal ts=2 sw=2 sts=2
-    au filetype make        setlocal ts=4 sw=4 sts=4 noexpandtab
-    au filetype python      setlocal ts=4 sw=4 sts=4
-    au filetype sh          setlocal ts=4 sw=4 sts=4
-    au filetype sql         setlocal ts=4 sw=4 sts=4
-    au filetype vim         setlocal ts=4 sw=4 sts=4
-    au filetype zsh         setlocal ts=4 sw=4 sts=4
+    au FileType c           setlocal ts=4 sw=4 sts=4
+    au FileType cpp         setlocal ts=4 sw=4 sts=4
+    au FileType css         setlocal ts=2 sw=2 sts=2
+    au FileType dockerfile  setlocal ts=4 sw=4 sts=4
+    au FileType graphql     setlocal ts=2 sw=2 sts=2
+    au FileType html        setlocal ts=2 sw=2 sts=2
+    au FileType java        setlocal ts=4 sw=4 sts=4
+    au FileType javascript  setlocal ts=2 sw=2 sts=2 suffixesadd=.js
+    au FileType typescript  setlocal ts=2 sw=2 sts=2 suffixesadd=.ts
+    au FileType json        setlocal ts=2 sw=2 sts=2
+    au FileType make        setlocal ts=4 sw=4 sts=4 noexpandtab
+    au FileType python      setlocal ts=4 sw=4 sts=4
+    au FileType sh          setlocal ts=4 sw=4 sts=4
+    au FileType sql         setlocal ts=4 sw=4 sts=4
+    au FileType vim         setlocal ts=4 sw=4 sts=4
+    au FileType zsh         setlocal ts=4 sw=4 sts=4
 augroup END
