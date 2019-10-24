@@ -25,6 +25,7 @@ exec 'set rtp+='.s:home
 " 将 ~/.vim 目录加入 runtimepath (有时候 vim 不会自动帮你加入）
 set rtp+=~/.vim
 
+set relativenumber
 
 "----------------------------------------------------------------------
 " 模块加载
