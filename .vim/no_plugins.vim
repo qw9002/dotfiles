@@ -48,6 +48,9 @@ LoadScript init/init-config.vim
 " 自定义按键
 LoadScript init/init-keymaps.vim
 
+" 界面样式
+LoadScript init/init-style.vim
+
 "----------------------------------------------------------------------
 " 在 ~/.vim/bundles 下安装插件
 "----------------------------------------------------------------------
