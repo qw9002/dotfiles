@@ -181,6 +181,12 @@ if has('python') || has('python3')
 
 endif
 
+" 显示 quickfix 列表和 location 列表
+Plug 'Valloric/ListToggle'
+let g:lt_location_list_toggle_map = '<leader>l'
+let g:lt_quickfix_list_toggle_map = '<leader>q'
+let g:lt_height = 10
+
 " snippets 片段扩展
 " 通过 VimL 语言的支持
 Plug 'honza/vim-snippets'
