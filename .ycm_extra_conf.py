@@ -46,10 +46,14 @@ flags = [
 '/usr/local/include',
 # use terminal command, search file head address
 # echo | clang -v -E -x c++ -
+# '-isystem',
+# '/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1',
 '-isystem',
-'/Library/Developer/CommandLineTools/usr/include/c++/v1',
+'/Library/Developer/CommandLineTools/usr/include',
 '-isystem',
-'/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/usr/include',
+'/Library/Developer/CommandLineTools/usr/lib/clang/11.0.0/include',
+'-isystem',
+'/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include',
 ]
 
 
