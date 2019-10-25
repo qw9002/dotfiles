@@ -33,6 +33,9 @@ function! s:VSetSearch()
     let @@ = temp
 endfunction
 
+" 给不同语言提供字典补全，插入模式下 c-x c-k 触发
+Plug 'asins/vim-dict'
+
 " 配对括号和引号自动补全
 Plug 'jiangmiao/auto-pairs', { 'for': [ 'c', 'cpp', 'javascript', 'typescript', 'vim', 'java' ] }
 let g:AutoPairsFlyMode            = 0
