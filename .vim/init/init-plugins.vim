@@ -701,10 +701,8 @@ if index(g:bundle_group, 'tool') >= 0
     let g:rainbow_active = 1
 
     " snippets 片段扩展
-    " 通过 VimL 语言的支持
-    Plug 'honza/vim-snippets'
-    " 需要通过 Python 的支持
-    Plug 'SirVer/ultisnips'
+    " 通过 VimL 语言的支持 " 需要通过 Python 的支持
+    Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
     let g:UltiSnipsSnippetDirectories  = ["UltiSnips", "mysnippets"]
     let g:UltiSnipsExpandTrigger       = "<tab>"
     let g:UltiSnipsJumpForwardTrigger  = "<tab>"
