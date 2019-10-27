@@ -52,8 +52,8 @@ Plug 'kana/vim-textobj-user'
 " 增加文件文本对象: e   dae yae cie
 Plug 'kana/vim-textobj-entire'
 
-" 函数文本对象：if/af 支持 c/c++/vim/java
-Plug 'kana/vim-textobj-function', { 'for':['c', 'cpp', 'vim', 'java'] }
+" 增加行文本对象: l   dal yal cil
+Plug 'kana/vim-textobj-line'
 
 " 参数文本对象：i,/a, 包括参数或者列表元素
 Plug 'sgur/vim-textobj-parameter'
