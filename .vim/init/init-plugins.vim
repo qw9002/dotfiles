@@ -307,9 +307,6 @@ if index(g:bundle_group, 'textobj') >= 0
 
     " 提供 uri/url 的文本对象，iu/au 表示
     Plug 'jceb/vim-textobj-uri'
-
-    " 正则匹配单词的一部分，提供操作可以用operate + (? or i)/（正则模式类型）
-    Plug 'kana/vim-textobj-lastpat'
 endif
 
 
