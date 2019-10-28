@@ -168,6 +168,8 @@ endif
 " 详细见：http://www.skywind.me/blog/archives/2084
 "----------------------------------------------------------------------
 
+nnoremap gr :AsyncRun 
+
 " 自动打开 quickfix window ，高度为 10
 let g:asyncrun_open = 10
 
