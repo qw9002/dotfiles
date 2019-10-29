@@ -5,18 +5,10 @@
 "======================================================================
 " vim: set ts=4 sw=4 tw=78 noet :
 
-" 设置通用前缀空格键
-" let maplocalleader="\<Space>"
-let mapleader="\<Space>"
-
 " Vim自动把默认剪贴板和系统剪贴板的内容同步
 if has('clipboard')
     set clipboard^=unnamed,unnamedplus
 endif
-
-packadd! termdebug
-" html 标签跳转
-packadd! matchit
 
 " 设置鼠标功能
 if has('mouse')
