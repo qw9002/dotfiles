@@ -32,16 +32,16 @@ set rtp+=~/.vim
 " 加载基础配置
 LoadScript init/init-basic.vim
 
-" 设定 tabsize
-LoadScript init/init-tabsize.vim
-
-" 加载扩展配置
+" 加载终端相关配置
 LoadScript init/init-config.vim
 
 " 自定义按键
 LoadScript init/init-keymaps.vim
 
-" 界面样式
+" 设定个人的 tabsize
+LoadScript init/init-tabsize.vim
+
+" 状态栏界面样式
 LoadScript init/init-style.vim
 
 " 插件加载
