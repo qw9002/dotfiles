@@ -479,7 +479,7 @@ endif
 if index(g:bundle_group, 'leaderf') >= 0
     " 如果 vim 支持 python 则启用  Leaderf
     if has('python') || has('python3')
-        Plug 'Yggdroot/LeaderF'
+        Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 
         " CTRL+p 打开文件模糊匹配
         let g:Lf_ShortcutF = '<c-p>'

@@ -169,6 +169,7 @@ endif
 "----------------------------------------------------------------------
 
 nnoremap <leader>a :AsyncRun 
+nnoremap <leader>e :AsyncStop<cr>
 
 " 自动打开 quickfix window ，高度为 10
 let g:asyncrun_open = 10
