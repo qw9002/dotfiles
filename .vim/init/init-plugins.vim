@@ -548,6 +548,10 @@ if index(g:bundle_group, 'leaderf') >= 0
                     \ "Function": [["<ESC>", ':exec g:Lf_py "functionExplManager.quit()"<cr>']],
                     \ }
 
+        let g:Lf_PreviewInPopup = 1 " 就可以启用这个功能，缺省未启用。
+        let g:Lf_PreviewHorizontalPosition = 'center' " 指定 popup window / floating window 的位置。
+        let g:Lf_PreviewPopupWidth = 100 " 指定 popup window / floating window 的宽度。
+
     else
         " 不支持 python ，使用 CtrlP 代替
         Plug 'ctrlpvim/ctrlp.vim'
