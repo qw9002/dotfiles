@@ -34,6 +34,9 @@ function! s:VSetSearch()
     let @@ = temp
 endfunction
 
+vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR>
+vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR>
+
 " 配对括号和引号自动补全
 Plug 'jiangmiao/auto-pairs', { 'for': [ 'c', 'cpp', 'javascript', 'typescript', 'vim', 'java' ] }
 let g:AutoPairsFlyMode            = 0
@@ -42,9 +45,6 @@ let g:AutoPairsShortcutToggle     = '<M-a>'
 let g:AutoPairsMapCh              = 0
 let g:AutoPairsMoveCharacter      = ''
 let g:AutoPairsShortcutJump       = ''
-
-vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR>
-vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR>
 
 " 基础插件：提供让用户方便的自定义文本对象的接口
 Plug 'kana/vim-textobj-user'
