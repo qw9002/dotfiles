@@ -148,9 +148,6 @@ if index(g:bundle_group, 'basic') >= 0
     vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR>
     vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR>
 
-    " 查寻高亮在首个匹配上
-    nnoremap <silent> <leader>* :keepjumps normal! mi*`i<CR>
-
     " 筛选符合条件的 argslist 文件并保存到 args 中去, 使用 argdo 处理匹配文件
     Plug 'nelstrom/vim-qargs'
 
