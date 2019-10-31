@@ -588,7 +588,11 @@ if index(g:bundle_group, 'ycm') >= 0
     let g:lt_quickfix_list_toggle_map = '<leader>q'
     let g:lt_height = 10
 
-    Plug 'ycm-core/YouCompleteMe', { 'do': 'python3 install.py --clang-completer --ts-completer' }
+    if has('python3')
+        Plug 'ycm-core/YouCompleteMe', { 'do': 'python3 install.py --clang-completer --ts-completer' }
+    elseif has('python')
+        Plug 'ycm-core/YouCompleteMe', { 'do': 'python install.py --clang-completer --ts-completer' }
+    endif
 
     " 触发快捷键设置
     let g:ycm_key_list_select_completion   = ['<C-n>']
@@ -697,10 +701,14 @@ if index(g:bundle_group, 'tool') >= 0
     " snippets 片段扩展
     " 通过 VimL 语言的支持 " 需要通过 Python 的支持
     Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-    let g:UltiSnipsSnippetDirectories  = ["UltiSnips", "mysnippets"]
-    let g:UltiSnipsExpandTrigger       = "<tab>"
-    let g:UltiSnipsJumpForwardTrigger  = "<tab>"
-    let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+    let g:UltiSnipsSnippetDirectories  = [ 'UltiSnips' ]
+    let g:UltiSnipsExpandTrigger       = '<tab>'
+    let g:UltiSnipsJumpForwardTrigger  = '<tab>'
+    let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+    let g:UltiSnipsListSnippets        = '<m-s>'
+    " 查询 snippets 文件, default 1
+    " let g:UltiSnipsEnableSnipMate      = 1
+    let g:UltiSnipsEditSplit           = 'vertical'
 
     " emmet高速编写网页类代码 {{{
     Plug 'mattn/emmet-vim', { 'for': [ 'html' ] }
