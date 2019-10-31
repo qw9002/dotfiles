@@ -14,6 +14,9 @@
 " 禁用 vi 兼容模式
 set nocompatible
 
+" 至少显示 5 行内容
+set scrolloff=5
+
 " 设置 Backspace 键模式
 set bs=eol,start,indent
 
