@@ -425,6 +425,7 @@ if index(g:bundle_group, 'ale') >= 0
                 \ 'java': ['javac'],
                 \ 'javascript': ['eslint'],
                 \ 'typescript': ['eslint'],
+                \ 'vim': ['vint'],
                 \ }
 
 
