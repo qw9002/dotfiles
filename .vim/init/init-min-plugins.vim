@@ -243,7 +243,12 @@ endif
 
 " snippets 片段扩展
 " 通过 VimL 语言的支持 " 需要通过 Python 的支持
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+if has('python')
+    Plug 'SirVer/ultisnips', { 'commit': '7dc30c5' }
+elseif has('python3')
+    Plug 'SirVer/ultisnips'
+endif
+Plug 'honza/vim-snippets'
 let g:UltiSnipsSnippetDirectories  = [ 'UltiSnips', 'mysnippets' ]
 let g:UltiSnipsExpandTrigger       = '<tab>'
 let g:UltiSnipsJumpForwardTrigger  = '<tab>'
