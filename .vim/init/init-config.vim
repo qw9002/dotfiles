@@ -9,9 +9,9 @@
 " 有 tmux 没有的功能键超时（毫秒）
 "----------------------------------------------------------------------
 if $TMUX != ''
-    set ttimeoutlen=30
-elseif &ttimeoutlen > 80 || &ttimeoutlen <= 0
-    set ttimeoutlen=80
+    set ttimeoutlen=35
+elseif &ttimeoutlen > 85 || &ttimeoutlen <= 0
+    set ttimeoutlen=85
 endif
 
 
@@ -21,7 +21,7 @@ endif
 "----------------------------------------------------------------------
 if has('nvim') == 0 && has('gui_running') == 0
     function! s:metacode(key)
-        exec "set <M-".a:key.">=\e".a:key
+        exec 'set <M-'.a:key.">=\e".a:key
     endfunc
     for i in range(10)
         call s:metacode(nr2char(char2nr('0') + i))

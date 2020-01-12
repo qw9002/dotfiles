@@ -43,26 +43,14 @@ inoremap <c-e> <end>
 inoremap <m-f> <c-right>
 inoremap <m-b> <c-left>
 
-" vim 原组合键 使用 <c-_> 代替
-inoremap <c-_> <c-k>
-
-
-"----------------------------------------------------------------------
-" 设置 CTRL+HJKL 移动光标（INSERT 模式偶尔需要移动的方便些）
-" 使用 SecureCRT/XShell 等终端软件需设置：Backspace sends delete
-" 详见：http://www.skywind.me/blog/archives/2021
-"----------------------------------------------------------------------
-
-inoremap <C-h> <left>
-inoremap <C-j> <down>
-inoremap <C-k> <up>
-inoremap <C-l> <right>
-
 " ALT 键移动增强
 inoremap <m-j> <c-\><c-o>gj
 inoremap <m-k> <c-\><c-o>gk
 inoremap <m-h> <c-left>
 inoremap <m-l> <c-right>
+
+" vim 原组合键 使用 <c-_> 代替
+inoremap <c-_> <c-k>
 
 
 "----------------------------------------------------------------------
@@ -76,17 +64,16 @@ cnoremap <c-e> <end>
 cnoremap <m-f> <c-right>
 cnoremap <m-b> <c-left>
 
-" 使用 ctrl-_ 打开命令、查询等历史窗口
-cnoremap <c-_> <c-f>
-
 " ALT 键移动增强
 cnoremap <m-h> <c-left>
 cnoremap <m-l> <c-right>
 
 " ALT+y 删除到行末
-noremap <m-y> d$
-inoremap <m-y> <c-\><c-o>d$
-cnoremap <m-y> <c-\><c-o>d$
+noremap <c-k> d$
+inoremap <c-k> <c-\><c-o>d$
+
+" 使用 ctrl-_ 打开命令、查询等历史窗口
+cnoremap <c-_> <c-f>
 
 
 "----------------------------------------------------------------------
@@ -147,9 +134,11 @@ if has('terminal') && exists(':terminal') == 2 && has('patch-8.1.1')
     tnoremap <m-L> <c-_>l
     tnoremap <m-J> <c-_>j
     tnoremap <m-K> <c-_>k
-    tnoremap <m-q> <c-\><c-n>
     tnoremap <m-f> <c-right>
     tnoremap <m-b> <c-left>
+
+    tnoremap <m-q> <c-\><c-n>
+    tnoremap <m-p> <c-_>"0
 
     " tab 切换
     tnoremap ]g <c-_>:tabnext<cr>
@@ -164,6 +153,7 @@ elseif has('nvim')
     tnoremap <m-J> <c-\><c-n><c-w>j
     tnoremap <m-K> <c-\><c-n><c-w>k
     tnoremap <m-q> <c-\><c-n>
+    tnoremap <m-p> <c-\><c-n>"0pa
 endif
 
 
@@ -271,7 +261,8 @@ endfunc
 if executable('rg')
     noremap <silent><leader>2 :AsyncRun! -cwd=<root> rg -n --no-heading 
                 \ --color never 
-                \ -g "*.h" -g "*.c*" -g "*.py" -g "*.js" -g "*.vim" 
+                \ -g "*.h" -g "*.c*" -g "*.py"
+                \ -g "*.js" -g "*.ts" -g "*.vim" 
                 \ <C-R><C-W> "<root>" <cr>
 elseif has('win32') || has('win64')
     noremap <silent><leader>2 :AsyncRun! -cwd=<root> findstr /n /s /C:"<C-R><C-W>" 
@@ -281,7 +272,7 @@ elseif has('win32') || has('win64')
 else
     noremap <silent><leader>2 :AsyncRun! -cwd=<root> grep -n -s -R <C-R><C-W> 
                 \ --include='*.h' --include='*.c*' --include='*.py' 
-                \ --include='*.js' --include='*.vim'
+                \ --include='*.js' --include='*.ts' --include='*.vim'
                 \ --exclude='*.min.js' --exclude='*.min.css'
                 \ --exclude-dir='node_modules' --exclude-dir='doc'
                 \ '<root>' <cr>

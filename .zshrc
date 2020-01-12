@@ -201,12 +201,12 @@ eval "$(lua $ZPLUG/skywind3000/z.lua/z.lua  --init zsh once enhanced)"
 export TERM=xterm-256color
 export _ZL_ROOT_MARKERS=".git,.svn,.hg,.root,package.json"
 
-# 设置个人别名，覆盖由oh-my-zsh库提供的个人别名
-# 有关活动别名的完整列表，请运行“alias”。
+# 设置个人别名，覆盖由 `oh-my-zsh` 库提供的个人别名
+# 有关活动别名的完整列表，请运行 "alias"。
 
 # aliases 命令别名自定义 ---------------------------------------------------------
 
-alias -g zplug="LC_MESSAGES=en_US.UTF-8 zplug"
+# alias -g zplug="LC_MESSAGES=en_US.UTF-8 zplug"
 
 alias cls='clear'
 alias grep="grep --color=auto"
