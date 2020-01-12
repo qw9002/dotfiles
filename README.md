@@ -13,6 +13,7 @@ $ pacman  -Sy     vim # arch linux
 下载 curl、git。
 
 [ycm 中文](https://ycm-wiki-zhcn.readthedocs.io/zh_CN/latest/official_doc/intro.html)
+
 [ycm 英文](https://github.com/ycm-core/YouCompleteMe)
 
 ```bash
