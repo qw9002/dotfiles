@@ -265,12 +265,12 @@ if executable('rg')
                 \ -g "*.js" -g "*.ts" -g "*.vim" 
                 \ <C-R><C-W> "<root>" <cr>
 elseif has('win32') || has('win64')
-    noremap <silent><leader>2 :AsyncRun! -cwd=<root> findstr /n /s /C:"<C-R><C-W>" 
+    noremap <silent><leader>2 :AsyncRun! -cwd=<root> findstr /n /s /C:"<C-R><C-W>"
                 \ "\%CD\%\*.h" "\%CD\%\*.c*" "\%CD\%\*.py" "\%CD\%\*.js"
                 \ "\%CD\%\*.vim"
                 \ <cr>
 else
-    noremap <silent><leader>2 :AsyncRun! -cwd=<root> grep -n -s -R <C-R><C-W> 
+    noremap <silent><leader>2 :AsyncRun! -cwd=<root> grep -n -s -R <C-R><C-W>
                 \ --include='*.h' --include='*.c*' --include='*.py' 
                 \ --include='*.js' --include='*.ts' --include='*.vim'
                 \ --exclude='*.min.js' --exclude='*.min.css'

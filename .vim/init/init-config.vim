@@ -10,7 +10,7 @@
 "----------------------------------------------------------------------
 if $TMUX != ''
     set ttimeoutlen=35
-elseif &ttimeoutlen > 85 || &ttimeoutlen <= 0
+elseif &ttimeoutlen > 80 || &ttimeoutlen <= 0
     set ttimeoutlen=85
 endif
 
