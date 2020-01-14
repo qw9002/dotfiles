@@ -28,7 +28,6 @@ endif
 " 计算当前 vim-init 的子路径
 "----------------------------------------------------------------------
 let s:home = fnamemodify(resolve(expand('<sfile>:p')), ':h:h')
-
 function! s:path(path)
     let path = expand(s:home . '/' . a:path )
     return substitute(path, '\\', '/', 'g')
@@ -45,7 +44,16 @@ call plug#begin(get(g:, 'bundle_home', '~/.vim/bundles'))
 "----------------------------------------------------------------------
 
 " 全文快速移动,按需使用移动命令
-Plug 'easymotion/vim-easymotion', { 'on': ['<plug>(easymotion-f)', '<plug>(easymotion-F)', '<plug>(easymotion-j)', '<plug>(easymotion-k)'] }
+Plug 'easymotion/vim-easymotion', {
+            \ 'on': [
+            \    '<plug>(easymotion-overwin-f)',
+            \    '<plug>(easymotion-f)',
+            \    '<plug>(easymotion-F)',
+            \    '<plug>(easymotion-j)',
+            \    '<plug>(easymotion-k)',
+            \   ]
+            \ }
+map <leader>s <plug>(easymotion-overwin-f)
 map <leader>f <plug>(easymotion-f)
 map <leader>F <plug>(easymotion-F)
 map <leader>j <plug>(easymotion-j)
@@ -147,6 +155,8 @@ if index(g:bundle_group, 'basic') >= 0
 
     vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR>
     vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR>
+    " 高亮在首个匹配上
+    nnoremap <silent> <leader>* :keepjumps normal! mi*`i<CR>
 
     " 筛选符合条件的 argslist 文件并保存到 args 中去, 使用 argdo 处理匹配文件
     Plug 'nelstrom/vim-qargs'
@@ -159,10 +169,10 @@ if index(g:bundle_group, 'basic') >= 0
     let g:startify_session_autoload       = 0
     let g:startify_change_to_dir          = 1
     let g:startify_bookmarks              = [
-                \{'c': '~/.vimrc'},
-                \'~/.zshrc',
-                \{'p': '~/docs/plant.md'}
-                \]
+                \   { 'c': '~/.vimrc' },
+                \   '~/.zshrc',
+                \   { 'p': '~/docs/plant.md' }
+                \ ]
 
     nmap <leader>p :Startify<cr>
 
