@@ -21,7 +21,7 @@ nnoremap <silent>& :&&<CR>
 xnoremap <silent>& :&&<CR>
 
 " 在可视模式上重复上次宏
-xnoremap <silent>@ :normal! @@<cr>
+xnoremap <silent>@ :normal @@<cr>
 
 "----------------------------------------------------------------------
 " NORMAL 模式
