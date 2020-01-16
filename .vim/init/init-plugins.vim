@@ -189,7 +189,9 @@ if index(g:bundle_group, 'basic') >= 0
                 \ 'git': 'git diff --no-color --diff-algorithm=histogram --no-ext-diff -U0 -- %f',
                 \}
 
-    noremap <c-w>p :PreviewTag<cr>
+    noremap <silent><m-;> :PreviewTag<cr>
+    noremap <silent><tab>; :PreviewGoto edit<cr>
+    noremap <silent><tab>: :PreviewGoto tabe<cr>
     noremap <m-u> :PreviewScroll -1<cr>
     noremap <m-d> :PreviewScroll +1<cr>
     inoremap <m-u> <c-\><c-o>:PreviewScroll -1<cr>

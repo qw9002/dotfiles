@@ -16,13 +16,16 @@
 " let maplocalleader="\<Space>"
 let mapleader="\<Space>"
 
+" 在普通和可视模式上重复上次替换
+nnoremap <silent>& :&&<CR>
+xnoremap <silent>& :&&<CR>
+
+" 在可视模式上重复上次宏
+xnoremap <silent>@ :normal! @@<cr>
+
 "----------------------------------------------------------------------
 " NORMAL 模式
 "----------------------------------------------------------------------
-
-" 在普通和可视模式上重复上次替换
-nnoremap & :&&<CR>
-xnoremap & :&&<CR>
 
 " ALT+h/l 快速左右按单词移动
 " ALT+j/k 逻辑跳转下一行/上一行（按 wrap 逻辑换行进行跳转）
@@ -68,8 +71,7 @@ cnoremap <m-b> <c-left>
 cnoremap <m-h> <c-left>
 cnoremap <m-l> <c-right>
 
-" ALT+y 删除到行末
-noremap <c-k> d$
+" ctrl+k 删除到行末
 inoremap <c-k> <c-\><c-o>d$
 
 " 使用 ctrl-_ 打开命令、查询等历史窗口
