@@ -190,8 +190,8 @@ if index(g:bundle_group, 'basic') >= 0
                 \}
 
     noremap <silent><m-;> :PreviewTag<cr>
-    noremap <silent><tab>; :PreviewGoto edit<cr>
-    noremap <silent><tab>: :PreviewGoto tabe<cr>
+    noremap <silent><m-e>; :PreviewGoto edit<cr>
+    noremap <silent><m-t>: :PreviewGoto tabe<cr>
     noremap <m-u> :PreviewScroll -1<cr>
     noremap <m-d> :PreviewScroll +1<cr>
     inoremap <m-u> <c-\><c-o>:PreviewScroll -1<cr>
