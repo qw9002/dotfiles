@@ -107,7 +107,7 @@ if index(g:bundle_group, 'basic') >= 0
     Plug 'flazz/vim-colorschemes'
 
     " 支持库，给其他插件用的函数库
-    Plug 'xolox/vim-misc'
+    " Plug 'xolox/vim-misc'
 
     " 用于在侧边符号栏显示 git/svn 的 diff
     Plug 'mhinz/vim-signify'
@@ -140,7 +140,7 @@ if index(g:bundle_group, 'basic') >= 0
     Plug 'tpope/vim-surround'
 
     " 交换两个或更多的单词
-    Plug 'tpope/vim-abolish'
+    " Plug 'tpope/vim-abolish'
 
     " Git 支持
     Plug 'tpope/vim-fugitive'
@@ -173,8 +173,7 @@ if index(g:bundle_group, 'basic') >= 0
                 \   '~/.zshrc',
                 \   { 'p': '~/docs/plant.md' }
                 \ ]
-
-    nmap <leader>p :Startify<cr>
+    nnoremap <leader>p :Startify<cr>
 
     " signify 调优
     let g:signify_vcs_list               = ['git', 'svn']
@@ -248,6 +247,7 @@ if index(g:bundle_group, 'tags') >= 0
     " 去除生成标签的文件夹
     let g:gutentags_ctags_exclude = [ '*.min.js', '*.min.css', 'build', 'vendor', '.git', '.tmux', 'bundles', '*.md', '*.svg' ]
 
+    " 使用 rg 筛选生成 tag 文件，会忽略 .gitignore 中的文件
     if executable('rg')
         let g:gutentags_file_list_command = 'rg --files'
     endif
@@ -305,7 +305,7 @@ if index(g:bundle_group, 'textobj') >= 0
     Plug 'kana/vim-textobj-indent'
 
     " 语法文本对象：iy/ay 基于语法的文本对象
-    Plug 'kana/vim-textobj-syntax'
+    " Plug 'kana/vim-textobj-syntax'
 
     " 函数文本对象：if/af 支持 c/c++/vim/java
     Plug 'kana/vim-textobj-function', { 'for':['c', 'cpp', 'vim', 'java'] }
@@ -314,10 +314,10 @@ if index(g:bundle_group, 'textobj') >= 0
     Plug 'sgur/vim-textobj-parameter'
 
     " 提供 python 相关文本对象，if/af 表示函数，ic/ac 表示类
-    Plug 'bps/vim-textobj-python', {'for': 'python'}
+    " Plug 'bps/vim-textobj-python', {'for': 'python'}
 
     " 提供 uri/url 的文本对象，iu/au 表示
-    Plug 'jceb/vim-textobj-uri'
+    " Plug 'jceb/vim-textobj-uri'
 endif
 
 
@@ -374,32 +374,12 @@ endif
 " NERDTree
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'nerdtree') >= 0
-    Plug 'scrooloose/nerdtree', {'on': ['NERDTree', 'NERDTreeFocus', 'NERDTreeToggle', 'NERDTreeCWD', 'NERDTreeFind'] }
+    Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle'] }
     Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
     let g:NERDTreeMinimalUI = 1
     let g:NERDTreeDirArrows = 1
     let g:NERDTreeHijackNetrw = 0
-    noremap <space>nn :NERDTree<cr>
-    noremap <space>no :NERDTreeFocus<cr>
-    noremap <space>nm :NERDTreeMirror<cr>
     noremap <space>nt :NERDTreeToggle<cr>
-endif
-
-
-"----------------------------------------------------------------------
-" LanguageTool 语法检查
-"----------------------------------------------------------------------
-if index(g:bundle_group, 'grammer') >= 0
-    Plug 'rhysd/vim-grammarous'
-    noremap <space>rg :GrammarousCheck --lang=en-US --no-move-to-first-error --no-preview<cr>
-    map <space>rr <Plug>(grammarous-open-info-window)
-    map <space>rv <Plug>(grammarous-move-to-info-window)
-    map <space>rs <Plug>(grammarous-reset)
-    map <space>rx <Plug>(grammarous-close-info-window)
-    map <space>rm <Plug>(grammarous-remove-error)
-    map <space>rd <Plug>(grammarous-disable-rule)
-    map <space>rn <Plug>(grammarous-move-to-next-error)
-    map <space>rp <Plug>(grammarous-move-to-previous-error)
 endif
 
 
@@ -477,14 +457,14 @@ if index(g:bundle_group, 'ale') >= 0
 endif
 
 
-"----------------------------------------------------------------------
-" echodoc：搭配 YCM/deoplete 在底部显示函数参数
-"----------------------------------------------------------------------
-if index(g:bundle_group, 'echodoc') >= 0
-    Plug 'Shougo/echodoc.vim'
-    set noshowmode
-    let g:echodoc#enable_at_startup = 1
-endif
+""----------------------------------------------------------------------
+"" echodoc：搭配 YCM/deoplete 在底部显示函数参数
+""----------------------------------------------------------------------
+"if index(g:bundle_group, 'echodoc') >= 0
+"    Plug 'Shougo/echodoc.vim'
+"    set noshowmode
+"    let g:echodoc#enable_at_startup = 1
+"endif
 
 
 "----------------------------------------------------------------------
@@ -560,39 +540,6 @@ if index(g:bundle_group, 'leaderf') >= 0
         let g:Lf_PreviewInPopup = 1 " 就可以启用这个功能，缺省未启用。
         let g:Lf_PreviewHorizontalPosition = 'center' " 指定 popup window / floating window 的位置。
         let g:Lf_PreviewPopupWidth = 100 " 指定 popup window / floating window 的宽度。
-
-    else
-        " 不支持 python ，使用 CtrlP 代替
-        Plug 'ctrlpvim/ctrlp.vim'
-
-        " 显示函数列表的扩展插件
-        Plug 'tacahiroy/ctrlp-funky'
-
-        " 忽略默认键位
-        let g:ctrlp_map = ''
-
-        " 模糊匹配忽略
-        let g:ctrlp_custom_ignore = {
-                    \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-                    \ 'file': '\v\.(exe|so|dll|mp3|wav|sdf|suo|mht)$',
-                    \ 'link': 'some_bad_symbolic_links',
-                    \ }
-
-        " 项目标志
-        let g:ctrlp_root_markers = ['.project', '.root', '.svn', '.git']
-        let g:ctrlp_working_path = 0
-
-        " CTRL+p 打开文件模糊匹配
-        noremap <c-p> :CtrlP<cr>
-
-        " CTRL+n 打开最近访问过的文件的匹配
-        noremap <c-n> :CtrlPMRUFiles<cr>
-
-        " ALT+p 显示当前文件的函数列表
-        noremap <m-p> :CtrlPFunky<cr>
-
-        " ALT+n 匹配 buffer
-        noremap <m-n> :CtrlPBuffer<cr>
     endif
 endif
 
@@ -696,7 +643,6 @@ if index(g:bundle_group, 'ycm') >= 0
                 \ 'sdl':1,
                 \ 'sh':1,
                 \ 'tasm':1,
-                \ 'typedscript':1,
                 \ 'typescript':1,
                 \ 'vb':1,
                 \ 'vim':1,
@@ -730,12 +676,12 @@ if index(g:bundle_group, 'tool') >= 0
     " let g:UltiSnipsEnableSnipMate      = 1
     let g:UltiSnipsEditSplit           = 'vertical'
 
-    " emmet高速编写网页类代码 {{{
-    Plug 'mattn/emmet-vim', { 'for': [ 'html' ] }
-    let g:emmet_html5 = 1
+    " " emmet高速编写网页类代码 {{{
+    " Plug 'mattn/emmet-vim', { 'for': [ 'html' ] }
+    " let g:emmet_html5 = 1
 
-    " 帮助emmet显示snippets提示
-    Plug 'jceb/emmet.snippets'
+    " " 帮助emmet显示snippets提示
+    " Plug 'jceb/emmet.snippets'
 
     " 有道翻译
     Plug 'ianva/vim-youdao-translater'

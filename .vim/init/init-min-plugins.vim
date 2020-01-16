@@ -36,6 +36,8 @@ endfunction
 
 vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR>
 vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR>
+" 高亮在首个匹配上
+nnoremap <silent> <leader>* :keepjumps normal! mi*`i<CR>
 
 " 配对括号和引号自动补全
 Plug 'jiangmiao/auto-pairs', { 'for': [ 'c', 'cpp', 'javascript', 'typescript', 'vim', 'java' ] }
@@ -185,59 +187,58 @@ if has('python3') || has('python')
     " Ycm 白名单（非名单内文件不启用 YCM），避免打开个 1MB 的 txt 分析半天
     "----------------------------------------------------------------------
     let g:ycm_filetype_whitelist = {
-                \ "c":1,
-                \ "cpp":1,
-                \ "objc":1,
-                \ "objcpp":1,
-                \ "python":1,
-                \ "java":1,
-                \ "javascript":1,
-                \ "typescript":1,
-                \ "coffee":1,
-                \ "vim":1,
-                \ "go":1,
-                \ "cs":1,
-                \ "lua":1,
-                \ "perl":1,
-                \ "perl6":1,
-                \ "php":1,
-                \ "ruby":1,
-                \ "rust":1,
-                \ "erlang":1,
-                \ "asm":1,
-                \ "nasm":1,
-                \ "masm":1,
-                \ "tasm":1,
-                \ "asm68k":1,
-                \ "asmh8300":1,
-                \ "asciidoc":1,
-                \ "basic":1,
-                \ "vb":1,
-                \ "make":1,
-                \ "cmake":1,
-                \ "html":1,
-                \ "css":1,
-                \ "less":1,
-                \ "json":1,
-                \ "cson":1,
-                \ "typedscript":1,
-                \ "haskell":1,
-                \ "lhaskell":1,
-                \ "lisp":1,
-                \ "scheme":1,
-                \ "sdl":1,
-                \ "sh":1,
-                \ "zsh":1,
-                \ "bash":1,
-                \ "man":1,
-                \ "markdown":1,
-                \ "matlab":1,
-                \ "maxima":1,
-                \ "dosini":1,
-                \ "conf":1,
-                \ "config":1,
-                \ "zimbu":1,
-                \ "ps1":1,
+                \ 'asciidoc':1,
+                \ 'asm':1,
+                \ 'asm68k':1,
+                \ 'asmh8300':1,
+                \ 'bash':1,
+                \ 'basic':1,
+                \ 'c':1,
+                \ 'cmake':1,
+                \ 'coffee':1,
+                \ 'conf':1,
+                \ 'config':1,
+                \ 'cpp':1,
+                \ 'cs':1,
+                \ 'cson':1,
+                \ 'css':1,
+                \ 'dosini':1,
+                \ 'erlang':1,
+                \ 'go':1,
+                \ 'haskell':1,
+                \ 'html':1,
+                \ 'java':1,
+                \ 'javascript':1,
+                \ 'json':1,
+                \ 'less':1,
+                \ 'lhaskell':1,
+                \ 'lisp':1,
+                \ 'lua':1,
+                \ 'make':1,
+                \ 'man':1,
+                \ 'markdown':1,
+                \ 'masm':1,
+                \ 'matlab':1,
+                \ 'maxima':1,
+                \ 'nasm':1,
+                \ 'objc':1,
+                \ 'objcpp':1,
+                \ 'perl':1,
+                \ 'perl6':1,
+                \ 'php':1,
+                \ 'ps1':1,
+                \ 'python':1,
+                \ 'ruby':1,
+                \ 'rust':1,
+                \ 'scheme':1,
+                \ 'sdl':1,
+                \ 'sh':1,
+                \ 'tasm':1,
+                \ 'typescript':1,
+                \ 'vb':1,
+                \ 'vim':1,
+                \ 'zimbu':1,
+                \ 'zsh':1,
                 \ }
 endif
 
@@ -292,76 +293,8 @@ let g:repl_stayatrepl_when_open = 0
 "----------------------------------------------------------------------
 call plug#end()
 
-" FEATURES TO COVER:
-" - Fuzzy File Search
-" - Tag jumping
-" - Autocomplete
-" - File Browsing
-" - Snippets
-" - Build Integration (if we have time)
-
-" GOALS OF THIS TALK:
-" - Increase Vim understanding
-" - Offer powerful options
-
-" NOT GOALS OF THIS TALK:
-" - Hate on plugins
-" - Get people to stop using plugins
-
-" {{{ BASIC SETUP
-" BASIC SETUP:
-
-" enter the current millenium
-" set nocompatible
-
-" enable syntax and plugins (for netrw)
-" syntax enable
-" filetype plugin on
-
-" FINDING FILES:
-
-" Search down into subfolders
 " Provides tab-completion for all file-related tasks
 set path+=**
-
-" Display all matching files when we tab complete
-" set wildmenu
-
-" NOW WE CAN:
-" - Hit tab to :find by partial match
-" - Use * to make it fuzzy
-
-" THINGS TO CONSIDER:
-" - :b lets you autocomplete any open buffer
-
-
-" TAG JUMPING:
-
-" Create the `tags` file (may need to install ctags first)
-" command! MakeTags !ctags -R .
-
-" NOW WE CAN:
-" - Use ^] to jump to tag under cursor
-" - Use g^] for ambiguous tags
-" - Use ^t to jump back up the tag stack
-
-" THINGS TO CONSIDER:
-" - This doesn't help if you want a visual list of tags
-
-" AUTOCOMPLETE:
-
-" The good stuff is documented in |ins-completion|
-
-" HIGHLIGHTS:
-" - ^x^n for JUST this file
-" - ^x^f for filenames (works with our path trick!)
-" - ^x^] for tags only
-" - ^n for anything specified by the 'complete' option
-
-" NOW WE CAN:
-" - Use ^n and ^p to go back and forth in the suggestion list
-
-" FILE BROWSING:
 
 " Tweaks for browsing
 let g:netrw_banner=0        " disable annoying banner
@@ -370,29 +303,3 @@ let g:netrw_altv=1          " open splits to the right
 let g:netrw_liststyle=3     " tree view
 let g:netrw_list_hide=netrw_gitignore#Hide()
 let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
-
-" NOW WE CAN:
-" - :edit a folder to open a file browser
-" - <CR>/v/t to open in an h-split/v-split/tab
-" - check |netrw-browse-maps| for more mappings
-
-" SNIPPETS:
-
-
-" NOW WE CAN:
-" - Take over the world!
-"   (with much fewer keystrokes)
-
-" BUILD INTEGRATION:
-
-" Steal Mr. Bradley's formatter & add it to our spec_helper
-" http://philipbradley.net/rspec-into-vim-with-quickfix
-
-" Configure the `make` command to run RSpec
-" set makeprg=bundle\ exec\ rspec\ -f\ QuickfixFormatter
-
-" NOW WE CAN:
-" - Run :make to run RSpec
-" - :cl to list errors
-" - :cc# to jump to error by number
-" - :cn and :cp to navigate forward and back
