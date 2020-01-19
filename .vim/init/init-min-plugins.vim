@@ -173,6 +173,8 @@ if has('python3') || has('python')
     " 默认展示代码片段
     " let g:ycm_use_ultisnips_completer = 1
     nnoremap gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+    nnoremap <leader>i :YcmCompleter OrganizeImports<CR>
+
 
     " noremap <c-z> <NOP>
 

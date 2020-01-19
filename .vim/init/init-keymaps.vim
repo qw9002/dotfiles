@@ -16,12 +16,14 @@
 " let maplocalleader="\<Space>"
 let mapleader="\<Space>"
 
-" 在普通和可视模式上重复上次替换
-nnoremap <silent>& :&&<CR>
-xnoremap <silent>& :&&<CR>
-
+" 在可视模式上重复上次修改
+xnoremap <silent>. :normal ;.<cr>
+" 重复上次 :s 替换, 带上次标识位
+nnoremap <silent>& :~&<cr>
+xnoremap <silent>& :~&<cr>
 " 在可视模式上重复上次宏
 xnoremap <silent>@ :normal @@<cr>
+
 
 "----------------------------------------------------------------------
 " NORMAL 模式
@@ -261,19 +263,19 @@ endfunc
 " 下面进行 grep，这样能方便的对相关项目进行搜索
 "----------------------------------------------------------------------
 if executable('rg')
-    noremap <silent><leader>2 :AsyncRun! -cwd=<root> rg -n --no-heading 
+    noremap <silent><leader>2 :AsyncRun! -cwd=<root> rg -n --no-heading
                 \ --color never 
-                \ -g "*.h" -g "*.c*" -g "*.py"
-                \ -g "*.js" -g "*.ts" -g "*.vim" 
-                \ <C-R><C-W> "<root>" <cr>
+                \ -g '*.h' -g '*.c*' -g '*.py'
+                \ -g '*.js' -g '*.ts' -g '*.vim'
+                \ <C-R><C-W> '<root>' <cr>
 elseif has('win32') || has('win64')
     noremap <silent><leader>2 :AsyncRun! -cwd=<root> findstr /n /s /C:"<C-R><C-W>"
-                \ "\%CD\%\*.h" "\%CD\%\*.c*" "\%CD\%\*.py" "\%CD\%\*.js"
-                \ "\%CD\%\*.vim"
+                \ '\%CD\%\*.h' '\%CD\%\*.c*' '\%CD\%\*.py'
+                \ '\%CD\%\*.js' '\%CD\%\*.ts' '\%CD\%\*.vim'
                 \ <cr>
 else
     noremap <silent><leader>2 :AsyncRun! -cwd=<root> grep -n -s -R <C-R><C-W>
-                \ --include='*.h' --include='*.c*' --include='*.py' 
+                \ --include='*.h' --include='*.c*' --include='*.py'
                 \ --include='*.js' --include='*.ts' --include='*.vim'
                 \ --exclude='*.min.js' --exclude='*.min.css'
                 \ --exclude-dir='node_modules' --exclude-dir='doc'

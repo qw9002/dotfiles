@@ -189,6 +189,7 @@ if index(g:bundle_group, 'basic') >= 0
                 \}
 
     noremap <silent><m-;> :PreviewTag<cr>
+    noremap <m-'> :PreviewClose<cr>
     noremap <silent><m-e>; :PreviewGoto edit<cr>
     noremap <silent><m-t>: :PreviewGoto tabe<cr>
     noremap <m-u> :PreviewScroll -1<cr>
@@ -214,7 +215,7 @@ if index(g:bundle_group, 'enhanced') >= 0
     let g:AutoPairsShortcutBackInsert = '<M-z>'
     let g:AutoPairsShortcutToggle     = '<M-a>'
     let g:AutoPairsMapCh              = 0
-    let g:AutoPairsMoveCharacter      = '<Nop>'
+    let g:AutoPairsMoveCharacter      = ''
     let g:AutoPairsShortcutJump       = ''
 
     " 提供 gist 接口
@@ -308,7 +309,7 @@ if index(g:bundle_group, 'textobj') >= 0
     " Plug 'kana/vim-textobj-syntax'
 
     " 函数文本对象：if/af 支持 c/c++/vim/java
-    Plug 'kana/vim-textobj-function', { 'for':['c', 'cpp', 'vim', 'java'] }
+    " Plug 'kana/vim-textobj-function', { 'for':['c', 'cpp', 'vim', 'java'] }
 
     " 参数文本对象：i,/a, 包括参数或者列表元素
     Plug 'sgur/vim-textobj-parameter'
@@ -582,6 +583,7 @@ if index(g:bundle_group, 'ycm') >= 0
     " 默认展示代码片段
     " let g:ycm_use_ultisnips_completer = 1
     nnoremap gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+    nnoremap <leader>i :YcmCompleter OrganizeImports<CR>
 
     " noremap <c-z> <NOP>
 
