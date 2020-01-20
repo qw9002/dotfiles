@@ -14,7 +14,7 @@
 set laststatus=2
 
 " 总是显示行号
-set number relativenumber
+set number
 
 " 总是显示侧边栏（用于显示 mark/gitdiff/诊断信息）
 set signcolumn=yes
@@ -103,7 +103,7 @@ hi! PmenuSel guibg=gray guifg=brown ctermbg=brown ctermfg=gray
 if has('terminal') && exists(':terminal') == 2
     if exists('##TerminalOpen')
         augroup VimUnixTerminalGroup
-            au! 
+            au!
             au TerminalOpen * setlocal nonumber signcolumn=no
         augroup END
     endif
@@ -115,5 +115,5 @@ endif
 "----------------------------------------------------------------------
 augroup VimInitStyle
     au!
-    au FileType qf setlocal nonumber norelativenumber
+    au FileType qf setlocal nonumber
 augroup END

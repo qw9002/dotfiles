@@ -44,7 +44,7 @@ endif
 "----------------------------------------------------------------------
 function! s:key_escape(name, code)
     if has('nvim') == 0 && has('gui_running') == 0
-        exec "set ".a:name."=\e".a:code
+        exec 'set '.a:name."=\e".a:code
     endif
 endfunc
 
