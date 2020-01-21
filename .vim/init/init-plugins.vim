@@ -23,7 +23,6 @@ endif
 " 计算当前 vim-init 的子路径
 "----------------------------------------------------------------------
 let s:home = fnamemodify(resolve(expand('<sfile>:p')), ':h:h')
-
 function! s:path(path)
     let path = expand(s:home . '/' . a:path )
     return substitute(path, '\\', '/', 'g')
@@ -111,7 +110,8 @@ if index(g:bundle_group, 'basic') >= 0
                 \ 'git': 'git diff --no-color --diff-algorithm=histogram --no-ext-diff -U0 -- %f',
                 \}
 
-    noremap <c-w>p :PreviewTag<cr>
+    noremap <m-;> :PreviewTag<cr>
+    noremap <m-'> :PreviewClose<cr>
     noremap <m-u> :PreviewScroll -1<cr>
     noremap <m-d> :PreviewScroll +1<cr>
     inoremap <m-u> <c-\><c-o>:PreviewScroll -1<cr>
@@ -136,8 +136,8 @@ if index(g:bundle_group, 'enhanced') >= 0
     let g:AutoPairsShortcutBackInsert = '<M-z>'
     let g:AutoPairsShortcutToggle     = '<M-a>'
     let g:AutoPairsMapCh              = 0
-    let g:AutoPairsMoveCharacter      = '<Nop>'
-    let g:AutoPairsShortcutJump       = '<Nop>'
+    let g:AutoPairsMoveCharacter      = ''
+    let g:AutoPairsShortcutJump       = ''
 
     " 提供 gist 接口
     Plug 'lambdalisue/vim-gista', { 'on': 'Gista' }
