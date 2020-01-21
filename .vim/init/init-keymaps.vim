@@ -24,13 +24,12 @@ xnoremap <silent>& :~&<cr>
 " 在可视模式上重复上次宏
 xnoremap <silent>@ :normal @@<cr>
 
+" ALT+h/l 快速左右按单词移动
+" ALT+j/k 逻辑跳转下一行/上一行（按 wrap 逻辑换行进行跳转）
 
 "----------------------------------------------------------------------
 " NORMAL 模式
 "----------------------------------------------------------------------
-
-" ALT+h/l 快速左右按单词移动
-" ALT+j/k 逻辑跳转下一行/上一行（按 wrap 逻辑换行进行跳转）
 noremap <m-h> b
 noremap <m-l> w
 noremap <m-j> gj
@@ -40,7 +39,6 @@ noremap <m-k> gk
 "----------------------------------------------------------------------
 " INSERT 模式下使用 EMACS 键位
 "----------------------------------------------------------------------
-
 inoremap <c-f> <right>
 inoremap <c-b> <left>
 inoremap <c-a> <home>
@@ -53,6 +51,9 @@ inoremap <m-j> <c-\><c-o>gj
 inoremap <m-k> <c-\><c-o>gk
 inoremap <m-h> <c-left>
 inoremap <m-l> <c-right>
+
+" ctrl+k 删除到行末
+inoremap <c-k> <c-\><c-o>d$
 
 " vim 原组合键 使用 <c-_> 代替
 inoremap <c-_> <c-k>
@@ -73,12 +74,14 @@ cnoremap <m-b> <c-left>
 cnoremap <m-h> <c-left>
 cnoremap <m-l> <c-right>
 
+" 使用 alt-q 打开命令、查询等历史窗口
+cnoremap <m-q> <c-f>
+
 " ctrl+k 删除到行末
-inoremap <c-k> <c-\><c-o>d$
+cnoremap <c-k> <c-\>e(strpart(getcmdline(), 0, getcmdpos() - 1))<cr>
 
-" 使用 ctrl-_ 打开命令、查询等历史窗口
-cnoremap <c-_> <c-f>
-
+" vim 原组合键 使用 <c-_> 代替
+cnoremap <c-_> <c-k>
 
 "----------------------------------------------------------------------
 " TAB：创建，关闭，上一个，下一个，首个，末个，左移，右移，
