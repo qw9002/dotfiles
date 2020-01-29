@@ -26,6 +26,9 @@ Plug 'tpope/vim-surround'
 " Git 支持
 Plug 'tpope/vim-fugitive'
 
+" 筛选符合条件的 argslist 文件并保存到 args 中去, 使用 argdo 处理匹配文件
+Plug 'nelstrom/vim-qargs'
+
 " 可视模式下用 * 号匹配字符串
 function! s:VSetSearch()
     let temp = @@
@@ -57,6 +60,9 @@ Plug 'kana/vim-textobj-entire'
 " 增加行文本对象: l   dal yal cil
 Plug 'kana/vim-textobj-line'
 
+" indent 文本对象：ii/ai 表示当前缩进，vii 选中当缩进，cii 改写缩进
+Plug 'kana/vim-textobj-indent'
+
 " 参数文本对象：i,/a, 包括参数或者列表元素
 Plug 'sgur/vim-textobj-parameter'
 
@@ -70,23 +76,29 @@ if has('python') || has('python3')
     " CTRL+p 打开文件模糊匹配
     let g:Lf_ShortcutF = '<c-p>'
 
-    " ALT+n 打开 buffer 模糊匹配
-    let g:Lf_ShortcutB = '<m-n>'
+    " ALT+b 打开 buffer 模糊匹配
+    let g:Lf_ShortcutB = '<m-b>'
 
-    " CTRL+n 打开最近使用的文件 MRU，进行模糊匹配
-    noremap <c-n> :LeaderfMru<cr>
+    " CTRL+n 打开当前项目最近使用的文件 MRU，进行模糊匹配
+    noremap <c-n> :LeaderfMruCwd<cr>
 
-    " ALT+p 打开函数列表，按 i 进入模糊匹配，ESC 退出
-    noremap <m-p> :LeaderfFunction!<cr>
+    " ALT+n 打开最近使用的文件 MRU，进行模糊匹配
+    noremap <m-n> :LeaderfMru<cr>
 
-    " ALT+SHIFT+p 打开 tag 列表，i 进入模糊匹配，ESC退出
-    noremap <m-P> :LeaderfBufTag!<cr>
+    " ALT+f 打开函数列表，按 i 进入模糊匹配，ESC 退出
+    noremap <m-f> :LeaderfFunction!<cr>
 
-    " ALT+n 打开 buffer 列表进行模糊匹配
-    noremap <m-n> :LeaderfBuffer<cr>
+    " ALT+SHIFT+f 打开函数列表，按 i 进入模糊匹配，ESC 退出
+    noremap <m-F> :LeaderfFunctionAll!<cr>
+
+    " ALT+t 打开 tag 列表，i 进入模糊匹配，ESC退出
+    noremap <m-t> :LeaderfBufTag!<cr>
 
     " 全局 tags 模糊匹配
-    noremap <m-m> :LeaderfTag<cr>
+    noremap <m-T> :LeaderfTag<cr>
+
+    " Leaderf 自己的命令模糊匹配
+    noremap <m-s> :<c-u>LeaderfSelf<cr>
 
     " 最大历史文件保存 2048 个
     let g:Lf_MruMaxFiles = 2048
@@ -117,21 +129,49 @@ if has('python') || has('python3')
     let g:Lf_StlColorscheme = 'powerline'
 
     " 禁用 function/buftag 的预览功能，可以手动用 p 预览
-    let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
+    let g:Lf_PreviewResult = { 'Function':0, 'BufTag':0 }
 
+    " 子命令 Leaderf[!] subCommand 下面中的一个参数, !直接进入普通模式
+    " {
+    "     bufTag: 当前缓冲区标签,
+    "     buffer: 项目缓冲文件名,
+    "     cmdHistory: 命令行历史,
+    "     colorscheme: 色彩方案,
+    "     command: 可用命令,
+    "     file: 项目文件名,
+    "     filetype: 项目文件类型指定,
+    "     function: 当前缓冲区函数,
+    "     gtags: gnu global符号索引,
+    "     help: 帮助标签,
+    "     line: 搜索行在缓冲区中,
+    "     mru: 最近使用的文件,
+    "     rg: ripgrep 文本搜索,
+    "     searchHistory: 搜索命令行历史,
+    "     self: Leaderf自己的命令,
+    "     tag: 当前项目所有标签,
+    " }
     " 使用 ESC 键可以直接退出 leaderf 的 normal 模式
     let g:Lf_NormalMap = {
-                \ "File":   [["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
-                \ "Buffer": [["<ESC>", ':exec g:Lf_py "bufExplManager.quit()"<cr>']],
-                \ "Mru": [["<ESC>", ':exec g:Lf_py "mruExplManager.quit()"<cr>']],
-                \ "Tag": [["<ESC>", ':exec g:Lf_py "tagExplManager.quit()"<cr>']],
-                \ "BufTag": [["<ESC>", ':exec g:Lf_py "bufTagExplManager.quit()"<cr>']],
-                \ "Function": [["<ESC>", ':exec g:Lf_py "functionExplManager.quit()"<cr>']],
+                \ 'BufTag': [['<ESC>', ':exec g:Lf_py "bufTagExplManager.quit()"<cr>']],
+                \ 'Buffer': [['<ESC>', ':exec g:Lf_py "bufExplManager.quit()"<cr>']],
+                \ 'File':   [['<ESC>', ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
+                \ 'Function': [['<ESC>', ':exec g:Lf_py "functionExplManager.quit()"<cr>']],
+                \ 'Mru': [['<ESC>', ':exec g:Lf_py "mruExplManager.quit()"<cr>']],
+                \ 'Rg': [['<ESC>', ':exec g:Lf_py "rgExplManager.quit()"<cr>']],
+                \ 'Self': [['<ESC>', ':exec g:Lf_py "selfExplManager.quit()"<cr>']],
+                \ 'Tag': [['<ESC>', ':exec g:Lf_py "tagExplManager.quit()"<cr>']],
                 \ }
 
+    " 开启后不能在普通模式中使用搜索/
+    " let g:Lf_WindowPosition = 'popup'
     let g:Lf_PreviewInPopup = 1 " 就可以启用这个功能，缺省未启用。
     let g:Lf_PreviewHorizontalPosition = 'center' " 指定 popup window / floating window 的位置。
     let g:Lf_PreviewPopupWidth = 100 " 指定 popup window / floating window 的宽度。
+
+    if executable('rg')
+        xnoremap <leader>gf :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR><CR>
+    endif
+    noremap <leader>cr :<C-U>Leaderf! --recall<CR>
 endif
 
 " 显示 quickfix 列表和 location 列表
@@ -150,40 +190,48 @@ if has('python3') || has('python')
     " 触发快捷键设置
     let g:ycm_key_list_select_completion   = ['<C-n>']
     let g:ycm_key_list_previous_completion = ['<C-p>']
-    let g:SuperTabDefaultCompletionType    = '<C-n>'
-    " 不显示load python 提示
-    let g:ycm_confirm_extra_conf=0
-    " 通过ycm语法检测显示错误符号和警告符号
-    let g:ycm_error_symbol   = '✗'
-    let g:ycm_warning_symbol = '⚠'
-    let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
-
-    " 禁用预览功能：扰乱视听
-    let g:ycm_add_preview_to_completeopt = 0
-
-    " 禁用诊断功能：我们用前面更好用的 ALE 代替
-    let g:ycm_show_diagnostics_ui = 0
-    let g:ycm_server_log_level = 'info'
-    let g:ycm_min_num_identifier_candidate_chars = 2
-    let g:ycm_collect_identifiers_from_comments_and_strings = 1
-    let g:ycm_complete_in_strings=1
-    let g:ycm_key_invoke_completion = '<c-z>'
-    set completeopt=menu,menuone,noselect
-
-    " 默认展示代码片段
-    " let g:ycm_use_ultisnips_completer = 1
-    nnoremap gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-    nnoremap <leader>i :YcmCompleter OrganizeImports<CR>
-
+    let g:ycm_key_list_stop_completion = ['<C-y>']
+    let g:ycm_key_invoke_completion = '<C-z>'
+    " 当用户的光标位于诊断行上时用于显示完整诊断文本。默认 <leader>d
+    let g:ycm_key_detailed_diagnostics = '<leader>d'
+    set completeopt=menu,menuone,popup
 
     " noremap <c-z> <NOP>
 
+    let g:ycm_server_log_level = 'info'
+    " 禁用诊断功能：我们用前面更好用的 ALE 代替
+    let g:ycm_show_diagnostics_ui = 0
+    " 禁用预览功能：扰乱视听
+    let g:ycm_add_preview_to_completeopt = 0
+    let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
+    " 不显示load python 提示
+    let g:ycm_confirm_extra_conf=0
+    " 通过ycm语法检测显示错误符号和警告符号
+    " let g:ycm_error_symbol   = '✗'
+    " let g:ycm_warning_symbol = '⚠'
+
+    " 输入最少字符开启字符补全功能 默认 2
+    " let g:ycm_min_num_of_chars_for_completion = 2
+    " 显示字符候选标识符最少的字符数 默认 0
+    let g:ycm_min_num_identifier_candidate_chars = 2
+    " 最大语义补全符数量 默认 50
+    " let g:ycm_max_num_candidates = 50
+    " 最大标识符数量 默认 10
+    let g:ycm_max_num_identifier_candidates = 5
+    " 设置为 0 时，不再触发语义补全
+    " let g:ycm_auto_trigger = 1
+    " c 语言中的 #include 会自动补全文件
+    let g:ycm_complete_in_strings=1
+    " 设置为 1 时，补全标识符信息会从注释中获取 默认为 0
+    let g:ycm_collect_identifiers_from_comments_and_strings = 1
+    " 当此选项设置为1时，YCM的标识符完成器还将从标记文件中收集标识符
+    let g:ycm_collect_identifiers_from_tags_files = 1
+
     " 两个字符自动触发语义补全
     let g:ycm_semantic_triggers =  {
-                \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
-                \ 'cs,lua,javascript,typescript': ['re!\w{2}'],
+                \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{3}'],
+                \ 'cs,lua,javascript,typescript': ['re!\w{3}'],
                 \ }
-
 
     "----------------------------------------------------------------------
     " Ycm 白名单（非名单内文件不启用 YCM），避免打开个 1MB 的 txt 分析半天
@@ -242,6 +290,27 @@ if has('python3') || has('python')
                 \ 'zimbu':1,
                 \ 'zsh':1,
                 \ }
+
+    nnoremap gd :YcmCompleter GoTo<CR>
+
+    " 重构后的结果会加入到 quickfix 中，方便查看修改
+    autocmd FileType c,cpp,objc,objcpp,cuda,java,javascript,typescript,rust,cs
+                \ nnoremap gcr :YcmCompleter RefactorRename
+
+    autocmd FileType c,cpp,objc,objcpp,cuda,cs,go,java,javascript,rust,typescript
+                \ nnoremap gcR :YcmCompleter RestartServer<CR>
+
+    autocmd FileType c,cpp,objc,objcpp,cuda,java,javascript,go,typescript,rust,cs
+                \ noremap gcF :YcmCompleter Format<CR>
+
+    autocmd FileType c,cpp,objc,objcpp,cuda,java,javascript,go,python,typescript,rust
+                \ nnoremap gct :YcmCompleter GetType<CR>
+
+    autocmd FileType c,cpp,objc,objcpp,cuda,cs,go,java,javascript,python,typescript,rust
+                \ nnoremap gcd :YcmCompleter GetDoc<CR>
+
+    autocmd FileType java,javascript,typescript
+                \ nnoremap gcI :YcmCompleter OrganizeImports<CR>
 endif
 
 " snippets 片段扩展
@@ -254,9 +323,9 @@ endif
 Plug 'honza/vim-snippets'
 let g:UltiSnipsSnippetDirectories  = [ 'UltiSnips', 'mysnippets' ]
 let g:UltiSnipsExpandTrigger       = '<tab>'
-let g:UltiSnipsJumpForwardTrigger  = '<tab>'
-let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
-let g:UltiSnipsListSnippets        = '<m-s>'
+let g:UltiSnipsJumpForwardTrigger  = '<c-j>'
+let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
+let g:UltiSnipsListSnippets        = '<c-l>'
 let g:UltiSnipsEditSplit           = 'vertical'
 
 Plug 'sillybun/vim-repl'

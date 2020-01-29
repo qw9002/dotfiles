@@ -162,7 +162,7 @@ if index(g:bundle_group, 'basic') >= 0
     Plug 'nelstrom/vim-qargs'
 
     " 默认不显示 startify
-    let g:startify_disable_at_vimenter    = 1
+    let g:startify_disable_at_vimenter    = 0
     let g:startify_session_dir            = '~/.vim/session'
     let g:startify_session_persistence    = 1
     let g:startify_session_delete_buffers = 1
@@ -410,8 +410,8 @@ if index(g:bundle_group, 'leaderf') >= 0
         " ALT+f 打开函数列表，按 i 进入模糊匹配，ESC 退出
         noremap <m-f> :LeaderfFunction!<cr>
 
-        " " ALT+SHIFT+b 打开 buffer 模糊匹配
-        " noremap <m-b> :LeaderfBuffer<cr>
+        " ALT+SHIFT+f 打开函数列表，按 i 进入模糊匹配，ESC 退出
+        noremap <m-F> :LeaderfFunctionAll!<cr>
 
         " ALT+b 打开 buffer 列表进行模糊匹配
         let g:Lf_ShortcutB = '<m-b>'
@@ -453,8 +453,25 @@ if index(g:bundle_group, 'leaderf') >= 0
         " 禁用 function/buftag 的预览功能，可以手动用 p 预览
         let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
 
-        " 子命令 Leaderf[!] 下面中的一个参数, !直接进入普通模式
-        " {file,tag,function,mru,searchHistory,cmdHistory,help,line,colorscheme,gtags,self,bufTag,buffer,rg,filetype,command}
+        " 子命令 Leaderf[!] subCommand 下面中的一个参数, !直接进入普通模式
+        " {
+        "     bufTag: 当前缓冲区标签,
+        "     buffer: 项目缓冲文件名,
+        "     cmdHistory: 命令行历史,
+        "     colorscheme: 色彩方案,
+        "     command: 可用命令,
+        "     file: 项目文件名,
+        "     filetype: 项目文件类型指定,
+        "     function: 当前缓冲区函数,
+        "     gtags: gnu global符号索引,
+        "     help: 帮助标签,
+        "     line: 搜索行在缓冲区中,
+        "     mru: 最近使用的文件,
+        "     rg: ripgrep 文本搜索,
+        "     searchHistory: 搜索命令行历史,
+        "     self: Leaderf自己的命令,
+        "     tag: 当前项目所有标签,
+        " }
         " 使用 ESC 键可以直接退出 leaderf 的 normal 模式
         let g:Lf_NormalMap = {
                     \ 'BufTag': [['<ESC>', ':exec g:Lf_py "bufTagExplManager.quit()"<cr>']],
@@ -555,44 +572,54 @@ if index(g:bundle_group, 'ycm') >= 0
     if has('python3')
         Plug 'ycm-core/YouCompleteMe', { 'do': 'python3 install.py --clangd-completer --ts-completer' }
     elseif has('python')
-        Plug 'ycm-core/YouCompleteMe', { 'do': 'python install.py --clangd-completer --ts-completer' }
+        Plug 'ycm-core/YouCompleteMe', { 'do': 'python install.py --clang-completer --ts-completer' }
     endif
 
     " 触发快捷键设置
     let g:ycm_key_list_select_completion   = ['<C-n>']
     let g:ycm_key_list_previous_completion = ['<C-p>']
-    let g:SuperTabDefaultCompletionType    = '<C-n>'
+    let g:ycm_key_list_stop_completion = ['<C-y>']
+    let g:ycm_key_invoke_completion = '<C-z>'
+    " 当用户的光标位于诊断行上时用于显示完整诊断文本。默认 <leader>d
+    let g:ycm_key_detailed_diagnostics = '<leader>d'
+    set completeopt=menu,menuone,popup
+
+    " noremap <c-z> <NOP>
+
+    let g:ycm_server_log_level = 'info'
+    " 禁用诊断功能：我们用前面更好用的 ALE 代替
+    let g:ycm_show_diagnostics_ui = 0
+    " 禁用预览功能：扰乱视听
+    let g:ycm_add_preview_to_completeopt = 0
+    let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
     " 不显示load python 提示
     let g:ycm_confirm_extra_conf=0
     " 通过ycm语法检测显示错误符号和警告符号
     " let g:ycm_error_symbol   = '✗'
     " let g:ycm_warning_symbol = '⚠'
-    let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
 
-    " 禁用预览功能：扰乱视听
-    let g:ycm_add_preview_to_completeopt = 0
-
-    " 禁用诊断功能：我们用前面更好用的 ALE 代替
-    let g:ycm_show_diagnostics_ui = 0
-    let g:ycm_server_log_level = 'info'
+    " 输入最少字符开启字符补全功能 默认 2
+    " let g:ycm_min_num_of_chars_for_completion = 2
+    " 显示字符候选标识符最少的字符数 默认 0
     let g:ycm_min_num_identifier_candidate_chars = 2
-    let g:ycm_collect_identifiers_from_comments_and_strings = 1
+    " 最大语义补全符数量 默认 50
+    " let g:ycm_max_num_candidates = 50
+    " 最大标识符数量 默认 10
+    let g:ycm_max_num_identifier_candidates = 5
+    " 设置为 0 时，不再触发语义补全
+    " let g:ycm_auto_trigger = 1
+    " c 语言中的 #include 会自动补全文件
     let g:ycm_complete_in_strings=1
-    let g:ycm_key_invoke_completion = '<c-z>'
-    set completeopt=menu,menuone,popup
-
-    " 默认展示代码片段
-    " let g:ycm_use_ultisnips_completer = 1
-    nnoremap gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-
-    " noremap <c-z> <NOP>
+    " 设置为 1 时，补全标识符信息会从注释中获取 默认为 0
+    let g:ycm_collect_identifiers_from_comments_and_strings = 1
+    " 当此选项设置为1时，YCM的标识符完成器还将从标记文件中收集标识符
+    let g:ycm_collect_identifiers_from_tags_files = 1
 
     " 两个字符自动触发语义补全
     let g:ycm_semantic_triggers =  {
-                \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
-                \ 'cs,lua,javascript,typescript': ['re!\w{2}'],
+                \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{3}'],
+                \ 'cs,lua,javascript,typescript': ['re!\w{3}'],
                 \ }
-
 
     "----------------------------------------------------------------------
     " Ycm 白名单（非名单内文件不启用 YCM），避免打开个 1MB 的 txt 分析半天
@@ -651,6 +678,28 @@ if index(g:bundle_group, 'ycm') >= 0
                 \ 'zimbu':1,
                 \ 'zsh':1,
                 \ }
+
+    nnoremap gd :YcmCompleter GoTo<CR>
+
+    " 重构后的结果会加入到 quickfix 中，方便查看修改
+    autocmd FileType c,cpp,objc,objcpp,cuda,java,javascript,typescript,rust,cs
+                \ nnoremap gcr :YcmCompleter RefactorRename
+
+    autocmd FileType c,cpp,objc,objcpp,cuda,cs,go,java,javascript,rust,typescript
+                \ nnoremap gcR :YcmCompleter RestartServer<CR>
+
+    autocmd FileType c,cpp,objc,objcpp,cuda,java,javascript,go,typescript,rust,cs
+                \ noremap gcF :YcmCompleter Format<CR>
+
+    autocmd FileType c,cpp,objc,objcpp,cuda,java,javascript,go,python,typescript,rust
+                \ nnoremap gct :YcmCompleter GetType<CR>
+
+    autocmd FileType c,cpp,objc,objcpp,cuda,cs,go,java,javascript,python,typescript,rust
+                \ nnoremap gcd :YcmCompleter GetDoc<CR>
+
+    autocmd FileType java,javascript,typescript
+                \ nnoremap gcI :YcmCompleter OrganizeImports<CR>
+
 endif
 
 
@@ -672,12 +721,12 @@ if index(g:bundle_group, 'tool') >= 0
     Plug 'honza/vim-snippets'
     let g:UltiSnipsSnippetDirectories  = [ 'UltiSnips', 'mysnippets' ]
     let g:UltiSnipsExpandTrigger       = '<tab>'
-    let g:UltiSnipsJumpForwardTrigger  = '<tab>'
-    let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
-    let g:UltiSnipsListSnippets        = '<m-s>'
+    let g:UltiSnipsJumpForwardTrigger  = '<c-j>'
+    let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
+    let g:UltiSnipsListSnippets        = '<c-l>'
+    let g:UltiSnipsEditSplit           = 'vertical'
     " 查询 snippets 文件, default 1
     " let g:UltiSnipsEnableSnipMate      = 1
-    let g:UltiSnipsEditSplit           = 'vertical'
 
     " " emmet高速编写网页类代码 {{{
     " Plug 'mattn/emmet-vim', { 'for': [ 'html' ] }
