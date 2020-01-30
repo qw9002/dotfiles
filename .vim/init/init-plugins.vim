@@ -686,10 +686,10 @@ if index(g:bundle_group, 'ycm') >= 0
                 \ nnoremap gcr :YcmCompleter RefactorRename
 
     autocmd FileType c,cpp,objc,objcpp,cuda,cs,go,java,javascript,rust,typescript
-                \ nnoremap gcR :YcmCompleter RestartServer<CR>
+                \ nnoremap gcs :YcmCompleter RestartServer<CR>
 
     autocmd FileType c,cpp,objc,objcpp,cuda,java,javascript,go,typescript,rust,cs
-                \ noremap gcF :YcmCompleter Format<CR>
+                \ noremap gcf :YcmCompleter Format<CR>
 
     autocmd FileType c,cpp,objc,objcpp,cuda,java,javascript,go,python,typescript,rust
                 \ nnoremap gct :YcmCompleter GetType<CR>
@@ -698,7 +698,7 @@ if index(g:bundle_group, 'ycm') >= 0
                 \ nnoremap gcd :YcmCompleter GetDoc<CR>
 
     autocmd FileType java,javascript,typescript
-                \ nnoremap gcI :YcmCompleter OrganizeImports<CR>
+                \ nnoremap gco :YcmCompleter OrganizeImports<CR>
 
 endif
 
