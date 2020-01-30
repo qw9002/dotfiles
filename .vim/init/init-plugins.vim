@@ -17,9 +17,9 @@ packadd! matchit
 " 默认情况下的分组，可以再前面覆盖之
 "----------------------------------------------------------------------
 if !exists('g:bundle_group')
-    let g:bundle_group  = ['basic', 'tags', 'enhanced', 'filetypes', 'textobj']
-    let g:bundle_group += ['tags', 'airline', 'nerdtree', 'ale', 'echodoc']
-    let g:bundle_group += ['leaderf', 'ycm']
+    let g:bundle_group  = ['basic', 'enhanced', 'textobj', 'filetypes']
+    let g:bundle_group += ['airline', 'nerdtree', 'ale']
+    let g:bundle_group += ['tags', 'leaderf', 'ycm', 'snippets']
     let g:bundle_group += ['tool']
 endif
 
@@ -42,58 +42,6 @@ call plug#begin(get(g:, 'bundle_home', '~/.vim/bundles'))
 "----------------------------------------------------------------------
 " 默认插件
 "----------------------------------------------------------------------
-
-" 全文快速移动,按需使用移动命令
-Plug 'easymotion/vim-easymotion', {
-            \ 'on': [
-            \    '<plug>(easymotion-overwin-f)',
-            \    '<plug>(easymotion-f)',
-            \    '<plug>(easymotion-F)',
-            \    '<plug>(easymotion-j)',
-            \    '<plug>(easymotion-k)',
-            \   ]
-            \ }
-map <leader>s <plug>(easymotion-overwin-f)
-map <leader>f <plug>(easymotion-f)
-map <leader>F <plug>(easymotion-F)
-map <leader>j <plug>(easymotion-j)
-map <leader>k <plug>(easymotion-k)
-" 忽略大小写
-let g:EasyMotion_smartcase = 1
-
-" " 对齐
-" Plug 'junegunn/vim-easy-align'
-" vmap <Enter> <Plug>(EasyAlign)
-" xmap ga <Plug>(EasyAlign)
-" let g:easy_align_delimiters = {
-"             \ '>': { 'pattern': '>>\|=>\|>' },
-"             \ '/': {
-"             \     'pattern':         '//\+\|/\*\|\*/',
-"             \     'delimiter_align': 'l',
-"             \     'ignore_groups':   ['!Comment'] },
-"             \ ']': {
-"             \     'pattern':       '[[\]]',
-"             \     'left_margin':   0,
-"             \     'right_margin':  0,
-"             \     'stick_to_left': 0
-"             \   },
-"             \ ')': {
-"             \     'pattern':       '[()]',
-"             \     'left_margin':   0,
-"             \     'right_margin':  0,
-"             \     'stick_to_left': 0
-"             \   },
-"             \ 'd': {
-"             \     'pattern':      ' \(\S\+\s*[;=]\)\@=',
-"             \     'left_margin':  0,
-"             \     'right_margin': 0
-"             \   }
-"             \ }
-
-" Diff 增强，支持 histogram / patience 等更科学的 diff 算法
-Plug 'chrisbra/vim-diff-enhanced'
-
-Plug 'skywind3000/asyncrun.vim'
 
 "----------------------------------------------------------------------
 " 基础插件
@@ -205,6 +153,28 @@ endif
 " 增强插件
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'enhanced') >= 0
+    Plug 'skywind3000/asyncrun.vim'
+
+    " Diff 增强，支持 histogram / patience 等更科学的 diff 算法
+    Plug 'chrisbra/vim-diff-enhanced'
+
+    " 全文快速移动,按需使用移动命令
+    Plug 'easymotion/vim-easymotion', {
+                \ 'on': [
+                \    '<plug>(easymotion-overwin-f)',
+                \    '<plug>(easymotion-f)',
+                \    '<plug>(easymotion-F)',
+                \    '<plug>(easymotion-j)',
+                \    '<plug>(easymotion-k)',
+                \   ]
+                \ }
+    map <leader>s <plug>(easymotion-overwin-f)
+    map <leader>f <plug>(easymotion-f)
+    map <leader>F <plug>(easymotion-F)
+    map <leader>j <plug>(easymotion-j)
+    map <leader>k <plug>(easymotion-k)
+    " 忽略大小写
+    let g:EasyMotion_smartcase = 1
 
     " 给不同语言提供字典补全，插入模式下 c-x c-k 触发
     " Plug 'asins/vim-dict'
@@ -394,6 +364,71 @@ endif
 
 
 "----------------------------------------------------------------------
+" 自动生成 ctags/gtags，并提供自动索引功能
+" 不在 git/svn 内的项目，需要在项目根目录 touch 一个空的 .root 文件
+" 详细用法见：https://zhuanlan.zhihu.com/p/36279445
+"----------------------------------------------------------------------
+if index(g:bundle_group, 'tags') >= 0
+
+    " 提供 ctags/gtags 后台数据库自动更新功能
+    Plug 'ludovicchabant/vim-gutentags'
+
+    " 提供 GscopeFind 命令并自动处理好 gtags 数据库切换
+    " 支持光标移动到符号名上：<leader>cg 查看定义，<leader>cs 查看引用
+    Plug 'skywind3000/gutentags_plus'
+
+    " 第一个 GTAGSLABEL 告诉 gtags 默认 C/C++/Java 等六种原生支持的代码直接使用
+    " gtags 本地分析器，而其他语言使用 pygments 模块。
+    let $GTAGSLABEL = 'native-pygments'
+    let $GTAGSCONF = expand('~/.gtags.conf')
+
+    " 设定项目目录标志：除了 .git/.svn 外，还有 .root 文件
+    let g:gutentags_project_root = [ '.root', '.svn', '.git', '.hg', '.project' ]
+
+    " 去除生成标签的文件夹
+    let g:gutentags_ctags_exclude = [ '*.min.js', '*.min.css', 'build', 'vendor', '.git', '.tmux', 'bundles', '*.md', '*.svg' ]
+
+    " 使用 rg 筛选生成 tag 文件，会忽略 .gitignore 中的文件
+    if executable('rg')
+        let g:gutentags_file_list_command = 'rg --files'
+    endif
+
+    " 所生成的数据文件的名称
+    let g:gutentags_ctags_tagfile = '.tags'
+
+    " 默认生成的数据文件集中到 ~/.cache/tags 避免污染项目目录，好清理
+    let g:gutentags_cache_dir = expand('~/.cache/tags')
+
+    " 默认禁用自动生成
+    let g:gutentags_modules = []
+    " 如果有 ctags 可执行就允许动态生成 ctags 文件
+    if executable('ctags')
+        let g:gutentags_modules += ['ctags']
+    endif
+    " 如果有 gtags 可执行就允许动态生成 gtags 数据库
+    if executable('gtags') && executable('gtags-cscope')
+        let g:gutentags_modules += ['gtags_cscope']
+    endif
+
+    let g:gutentags_plus_switch = 1
+
+    " 设置 ctags 的参数
+    let g:gutentags_ctags_extra_args  = ['--fields=+niazS', '--extras=+q']
+    let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
+    let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+
+    " 使用 universal-ctags 的话需要下面这行，请反注释
+    let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
+
+    " 禁止 gutentags 自动链接 gtags 数据库
+    let g:gutentags_auto_add_gtags_cscope = 0
+
+    " let g:gutentags_trace = 1
+    " let g:gutentags_define_advanced_commands = 1
+endif
+
+
+"----------------------------------------------------------------------
 " LeaderF：CtrlP / FZF 的超级代替者，文件模糊匹配，tags/函数名 选择
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'leaderf') >= 0
@@ -494,71 +529,6 @@ if index(g:bundle_group, 'leaderf') >= 0
         endif
         noremap <leader>cr :<C-U>Leaderf! --recall<CR>
     endif
-endif
-
-
-"----------------------------------------------------------------------
-" 自动生成 ctags/gtags，并提供自动索引功能
-" 不在 git/svn 内的项目，需要在项目根目录 touch 一个空的 .root 文件
-" 详细用法见：https://zhuanlan.zhihu.com/p/36279445
-"----------------------------------------------------------------------
-if index(g:bundle_group, 'tags') >= 0
-
-    " 提供 ctags/gtags 后台数据库自动更新功能
-    Plug 'ludovicchabant/vim-gutentags'
-
-    " 提供 GscopeFind 命令并自动处理好 gtags 数据库切换
-    " 支持光标移动到符号名上：<leader>cg 查看定义，<leader>cs 查看引用
-    Plug 'skywind3000/gutentags_plus'
-
-    " 第一个 GTAGSLABEL 告诉 gtags 默认 C/C++/Java 等六种原生支持的代码直接使用
-    " gtags 本地分析器，而其他语言使用 pygments 模块。
-    let $GTAGSLABEL = 'native-pygments'
-    let $GTAGSCONF = expand('~/.gtags.conf')
-
-    " 设定项目目录标志：除了 .git/.svn 外，还有 .root 文件
-    let g:gutentags_project_root = [ '.root', '.svn', '.git', '.hg', '.project' ]
-
-    " 去除生成标签的文件夹
-    let g:gutentags_ctags_exclude = [ '*.min.js', '*.min.css', 'build', 'vendor', '.git', '.tmux', 'bundles', '*.md', '*.svg' ]
-
-    " 使用 rg 筛选生成 tag 文件，会忽略 .gitignore 中的文件
-    if executable('rg')
-        let g:gutentags_file_list_command = 'rg --files'
-    endif
-
-    " 所生成的数据文件的名称
-    let g:gutentags_ctags_tagfile = '.tags'
-
-    " 默认生成的数据文件集中到 ~/.cache/tags 避免污染项目目录，好清理
-    let g:gutentags_cache_dir = expand('~/.cache/tags')
-
-    " 默认禁用自动生成
-    let g:gutentags_modules = []
-    " 如果有 ctags 可执行就允许动态生成 ctags 文件
-    if executable('ctags')
-        let g:gutentags_modules += ['ctags']
-    endif
-    " 如果有 gtags 可执行就允许动态生成 gtags 数据库
-    if executable('gtags') && executable('gtags-cscope')
-        let g:gutentags_modules += ['gtags_cscope']
-    endif
-
-    let g:gutentags_plus_switch = 1
-
-    " 设置 ctags 的参数
-    let g:gutentags_ctags_extra_args  = ['--fields=+niazS', '--extras=+q']
-    let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
-    let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
-
-    " 使用 universal-ctags 的话需要下面这行，请反注释
-    let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
-
-    " 禁止 gutentags 自动链接 gtags 数据库
-    let g:gutentags_auto_add_gtags_cscope = 0
-
-    " let g:gutentags_trace = 1
-    " let g:gutentags_define_advanced_commands = 1
 endif
 
 
@@ -703,14 +673,7 @@ if index(g:bundle_group, 'ycm') >= 0
 endif
 
 
-if index(g:bundle_group, 'tool') >= 0
-    " 预览命令行命令效果
-    Plug 'markonm/traces.vim'
-
-    " 彩虹括号 利用区分括号配对
-    Plug 'luochen1990/rainbow'
-    let g:rainbow_active = 1
-
+if index(g:bundle_group, 'snippets') >= 0
     " snippets 片段扩展
     " 通过 VimL 语言的支持 " 需要通过 Python 的支持
     if has('python')
@@ -727,6 +690,47 @@ if index(g:bundle_group, 'tool') >= 0
     let g:UltiSnipsEditSplit           = 'vertical'
     " 查询 snippets 文件, default 1
     " let g:UltiSnipsEnableSnipMate      = 1
+
+endif
+
+
+if index(g:bundle_group, 'tool') >= 0
+
+    " " 对齐
+    " Plug 'junegunn/vim-easy-align'
+    " vmap <Enter> <Plug>(EasyAlign)
+    " xmap ga <Plug>(EasyAlign)
+    " let g:easy_align_delimiters = {
+    "             \ '>': { 'pattern': '>>\|=>\|>' },
+    "             \ '/': {
+    "             \     'pattern':         '//\+\|/\*\|\*/',
+    "             \     'delimiter_align': 'l',
+    "             \     'ignore_groups':   ['!Comment'] },
+    "             \ ']': {
+    "             \     'pattern':       '[[\]]',
+    "             \     'left_margin':   0,
+    "             \     'right_margin':  0,
+    "             \     'stick_to_left': 0
+    "             \   },
+    "             \ ')': {
+    "             \     'pattern':       '[()]',
+    "             \     'left_margin':   0,
+    "             \     'right_margin':  0,
+    "             \     'stick_to_left': 0
+    "             \   },
+    "             \ 'd': {
+    "             \     'pattern':      ' \(\S\+\s*[;=]\)\@=',
+    "             \     'left_margin':  0,
+    "             \     'right_margin': 0
+    "             \   }
+    "             \ }
+
+    " 预览命令行命令效果
+    Plug 'markonm/traces.vim'
+
+    " 彩虹括号 利用区分括号配对
+    Plug 'luochen1990/rainbow'
+    let g:rainbow_active = 1
 
     " " emmet高速编写网页类代码 {{{
     " Plug 'mattn/emmet-vim', { 'for': [ 'html' ] }

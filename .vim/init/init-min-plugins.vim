@@ -217,7 +217,7 @@ if has('python3') || has('python')
     " 最大语义补全符数量 默认 50
     " let g:ycm_max_num_candidates = 50
     " 最大标识符数量 默认 10
-    let g:ycm_max_num_identifier_candidates = 5
+    let g:ycm_max_num_identifier_candidates = 3
     " 设置为 0 时，不再触发语义补全
     " let g:ycm_auto_trigger = 1
     " c 语言中的 #include 会自动补全文件
@@ -225,7 +225,7 @@ if has('python3') || has('python')
     " 设置为 1 时，补全标识符信息会从注释中获取 默认为 0
     let g:ycm_collect_identifiers_from_comments_and_strings = 1
     " 当此选项设置为1时，YCM的标识符完成器还将从标记文件中收集标识符
-    let g:ycm_collect_identifiers_from_tags_files = 1
+    " let g:ycm_collect_identifiers_from_tags_files = 1
 
     " 两个字符自动触发语义补全
     let g:ycm_semantic_triggers =  {
