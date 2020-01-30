@@ -146,6 +146,7 @@ if index(g:bundle_group, 'basic') >= 0
     inoremap <m-d> <c-\><c-o>:PreviewScroll +1<cr>
     autocmd FileType qf nnoremap <silent><buffer> p :PreviewQuickfix<cr>
     autocmd FileType qf nnoremap <silent><buffer> P :PreviewClose<cr>
+    autocmd FileType qf nnoremap <silent><buffer> <esc> :<c-u>q<cr>
 endif
 
 
