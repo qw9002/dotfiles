@@ -384,15 +384,32 @@ if index(g:bundle_group, 'tags') >= 0
     let $GTAGSCONF = expand('~/.gtags.conf')
 
     " 设定项目目录标志：除了 .git/.svn 外，还有 .root 文件
-    let g:gutentags_project_root = [ '.root', '.svn', '.git', '.hg', '.project' ]
+    let g:gutentags_project_root = [ '.root', '.svn', '.git', '.hg', '.project', 'package.json' ]
 
     " 去除生成标签的文件夹
-    let g:gutentags_ctags_exclude = [ '*.min.js', '*.min.css', 'build', 'vendor', '.git', '.tmux', 'bundles', '*.md', '*.svg' ]
+    let g:gutentags_ctags_exclude = [
+                \ '*.md',
+                \ '.tmux',
+                \ 'bundle',
+                \ 'bundles',
+                \ 'vendor',
+                \ ]
 
-    " 使用 rg 筛选生成 tag 文件，会忽略 .gitignore 中的文件
-    if executable('rg')
-        let g:gutentags_file_list_command = 'rg --files'
-    endif
+    " 使用 rg 筛选文件忽略 .gitignore 中的文件生成 tag 的文件
+    autocmd FileType * ++once if index(['typescript', 'javascript'], &filetype) >= 0 |
+                \ let g:gutentags_ctags_exclude += [
+                \   "\\@typescript-eslint",
+                \   'bower_components',
+                \   'build',
+                \   'dist',
+                \   'doc',
+                \   'eslint',
+                \   'eslint-config-alloy',
+                \   'prettier',
+                \ ] |
+                \ elseif executable('rg') |
+                \     let g:gutentags_file_list_command = 'rg --files' |
+                \ endif
 
     " 所生成的数据文件的名称
     let g:gutentags_ctags_tagfile = '.tags'
@@ -652,25 +669,29 @@ if index(g:bundle_group, 'ycm') >= 0
 
     nnoremap gd :YcmCompleter GoTo<CR>
 
-    " 重构后的结果会加入到 quickfix 中，方便查看修改
-    autocmd FileType c,cpp,objc,objcpp,cuda,java,javascript,typescript,rust,cs
-                \ nnoremap gcr :YcmCompleter RefactorRename
+    augroup ycmFileTypeMap
+        autocmd!
 
-    autocmd FileType c,cpp,objc,objcpp,cuda,cs,go,java,javascript,rust,typescript
-                \ nnoremap gcs :YcmCompleter RestartServer<CR>
+        " 重构后的结果会加入到 quickfix 中，方便查看修改
+        autocmd FileType c,cpp,objc,objcpp,cuda,java,javascript,typescript,rust,cs
+                    \ nnoremap gcr :YcmCompleter RefactorRename
 
-    autocmd FileType c,cpp,objc,objcpp,cuda,java,javascript,go,typescript,rust,cs
-                \ noremap gcf :YcmCompleter Format<CR>
+        autocmd FileType c,cpp,objc,objcpp,cuda,cs,go,java,javascript,rust,typescript
+                    \ nnoremap gcs :YcmCompleter RestartServer<CR>
 
-    autocmd FileType c,cpp,objc,objcpp,cuda,java,javascript,go,python,typescript,rust
-                \ nnoremap gct :YcmCompleter GetType<CR>
+        autocmd FileType c,cpp,objc,objcpp,cuda,java,javascript,go,typescript,rust,cs
+                    \ noremap gcf :YcmCompleter Format<CR>
 
-    autocmd FileType c,cpp,objc,objcpp,cuda,cs,go,java,javascript,python,typescript,rust
-                \ nnoremap gcd :YcmCompleter GetDoc<CR>
+        autocmd FileType c,cpp,objc,objcpp,cuda,java,javascript,go,python,typescript,rust
+                    \ nnoremap gct :YcmCompleter GetType<CR>
 
-    autocmd FileType java,javascript,typescript
-                \ nnoremap gco :YcmCompleter OrganizeImports<CR>
+        autocmd FileType c,cpp,objc,objcpp,cuda,cs,go,java,javascript,python,typescript,rust
+                    \ nnoremap gcd :YcmCompleter GetDoc<CR>
 
+        autocmd FileType java,javascript,typescript
+                    \ nnoremap gco :YcmCompleter OrganizeImports<CR>
+
+    augroup end
 endif
 
 

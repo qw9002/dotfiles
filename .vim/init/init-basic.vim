@@ -171,12 +171,13 @@ endif
 "----------------------------------------------------------------------
 set suffixes=.bak,~,.o,.h,.info,.swp,.obj,.pyc,.pyo,.egg-info,.class " 临时文件
 
-set wildignore=*.o,*.obj,*~,*.exe,*.a,*.pdb,*.lib "stuff to ignore when tab completing
+" set wildignore=*.bak,*.info,*.egg-info,*.tmp " 临时文件
+set wildignore=*.o,*.obj,*~,*.exe,*.a,*.pdb,*.lib,cscope.* " 补全时忽略
 set wildignore+=*.so,*.dll,*.swp,*.egg,*.jar,*.class,*.pyc,*.pyo,*.bin,*.dex,*.min.* " 编译文件
 set wildignore+=*.zip,*.7z,*.rar,*.gz,*.tar,*.gzip,*.bz2,*.tgz,*.xz " MacOSX/Linux 压缩文件
 set wildignore+=*DS_Store*,*.ipch
 set wildignore+=*.gem
-set wildignore+=*.png,*.jpg,*.gif,*.bmp,*.tga,*.pcx,*.ppm,*.img,*.iso
+set wildignore+=*.png,*.jpg,*.gif,*.bmp,*.tga,*.pcx,*.ppm,*.img,*.iso,*.svg,*.ico
 set wildignore+=*.so,*.swp,*.zip,*/.Trash/**,*.pdf,*.dmg,*/.rbenv/**
 set wildignore+=*/.nx/**,*.app,*.git,.git
 set wildignore+=*.wav,*.mp3,*.ogg,*.pcm
@@ -184,9 +185,13 @@ set wildignore+=*.mht,*.suo,*.sdf,*.jnlp
 set wildignore+=*.chm,*.epub,*.pdf,*.mobi,*.ttf
 set wildignore+=*.mp4,*.avi,*.flv,*.mov,*.mkv,*.swf,*.swc
 set wildignore+=*.ppt,*.pptx,*.docx,*.xlt,*.xls,*.xlsx,*.odt,*.wps
-set wildignore+=*.msi,*.crx,*.deb,*.vfd,*.apk,*.ipa,*.bin,*.msu
+set wildignore+=*.msi,*.crx,*.deb,*.vfd,*.apk,*.ipa,*.msu
 set wildignore+=*.gba,*.sfc,*.078,*.nds,*.smd,*.smc
 set wildignore+=*.linux2,*.win32,*.darwin,*.freebsd,*.linux,*.android
 set wildignore+=*/.git/**/*,*/.hg/**/*,*/.svn/**/* " 版本控制文件
 set wildignore+=*.sln,*.Master,*.csproj,*.csproj.user,*.cache
 " set wildignore+=tags " 标签文件
+
+" javascritp/typescript 忽略
+set wildignore+=*.lock,*-lock.json,*.css,*.doc,*.json,*/tests/*,*build*.js,*bundle*.js
+set wildignore+=*sites/*/files/*,*.flac,*.less,*.map,*.scss,*.swo,.*rc*
