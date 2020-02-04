@@ -387,26 +387,23 @@ if index(g:bundle_group, 'tags') >= 0
     let g:gutentags_project_root = [ '.root', '.svn', '.git', '.hg', '.project', 'package.json' ]
 
     " 去除生成标签的文件夹
-    let g:gutentags_ctags_exclude = [
-                \ '*.md',
-                \ '.tmux',
-                \ 'bundle',
-                \ 'bundles',
-                \ 'vendor',
-                \ ]
-
+    let g:gutentags_ctags_exclude = []
     " 使用 rg 筛选文件忽略 .gitignore 中的文件生成 tag 的文件
     autocmd FileType * ++once if index(['typescript', 'javascript'], &filetype) >= 0 |
                 \ let g:gutentags_ctags_exclude += [
-                \   "\\@typescript-eslint",
-                \   'bower_components',
+                \   '*.md',
                 \   'build',
                 \   'dist',
-                \   'doc',
-                \   'eslint',
-                \   'eslint-config-alloy',
-                \   'prettier',
+                \   'node_modules',
+                \   'vendor',
                 \ ] |
+                \ elseif &filetype ==# 'vim' |
+                \   let g:gutentags_ctags_exclude += [
+                \     '.tmux',
+                \     'bundle',
+                \     'bundles',
+                \   ]
+                \ | " 指定生成 ctags 的文件, 通过 .gitignore 中的文件，忽略 exclude 配置
                 \ elseif executable('rg') |
                 \     let g:gutentags_file_list_command = 'rg --files' |
                 \ endif
@@ -430,10 +427,10 @@ if index(g:bundle_group, 'tags') >= 0
 
     let g:gutentags_plus_switch = 1
 
-    " 设置 ctags 的参数
+    " 设置 universal-ctags 的参数
     let g:gutentags_ctags_extra_args  = ['--fields=+niazS', '--extras=+q']
-    let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
-    let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+    let g:gutentags_ctags_extra_args += ['--kinds-c++=+px']
+    let g:gutentags_ctags_extra_args += ['--kinds-c=+px']
 
     " 使用 universal-ctags 的话需要下面这行，请反注释
     let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
