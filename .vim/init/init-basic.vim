@@ -193,5 +193,5 @@ set wildignore+=*.sln,*.Master,*.csproj,*.csproj.user,*.cache
 " set wildignore+=tags " 标签文件
 
 " javascritp/typescript 忽略
-set wildignore+=*.lock,*-lock.json,*.css,*.doc,*.json,*/tests/*,*build*.js,*bundle*.js
+set wildignore+=*.lock,*-lock.json,*.css,*.doc,*/tests/*,*build*.js,*bundle*.js
 set wildignore+=*sites/*/files/*,*.flac,*.less,*.map,*.scss,*.swo,.*rc*

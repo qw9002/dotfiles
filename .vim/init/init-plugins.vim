@@ -392,6 +392,7 @@ if index(g:bundle_group, 'tags') >= 0
     autocmd FileType * ++once if index(['typescript', 'javascript'], &filetype) >= 0 |
                 \ let g:gutentags_ctags_exclude += [
                 \   '*.md',
+                \   '*.json',
                 \   'build',
                 \   'dist',
                 \   'node_modules',
