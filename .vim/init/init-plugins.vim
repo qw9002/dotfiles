@@ -386,25 +386,32 @@ if index(g:bundle_group, 'tags') >= 0
     " 设定项目目录标志：除了 .git/.svn 外，还有 .root 文件
     let g:gutentags_project_root = [ '.root', '.svn', '.git', '.hg', '.project', 'package.json' ]
 
+    let g:gutentags_exclude_filetypes = ['startify']
+
     " 去除生成标签的文件夹
     let g:gutentags_ctags_exclude = []
     " 使用 rg 筛选文件忽略 .gitignore 中的文件生成 tag 的文件
-    autocmd FileType * ++once if index(['typescript', 'javascript'], &filetype) >= 0 |
-                \ let g:gutentags_ctags_exclude += [
-                \   '*.md',
-                \   '*.json',
-                \   'build',
-                \   'dist',
-                \   'node_modules',
-                \   'vendor',
-                \ ] |
+    autocmd FileType * ++once
+                \ if index(['typescript', 'javascript', 'json'], &filetype) >= 0 |
+                \   let g:gutentags_ctags_exclude += [
+                \     '*.json',
+                \     '*.md',
+                \     'node_modules',
+                \     'vendor',
+                \   ] |
                 \ elseif &filetype ==# 'vim' |
                 \   let g:gutentags_ctags_exclude += [
+                \     '*.md',
                 \     '.tmux',
+                \     'autoload',
                 \     'bundle',
                 \     'bundles',
-                \   ]
-                \ | " 指定生成 ctags 的文件, 通过 .gitignore 中的文件，忽略 exclude 配置
+                \     'cache',
+                \     'doc',
+                \     'plugin',
+                \     'session',
+                \     'syntax',
+                \   ] |
                 \ elseif executable('rg') |
                 \     let g:gutentags_file_list_command = 'rg --files' |
                 \ endif
@@ -429,7 +436,7 @@ if index(g:bundle_group, 'tags') >= 0
     let g:gutentags_plus_switch = 1
 
     " 设置 universal-ctags 的参数
-    let g:gutentags_ctags_extra_args  = ['--fields=+niazS', '--extras=+q']
+    let g:gutentags_ctags_extra_args  = ['--fields=+niazSlm', '--extras=+q']
     let g:gutentags_ctags_extra_args += ['--kinds-c++=+px']
     let g:gutentags_ctags_extra_args += ['--kinds-c=+px']
 
