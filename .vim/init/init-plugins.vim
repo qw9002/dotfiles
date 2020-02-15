@@ -704,7 +704,7 @@ if index(g:bundle_group, 'ycm') >= 0
 
         " 重构后的结果会加入到 quickfix 中，方便查看修改
         autocmd FileType c,cpp,objc,objcpp,cuda,java,javascript,typescript,rust,cs
-                    \ nnoremap gcr :YcmCompleter RefactorRename
+                    \ nnoremap gcr :YcmCompleter RefactorRename 
 
         autocmd FileType c,cpp,objc,objcpp,cuda,cs,go,java,javascript,rust,typescript
                     \ nnoremap gcs :YcmCompleter RestartServer<CR>
