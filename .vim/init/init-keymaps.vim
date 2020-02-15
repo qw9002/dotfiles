@@ -24,18 +24,6 @@ xnoremap <silent>& :~&<cr>
 " 在可视模式上重复上次宏
 xnoremap <silent>@ :normal @@<cr>
 
-" ALT+h/l 快速左右按单词移动
-" ALT+j/k 逻辑跳转下一行/上一行（按 wrap 逻辑换行进行跳转）
-
-"----------------------------------------------------------------------
-" NORMAL 模式
-"----------------------------------------------------------------------
-noremap <m-h> b
-noremap <m-l> w
-noremap <m-j> gj
-noremap <m-k> gk
-
-
 "----------------------------------------------------------------------
 " INSERT 模式下使用 EMACS 键位
 "----------------------------------------------------------------------
@@ -45,12 +33,6 @@ inoremap <c-a> <home>
 inoremap <c-e> <end>
 inoremap <m-f> <c-right>
 inoremap <m-b> <c-left>
-
-" ALT 键移动增强
-inoremap <m-j> <c-\><c-o>gj
-inoremap <m-k> <c-\><c-o>gk
-inoremap <m-h> <c-left>
-inoremap <m-l> <c-right>
 
 " ctrl+k 删除到行末
 inoremap <c-k> <c-\><c-o>d$
@@ -110,11 +92,12 @@ function! Tab_MoveRight()
 endfunc
 
 noremap <silent> <c-w>tn :tabnew<cr>
-noremap <silent> <c-w>tc :tabclose<cr>
+noremap <silent> <c-w>tq :tabclose<cr>
 noremap <silent> <c-w>to :tabonly<cr>
 noremap <silent> <c-w>tt :tab terminal<cr>
 noremap <silent> <c-w>th :call Tab_MoveLeft()<cr>
 noremap <silent> <c-w>tl :call Tab_MoveRight()<cr>
+noremap <silent> <c-w>td :tabdo 
 
 
 "----------------------------------------------------------------------
@@ -123,24 +106,24 @@ noremap <silent> <c-w>tl :call Tab_MoveRight()<cr>
 " bash/zsh 及带文本界面的程序中都是重要键位需要保留，不能 tnoremap 的
 "----------------------------------------------------------------------
 
-noremap <m-H> <c-w>h
-noremap <m-L> <c-w>l
-noremap <m-J> <c-w>j
-noremap <m-K> <c-w>k
-inoremap <m-H> <esc><c-w>h
-inoremap <m-L> <esc><c-w>l
-inoremap <m-J> <esc><c-w>j
-inoremap <m-K> <esc><c-w>k
+noremap <m-h> <c-w>h
+noremap <m-l> <c-w>l
+noremap <m-j> <c-w>j
+noremap <m-k> <c-w>k
+inoremap <m-h> <esc><c-w>h
+inoremap <m-l> <esc><c-w>l
+inoremap <m-j> <esc><c-w>j
+inoremap <m-k> <esc><c-w>k
 
 if has('terminal') && exists(':terminal') == 2 && has('patch-8.1.1')
     " vim 8.1 支持 termwinkey ，不需要把 terminal 切换成 normal 模式
     " 设置 termwinkey 为 CTRL 加减号（GVIM），有些终端下是 CTRL+?
     " 后面四个键位是搭配 termwinkey 的，如果 termwinkey 更改，也要改
     set termwinkey=<c-_>
-    tnoremap <m-H> <c-_>h
-    tnoremap <m-L> <c-_>l
-    tnoremap <m-J> <c-_>j
-    tnoremap <m-K> <c-_>k
+    tnoremap <m-h> <c-_>h
+    tnoremap <m-l> <c-_>l
+    tnoremap <m-j> <c-_>j
+    tnoremap <m-k> <c-_>k
     tnoremap <m-f> <c-right>
     tnoremap <m-b> <c-left>
 
@@ -155,10 +138,10 @@ if has('terminal') && exists(':terminal') == 2 && has('patch-8.1.1')
 
 elseif has('nvim')
     " neovim 没有 termwinkey 支持，必须把 terminal 切换回 normal 模式
-    tnoremap <m-H> <c-\><c-n><c-w>h
-    tnoremap <m-L> <c-\><c-n><c-w>l
-    tnoremap <m-J> <c-\><c-n><c-w>j
-    tnoremap <m-K> <c-\><c-n><c-w>k
+    tnoremap <m-h> <c-\><c-n><c-w>h
+    tnoremap <m-l> <c-\><c-n><c-w>l
+    tnoremap <m-j> <c-\><c-n><c-w>j
+    tnoremap <m-k> <c-\><c-n><c-w>k
     tnoremap <m-q> <c-\><c-n>
     tnoremap <m-p> <c-\><c-n>"0pa
 endif
