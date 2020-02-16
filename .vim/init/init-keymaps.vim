@@ -24,6 +24,9 @@ xnoremap <silent>& :~&<cr>
 " 在可视模式上重复上次宏
 xnoremap <silent>@ :normal @@<cr>
 
+nnoremap 1p "1p
+nnoremap 1P "1P
+
 "----------------------------------------------------------------------
 " INSERT 模式下使用 EMACS 键位
 "----------------------------------------------------------------------
@@ -35,7 +38,7 @@ inoremap <m-f> <c-right>
 inoremap <m-b> <c-left>
 
 " ctrl+k 删除到行末
-inoremap <c-k> <c-\><c-o>d$
+inoremap <c-k> <c-\><c-o>"_d$
 
 " vim 原组合键 使用 <c-_> 代替
 inoremap <c-_> <c-k>
