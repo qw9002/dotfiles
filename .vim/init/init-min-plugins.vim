@@ -211,140 +211,141 @@ let g:lt_quickfix_list_toggle_map = '<leader>q'
 let g:lt_height = 10
 
 if has('python3')
-    Plug 'ycm-core/YouCompleteMe', { 'do': 'python3 install.py --clang-completer --ts-completer' }
+    Plug 'ycm-core/YouCompleteMe', { 'do': 'python3 install.py --clangd-completer --ts-completer' }
 elseif has('python')
-    Plug 'ycm-core/YouCompleteMe', { 'do': 'python install.py --clang-completer --ts-completer' }
+    Plug 'ycm-core/YouCompleteMe', {
+                \ 'branch': 'legacy-py2',
+                \ 'do': 'python install.py --clang-completer --ts-completer'
+                \ }
 endif
 
-if has('python3') || has('python')
-    " 触发快捷键设置
-    let g:ycm_key_list_select_completion   = ['<c-n>']
-    let g:ycm_key_list_previous_completion = ['<c-p>']
-    let g:ycm_key_list_stop_completion = ['<c-y>']
-    let g:ycm_key_invoke_completion = '<c-z>'
-    " 当用户的光标位于诊断行上时用于显示完整诊断文本。默认 <leader>d
-    let g:ycm_key_detailed_diagnostics = '<leader>d'
-    set completeopt=menu,menuone,popup
+" 触发快捷键设置
+let g:ycm_key_list_select_completion   = ['<c-n>']
+let g:ycm_key_list_previous_completion = ['<c-p>']
+let g:ycm_key_list_stop_completion = ['<c-y>']
+let g:ycm_key_invoke_completion = '<c-z>'
+" 当用户的光标位于诊断行上时用于显示完整诊断文本。默认 <leader>d
+let g:ycm_key_detailed_diagnostics = '<leader>d'
+set completeopt=menu,menuone,popup
 
-    " noremap <c-z> <NOP>
+" noremap <c-z> <NOP>
 
-    let g:ycm_server_log_level = 'info'
-    " 禁用诊断功能：我们用前面更好用的 ALE 代替
-    let g:ycm_show_diagnostics_ui = 1
-    " 禁用预览功能：扰乱视听
-    let g:ycm_add_preview_to_completeopt = 0
-    let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
-    " 不显示load python 提示
-    let g:ycm_confirm_extra_conf=0
-    " 通过ycm语法检测显示错误符号和警告符号
-    let g:ycm_error_symbol   = '✗'
-    let g:ycm_warning_symbol = '⚠'
-    let g:ycm_always_populate_location_list = 1
+let g:ycm_server_log_level = 'info'
+" 禁用诊断功能：我们用前面更好用的 ALE 代替
+let g:ycm_show_diagnostics_ui = 1
+" 禁用预览功能：扰乱视听
+let g:ycm_add_preview_to_completeopt = 0
+let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
+" 不显示load python 提示
+let g:ycm_confirm_extra_conf=0
+" 通过ycm语法检测显示错误符号和警告符号
+let g:ycm_error_symbol   = '✗'
+let g:ycm_warning_symbol = '⚠'
+let g:ycm_always_populate_location_list = 1
 
 
-    " 输入最少字符开启字符补全功能 默认 2
-    " let g:ycm_min_num_of_chars_for_completion = 2
-    " 显示字符候选标识符最少的字符数 默认 0
-    let g:ycm_min_num_identifier_candidate_chars = 4
-    " 最大语义补全符数量 默认 50
-    " let g:ycm_max_num_candidates = 50
-    " 最大标识符数量 默认 10
-    let g:ycm_max_num_identifier_candidates = 3
-    " 设置为 0 时，不再触发语义补全
-    " let g:ycm_auto_trigger = 1
-    " c 语言中的 #include 会自动补全文件
-    let g:ycm_complete_in_strings=1
-    " 设置为 1 时，补全标识符信息会从注释中获取 默认为 0
-    let g:ycm_collect_identifiers_from_comments_and_strings = 1
-    " 当此选项设置为1时，YCM的标识符完成器还将从标记文件中收集标识符
-    " let g:ycm_collect_identifiers_from_tags_files = 1
+" 输入最少字符开启字符补全功能 默认 2
+" let g:ycm_min_num_of_chars_for_completion = 2
+" 显示字符候选标识符最少的字符数 默认 0
+let g:ycm_min_num_identifier_candidate_chars = 4
+" 最大语义补全符数量 默认 50
+" let g:ycm_max_num_candidates = 50
+" 最大标识符数量 默认 10
+let g:ycm_max_num_identifier_candidates = 3
+" 设置为 0 时，不再触发语义补全
+" let g:ycm_auto_trigger = 1
+" c 语言中的 #include 会自动补全文件
+let g:ycm_complete_in_strings=1
+" 设置为 1 时，补全标识符信息会从注释中获取 默认为 0
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
+" 当此选项设置为1时，YCM的标识符完成器还将从标记文件中收集标识符
+" let g:ycm_collect_identifiers_from_tags_files = 1
 
-    " 两个字符自动触发语义补全
-    let g:ycm_semantic_triggers =  {
-                \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{4}'],
-                \ 'cs,lua,javascript,typescript': ['re!\w{4}'],
-                \ }
+" 两个字符自动触发语义补全
+let g:ycm_semantic_triggers =  {
+            \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{4}'],
+            \ 'cs,lua,javascript,typescript': ['re!\w{4}'],
+            \ }
 
-    "----------------------------------------------------------------------
-    " Ycm 白名单（非名单内文件不启用 YCM），避免打开个 1MB 的 txt 分析半天
-    "----------------------------------------------------------------------
-    let g:ycm_filetype_whitelist = {
-                \ 'asciidoc':1,
-                \ 'asm':1,
-                \ 'asm68k':1,
-                \ 'asmh8300':1,
-                \ 'bash':1,
-                \ 'basic':1,
-                \ 'c':1,
-                \ 'cmake':1,
-                \ 'coffee':1,
-                \ 'conf':1,
-                \ 'config':1,
-                \ 'cpp':1,
-                \ 'cs':1,
-                \ 'cson':1,
-                \ 'css':1,
-                \ 'dosini':1,
-                \ 'erlang':1,
-                \ 'go':1,
-                \ 'haskell':1,
-                \ 'html':1,
-                \ 'java':1,
-                \ 'javascript':1,
-                \ 'json':1,
-                \ 'less':1,
-                \ 'lhaskell':1,
-                \ 'lisp':1,
-                \ 'lua':1,
-                \ 'make':1,
-                \ 'man':1,
-                \ 'markdown':1,
-                \ 'masm':1,
-                \ 'matlab':1,
-                \ 'maxima':1,
-                \ 'nasm':1,
-                \ 'objc':1,
-                \ 'objcpp':1,
-                \ 'perl':1,
-                \ 'perl6':1,
-                \ 'php':1,
-                \ 'ps1':1,
-                \ 'python':1,
-                \ 'ruby':1,
-                \ 'rust':1,
-                \ 'scheme':1,
-                \ 'sdl':1,
-                \ 'sh':1,
-                \ 'tasm':1,
-                \ 'typescript':1,
-                \ 'vb':1,
-                \ 'vim':1,
-                \ 'zimbu':1,
-                \ 'zsh':1,
-                \ }
+"----------------------------------------------------------------------
+" Ycm 白名单（非名单内文件不启用 YCM），避免打开个 1MB 的 txt 分析半天
+"----------------------------------------------------------------------
+let g:ycm_filetype_whitelist = {
+            \ 'asciidoc':1,
+            \ 'asm':1,
+            \ 'asm68k':1,
+            \ 'asmh8300':1,
+            \ 'bash':1,
+            \ 'basic':1,
+            \ 'c':1,
+            \ 'cmake':1,
+            \ 'coffee':1,
+            \ 'conf':1,
+            \ 'config':1,
+            \ 'cpp':1,
+            \ 'cs':1,
+            \ 'cson':1,
+            \ 'css':1,
+            \ 'dosini':1,
+            \ 'erlang':1,
+            \ 'go':1,
+            \ 'haskell':1,
+            \ 'html':1,
+            \ 'java':1,
+            \ 'javascript':1,
+            \ 'json':1,
+            \ 'less':1,
+            \ 'lhaskell':1,
+            \ 'lisp':1,
+            \ 'lua':1,
+            \ 'make':1,
+            \ 'man':1,
+            \ 'markdown':1,
+            \ 'masm':1,
+            \ 'matlab':1,
+            \ 'maxima':1,
+            \ 'nasm':1,
+            \ 'objc':1,
+            \ 'objcpp':1,
+            \ 'perl':1,
+            \ 'perl6':1,
+            \ 'php':1,
+            \ 'ps1':1,
+            \ 'python':1,
+            \ 'ruby':1,
+            \ 'rust':1,
+            \ 'scheme':1,
+            \ 'sdl':1,
+            \ 'sh':1,
+            \ 'tasm':1,
+            \ 'typescript':1,
+            \ 'vb':1,
+            \ 'vim':1,
+            \ 'zimbu':1,
+            \ 'zsh':1,
+            \ }
 
-    nnoremap gd :YcmCompleter GoTo<CR>
+nnoremap gd :YcmCompleter GoTo<CR>
 
-    " 重构后的结果会加入到 quickfix 中，方便查看修改
-    autocmd FileType c,cpp,objc,objcpp,cuda,java,javascript,typescript,rust,cs
-                \ nnoremap gcr :YcmCompleter RefactorRename
+" 重构后的结果会加入到 quickfix 中，方便查看修改
+autocmd FileType c,cpp,objc,objcpp,cuda,java,javascript,typescript,rust,cs
+            \ nnoremap gcr :YcmCompleter RefactorRename
 
-    autocmd FileType c,cpp,objc,objcpp,cuda,cs,go,java,javascript,rust,typescript
-                \ nnoremap gcs :YcmCompleter RestartServer<CR>
+autocmd FileType c,cpp,objc,objcpp,cuda,cs,go,java,javascript,rust,typescript
+            \ nnoremap gcs :YcmCompleter RestartServer<CR>
 
-    autocmd FileType c,cpp,objc,objcpp,cuda,java,javascript,go,typescript,rust,cs
-                \ noremap gcf :YcmCompleter Format<CR>
+autocmd FileType c,cpp,objc,objcpp,cuda,java,javascript,go,typescript,rust,cs
+            \ noremap gcf :YcmCompleter Format<CR>
 
-    autocmd FileType c,cpp,objc,objcpp,cuda,java,javascript,go,python,typescript,rust
-                \ nnoremap gct :YcmCompleter GetType<CR>
+autocmd FileType c,cpp,objc,objcpp,cuda,java,javascript,go,python,typescript,rust
+            \ nnoremap gct :YcmCompleter GetType<CR>
 
-    autocmd FileType c,cpp,objc,objcpp,cuda,cs,go,java,javascript,python,typescript,rust
-                \ nnoremap gcd :YcmCompleter GetDoc<CR>
+autocmd FileType c,cpp,objc,objcpp,cuda,cs,go,java,javascript,python,typescript,rust
+            \ nnoremap gcd :YcmCompleter GetDoc<CR>
 
-    autocmd FileType java,javascript,typescript
-                \ nnoremap gco :YcmCompleter OrganizeImports<CR>
+autocmd FileType java,javascript,typescript
+            \ nnoremap gco :YcmCompleter OrganizeImports<CR>
 
-endif
 
 " snippets 片段扩展
 " 通过 VimL 语言的支持 " 需要通过 Python 的支持
