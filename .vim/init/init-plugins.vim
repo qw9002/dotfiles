@@ -621,7 +621,7 @@ if index(g:bundle_group, 'ycm') >= 0
 
     let g:ycm_server_log_level = 'info'
     " 禁用诊断功能：我们用前面更好用的 ALE 代替
-    let g:ycm_show_diagnostics_ui = 0
+    let g:ycm_show_diagnostics_ui = 1
     " 禁用预览功能：扰乱视听
     let g:ycm_add_preview_to_completeopt = 0
     let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
