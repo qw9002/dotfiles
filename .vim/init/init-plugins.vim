@@ -40,10 +40,6 @@ endfunc
 call plug#begin(get(g:, 'bundle_home', '~/.vim/bundles'))
 
 "----------------------------------------------------------------------
-" 默认插件
-"----------------------------------------------------------------------
-
-"----------------------------------------------------------------------
 " 基础插件
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'basic') >= 0
@@ -154,7 +150,25 @@ endif
 " 增强插件
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'enhanced') >= 0
+    Plug 'skywind3000/asynctasks.vim'
     Plug 'skywind3000/asyncrun.vim'
+
+    let g:asyncrun_rootmarks = ['.git', '.svn', '.root', '.project', '.hg']
+    let g:asynctasks_term_pos = 'tab'
+    let g:asyncrun_open = 10
+    let g:asynctasks_term_rows = 10    " 设置纵向切割时，高度为 10
+    let g:asynctasks_term_cols = 60    " 设置横向切割时，宽度为 60
+    let g:asynctasks_term_reuse = 1
+    let g:asynctasks_term_focus = 0
+
+    nnoremap <leader>ar :AsyncRun 
+    nnoremap <leader>as :AsyncStop<cr>
+    nnoremap <leader>am :AsyncTaskMacro<cr>
+    nnoremap <leader>ae :AsyncTaskEdit<cr>
+    nnoremap <leader>al :AsyncTaskList<cr>
+
+    nnoremap <leader>5 :AsyncTask file-run<cr>
+    nnoremap <leader>9 :AsyncTask file-build<cr>
 
     " Diff 增强，支持 histogram / patience 等更科学的 diff 算法
     Plug 'chrisbra/vim-diff-enhanced'
@@ -570,7 +584,8 @@ if index(g:bundle_group, 'leaderf') >= 0
         let g:Lf_PreviewPopupWidth = 100 " 指定 popup window / floating window 的宽度。
 
         if executable('rg')
-            xnoremap <leader>gf :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR>
+            xnoremap gf :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR><CR>
+            noremap gs :<C-U>Leaderf! rg 
         endif
         noremap <leader>cr :<C-U>Leaderf! --recall<CR>
     endif
@@ -594,10 +609,10 @@ if index(g:bundle_group, 'ycm') >= 0
     endif
 
     " 触发快捷键设置
-    let g:ycm_key_list_select_completion   = ['<C-n>']
-    let g:ycm_key_list_previous_completion = ['<C-p>']
-    let g:ycm_key_list_stop_completion = ['<C-y>']
-    let g:ycm_key_invoke_completion = '<C-z>'
+    let g:ycm_key_list_select_completion   = ['<c-n>']
+    let g:ycm_key_list_previous_completion = ['<c-p>']
+    let g:ycm_key_list_stop_completion = ['<c-y>']
+    let g:ycm_key_invoke_completion = '<c-z>'
     " 当用户的光标位于诊断行上时用于显示完整诊断文本。默认 <leader>d
     let g:ycm_key_detailed_diagnostics = '<leader>d'
     set completeopt=menu,menuone,popup

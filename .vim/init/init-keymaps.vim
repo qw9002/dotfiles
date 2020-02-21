@@ -24,6 +24,9 @@ xnoremap <silent>& :~&<cr>
 " 在可视模式上重复上次宏
 xnoremap <silent>@ :normal @@<cr>
 
+cnoremap <c-p> <up>
+cnoremap <c-n> <down>
+
 nnoremap 1p "1p
 nnoremap 1P "1P
 
@@ -127,8 +130,12 @@ if has('terminal') && exists(':terminal') == 2 && has('patch-8.1.1')
     tnoremap <m-l> <c-_>l
     tnoremap <m-j> <c-_>j
     tnoremap <m-k> <c-_>k
+
     tnoremap <m-f> <c-right>
     tnoremap <m-b> <c-left>
+    tnoremap <m-d> <esc>d
+    tnoremap <m-u> <esc>u
+    tnoremap <m-c> <esc>c
 
     tnoremap <m-q> <c-\><c-n>
     tnoremap <m-p> <c-_>"0
@@ -150,99 +157,96 @@ elseif has('nvim')
 endif
 
 
-"----------------------------------------------------------------------
-" 编译运行 C/C++ 项目
-" 详细见：http://www.skywind.me/blog/archives/2084
-"----------------------------------------------------------------------
+""----------------------------------------------------------------------
+"" 编译运行 C/C++ 项目
+"" 详细见：http://www.skywind.me/blog/archives/2084
+""----------------------------------------------------------------------
 
-nnoremap <leader>a :AsyncRun 
-nnoremap <leader>e :AsyncStop<cr>
+"" 自动打开 quickfix window ，高度为 10
+"let g:asyncrun_open = 10
 
-" 自动打开 quickfix window ，高度为 10
-let g:asyncrun_open = 10
+"" 任务结束时候响铃提醒
+"let g:asyncrun_bell = 1
 
-" 任务结束时候响铃提醒
-let g:asyncrun_bell = 1
+"" " 设置 F10 打开/关闭 Quickfix 窗口
+"" nnoremap <leader>10 :call asyncrun#quickfix_toggle(6)<cr>
 
-" " 设置 F10 打开/关闭 Quickfix 窗口
-" nnoremap <leader>10 :call asyncrun#quickfix_toggle(6)<cr>
+"" F9 编译 C/C++ 文件
+"nnoremap <silent> <leader>9 :AsyncRun gcc -std=c99 -Wall -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
 
-" F9 编译 C/C++ 文件
-nnoremap <silent> <leader>9 :AsyncRun gcc -std=c99 -Wall -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
+"" F8 运行项目
+"nnoremap <silent> <leader>8 :AsyncRun -cwd=<root> -raw make run <cr>
 
-" F8 运行项目
-nnoremap <silent> <leader>8 :AsyncRun -cwd=<root> -raw make run <cr>
+"" F7 编译项目
+"nnoremap <silent> <leader>7 :AsyncRun -cwd=<root> make <cr>
 
-" F7 编译项目
-nnoremap <silent> <leader>7 :AsyncRun -cwd=<root> make <cr>
+"" F6 测试项目
+"nnoremap <silent> <leader>6 :AsyncRun -cwd=<root> -raw make test <cr>
 
-" F6 测试项目
-nnoremap <silent> <leader>6 :AsyncRun -cwd=<root> -raw make test <cr>
+"" F5 运行文件
+"nnoremap <silent> <leader>5 :call ExecuteFile()<cr>
 
-" F5 运行文件
-nnoremap <silent> <leader>5 :call ExecuteFile()<cr>
+"" 更新 cmake
+"nnoremap <silent> <leader>4 :AsyncRun -cwd=<root> cmake . <cr>
 
-" 更新 cmake
-nnoremap <silent> <leader>4 :AsyncRun -cwd=<root> cmake . <cr>
+"" 生成o 文件
+"nnoremap <silent> <leader>3 :AsyncRun gcc -std=c99 -Og -c "$(VIM_FILEPATH)" <cr>
 
-" 生成o 文件
-nnoremap <silent> <leader>3 :AsyncRun gcc -std=c99 -Og -c "$(VIM_FILEPATH)" <cr>
+"" 反汇编
+"nnoremap <silent> <leader>1 :vertical terminal objdump -d %:r.o<cr>
 
-" 反汇编
-nnoremap <silent> <leader>1 :vertical terminal objdump -d %:r.o<cr>
-
-" Windows 下支持直接打开新 cmd 窗口运行
-if has('win32') || has('win64')
-    nnoremap <silent> <leader>8 :AsyncRun -cwd=<root> -mode=4 make run <cr>
-endif
+"" Windows 下支持直接打开新 cmd 窗口运行
+"if has('win32') || has('win64')
+"    nnoremap <silent> <leader>8 :AsyncRun -cwd=<root> -mode=4 make run <cr>
+"endif
 
 
-"----------------------------------------------------------------------
-" F5 运行当前文件：根据文件类型判断方法，并且输出到 quickfix 窗口
-"----------------------------------------------------------------------
-function! ExecuteFile()
-    let cmd = ''
-    if index(['c', 'cpp', 'rs', 'go'], &ft) >= 0
-        " native 语言，把当前文件名去掉扩展名后作为可执行运行
-        " 写全路径名是因为后面 -cwd=? 会改变运行时的当前路径，所以写全路径
-        " 加双引号是为了避免路径中包含空格
-        let cmd = '"$(VIM_FILEDIR)/$(VIM_FILENOEXT)"'
-    elseif &ft == 'python'
-        let $PYTHONUNBUFFERED=1 " 关闭 python 缓存，实时看到输出
-        let cmd = 'python "$(VIM_FILEPATH)"'
-    elseif &ft == 'javascript'
-        let cmd = 'node "$(VIM_FILEPATH)"'
-    elseif &ft == 'typescript'
-        let cmd = 'ts-node "$(VIM_FILEPATH)"'
-    elseif &ft == 'perl'
-        let cmd = 'perl "$(VIM_FILEPATH)"'
-    elseif &ft == 'ruby'
-        let cmd = 'ruby "$(VIM_FILEPATH)"'
-    elseif &ft == 'php'
-        let cmd = 'php "$(VIM_FILEPATH)"'
-    elseif &ft == 'lua'
-        let cmd = 'lua "$(VIM_FILEPATH)"'
-    elseif &ft == 'zsh'
-        let cmd = 'zsh "$(VIM_FILEPATH)"'
-    elseif &ft == 'ps1'
-        let cmd = 'powershell -file "$(VIM_FILEPATH)"'
-    elseif &ft == 'vbs'
-        let cmd = 'cscript -nologo "$(VIM_FILEPATH)"'
-    elseif &ft == 'sh'
-        let cmd = 'bash "$(VIM_FILEPATH)"'
-    else
-        return
-    endif
-    " Windows 下打开新的窗口 (-mode=4) 运行程序，其他系统在 quickfix 运行
-    " -raw: 输出内容直接显示到 quickfix window 不匹配 errorformat
-    " -save=2: 保存所有改动过的文件
-    " -cwd=$(VIM_FILEDIR): 运行初始化目录为文件所在目录
-    if has('win32') || has('win64')
-        exec 'AsyncRun -cwd=$(VIM_FILEDIR) -raw -save=2 -mode=4 '. cmd
-    else
-        exec 'AsyncRun -cwd=$(VIM_FILEDIR) -raw -save=2 -mode=0 '. cmd
-    endif
-endfunc
+""----------------------------------------------------------------------
+"" F5 运行当前文件：根据文件类型判断方法，并且输出到 quickfix 窗口
+""----------------------------------------------------------------------
+"function! ExecuteFile()
+"    let cmd = ''
+"    if index(['c', 'cpp', 'rs', 'go'], &ft) >= 0
+"        " native 语言，把当前文件名去掉扩展名后作为可执行运行
+"        " 写全路径名是因为后面 -cwd=? 会改变运行时的当前路径，所以写全路径
+"        " 加双引号是为了避免路径中包含空格
+"        let cmd = '"$(VIM_FILEDIR)/$(VIM_FILENOEXT)"'
+"    elseif &ft == 'python'
+"        let $PYTHONUNBUFFERED=1 " 关闭 python 缓存，实时看到输出
+"        let cmd = 'python "$(VIM_FILEPATH)"'
+"    elseif &ft == 'javascript'
+"        let cmd = 'node "$(VIM_FILEPATH)"'
+"    elseif &ft == 'typescript'
+"        let cmd = 'ts-node "$(VIM_FILEPATH)"'
+"    elseif &ft == 'perl'
+"        let cmd = 'perl "$(VIM_FILEPATH)"'
+"    elseif &ft == 'ruby'
+"        let cmd = 'ruby "$(VIM_FILEPATH)"'
+"    elseif &ft == 'php'
+"        let cmd = 'php "$(VIM_FILEPATH)"'
+"    elseif &ft == 'lua'
+"        let cmd = 'lua "$(VIM_FILEPATH)"'
+"    elseif &ft == 'zsh'
+"        let cmd = 'zsh "$(VIM_FILEPATH)"'
+"    elseif &ft == 'ps1'
+"        let cmd = 'powershell -file "$(VIM_FILEPATH)"'
+"    elseif &ft == 'vbs'
+"        let cmd = 'cscript -nologo "$(VIM_FILEPATH)"'
+"    elseif &ft == 'sh'
+"        let cmd = 'bash "$(VIM_FILEPATH)"'
+"    else
+"        return
+"    endif
+"    " Windows 下打开新的窗口 (-mode=4) 运行程序，其他系统在 quickfix 运行
+"    " -raw: 输出内容直接显示到 quickfix window 不匹配 errorformat
+"    " -save=2: 保存所有改动过的文件
+"    " -cwd=$(VIM_FILEDIR): 运行初始化目录为文件所在目录
+"    if has('win32') || has('win64')
+"        exec 'AsyncRun -cwd=$(VIM_FILEDIR) -raw -save=2 -mode=4 '. cmd
+"    else
+"        exec 'AsyncRun -cwd=$(VIM_FILEDIR) -raw -save=2 -mode=0 '. cmd
+"    endif
+"endfunc
 
 
 "----------------------------------------------------------------------
