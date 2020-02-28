@@ -43,6 +43,25 @@ call plug#begin(get(g:, 'bundle_home', '~/.vim/bundles'))
 " 基础插件
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'basic') >= 0
+    Plug 'skywind3000/asyncrun.vim'
+    Plug 'skywind3000/asynctasks.vim'
+
+    let g:asyncrun_rootmarks = ['.git', '.svn', '.root', '.project', '.hg']
+    let g:asynctasks_term_pos = 'tab'
+    let g:asyncrun_open = 10
+    let g:asynctasks_term_rows = 10    " 设置纵向切割时，高度为 10
+    let g:asynctasks_term_cols = 60    " 设置横向切割时，宽度为 60
+    let g:asynctasks_term_reuse = 1
+    let g:asynctasks_term_focus = 0
+
+    nnoremap <leader>ar :AsyncRun 
+    nnoremap <leader>as :AsyncStop<cr>
+    nnoremap <leader>am :AsyncTaskMacro<cr>
+    nnoremap <leader>ae :AsyncTaskEdit<cr>
+    nnoremap <leader>al :AsyncTaskList<cr>
+
+    nnoremap <leader>5 :AsyncTask file-run<cr>
+    nnoremap <leader>9 :AsyncTask file-build<cr>
 
     " 展示开始画面，显示最近编辑过的文件
     Plug 'mhinz/vim-startify'
@@ -62,9 +81,6 @@ if index(g:bundle_group, 'basic') >= 0
 
     " 使用 <space>ha 清除 errormarker 标注的错误
     " noremap <silent> <space>ha :RemoveErrorMarkers<cr>
-
-    " 提供基于 TAGS 的定义预览，函数参数预览，quickfix 预览
-    Plug 'skywind3000/vim-preview'
 
     " 为其他插件提供重复操作'.'功能
     Plug 'tpope/vim-repeat'
@@ -132,17 +148,6 @@ if index(g:bundle_group, 'basic') >= 0
                 \ 'git': 'git diff --no-color --diff-algorithm=histogram --no-ext-diff -U0 -- %f',
                 \}
 
-    noremap <silent><m-;> :PreviewTag<cr>
-    noremap <silent><m-'> :PreviewClose<cr>
-    noremap <silent><m-,>; :PreviewGoto edit<cr>
-    noremap <silent><m-.>: :PreviewGoto tabe<cr>
-    noremap <m-u> :PreviewScroll -1<cr>
-    noremap <m-d> :PreviewScroll +1<cr>
-    inoremap <m-u> <c-\><c-o>:PreviewScroll -1<cr>
-    inoremap <m-d> <c-\><c-o>:PreviewScroll +1<cr>
-    autocmd FileType qf nnoremap <silent><buffer> p :PreviewQuickfix<cr>
-    autocmd FileType qf nnoremap <silent><buffer> P :PreviewClose<cr>
-    autocmd FileType qf nnoremap <silent><buffer> q :q<cr>
 endif
 
 
@@ -150,26 +155,6 @@ endif
 " 增强插件
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'enhanced') >= 0
-    Plug 'skywind3000/asynctasks.vim'
-    Plug 'skywind3000/asyncrun.vim'
-
-    let g:asyncrun_rootmarks = ['.git', '.svn', '.root', '.project', '.hg']
-    let g:asynctasks_term_pos = 'tab'
-    let g:asyncrun_open = 10
-    let g:asynctasks_term_rows = 10    " 设置纵向切割时，高度为 10
-    let g:asynctasks_term_cols = 60    " 设置横向切割时，宽度为 60
-    let g:asynctasks_term_reuse = 1
-    let g:asynctasks_term_focus = 0
-
-    nnoremap <leader>ar :AsyncRun 
-    nnoremap <leader>as :AsyncStop<cr>
-    nnoremap <leader>am :AsyncTaskMacro<cr>
-    nnoremap <leader>ae :AsyncTaskEdit<cr>
-    nnoremap <leader>al :AsyncTaskList<cr>
-
-    nnoremap <leader>5 :AsyncTask file-run<cr>
-    nnoremap <leader>9 :AsyncTask file-build<cr>
-
     " Diff 增强，支持 histogram / patience 等更科学的 diff 算法
     Plug 'chrisbra/vim-diff-enhanced'
 
@@ -370,7 +355,7 @@ if index(g:bundle_group, 'ale') >= 0
     let g:ale_python_flake8_options  = '--conf='.s:lintcfg('flake8.conf')
     let g:ale_python_pylint_options  = '--rcfile='.s:lintcfg('pylint.conf')
     let g:ale_python_pylint_options .= ' --disable=W'
-    let g:ale_c_gcc_options          = '-Wall -O2 -std=c99'
+    let g:ale_c_gcc_options          = '-Wall -O2 -std=c89'
     let g:ale_cpp_gcc_options        = '-Wall -O2 -std=c++14'
     let g:ale_c_cppcheck_options     = ''
     let g:ale_cpp_cppcheck_options   = ''
@@ -481,6 +466,21 @@ if index(g:bundle_group, 'tags') >= 0
 
     " let g:gutentags_trace = 1
     " let g:gutentags_define_advanced_commands = 1
+
+    " 提供基于 TAGS 的定义预览，函数参数预览，quickfix 预览
+    Plug 'skywind3000/vim-preview'
+
+    noremap <silent><m-;> :PreviewTag<cr>
+    noremap <silent><m-'> :PreviewClose<cr>
+    noremap <silent><m-,>; :PreviewGoto edit<cr>
+    noremap <silent><m-.>: :PreviewGoto tabe<cr>
+    noremap <m-u> :PreviewScroll -1<cr>
+    noremap <m-d> :PreviewScroll +1<cr>
+    inoremap <m-u> <c-\><c-o>:PreviewScroll -1<cr>
+    inoremap <m-d> <c-\><c-o>:PreviewScroll +1<cr>
+    autocmd FileType qf nnoremap <silent><buffer> p :PreviewQuickfix<cr>
+    autocmd FileType qf nnoremap <silent><buffer> P :PreviewClose<cr>
+    autocmd FileType qf nnoremap <silent><buffer> q :q<cr>
 endif
 
 
@@ -621,7 +621,7 @@ if index(g:bundle_group, 'ycm') >= 0
 
     let g:ycm_server_log_level = 'info'
     " 禁用诊断功能：我们用前面更好用的 ALE 代替
-    let g:ycm_show_diagnostics_ui = 0
+    let g:ycm_show_diagnostics_ui = 1
     " 禁用预览功能：扰乱视听
     let g:ycm_add_preview_to_completeopt = 0
     let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
@@ -630,6 +630,7 @@ if index(g:bundle_group, 'ycm') >= 0
     " 通过ycm语法检测显示错误符号和警告符号
     " let g:ycm_error_symbol   = '✗'
     " let g:ycm_warning_symbol = '⚠'
+    let g:ycm_always_populate_location_list = 1
 
     " 输入最少字符开启字符补全功能 默认 2
     " let g:ycm_min_num_of_chars_for_completion = 2
@@ -712,10 +713,11 @@ if index(g:bundle_group, 'ycm') >= 0
                 \ 'zsh':1,
                 \ }
 
-    nnoremap gd :YcmCompleter GoTo<CR>
-
     augroup ycmFileTypeMap
         autocmd!
+
+        autocmd FileType c,cpp,objc,objcpp,cuda,cs,go,java,javascript,python,rust,typescript
+                    \ nnoremap gd :YcmCompleter GoTo<CR>
 
         " 重构后的结果会加入到 quickfix 中，方便查看修改
         autocmd FileType c,cpp,objc,objcpp,cuda,java,javascript,typescript,rust,cs
@@ -735,6 +737,9 @@ if index(g:bundle_group, 'ycm') >= 0
 
         autocmd FileType java,javascript,typescript
                     \ nnoremap gco :YcmCompleter OrganizeImports<CR>
+
+        autocmd FileType c,cpp,objc,objcpp,cuda,cs,go,java,javascript,rust,typescript
+                    \ nnoremap gcx :YcmCompleter FixIt<cr>
 
     augroup end
 endif
@@ -855,3 +860,6 @@ endif
 " 结束插件安装
 "----------------------------------------------------------------------
 call plug#end()
+
+filetype plugin on
+set omnifunc=syntaxcomplete#Complete

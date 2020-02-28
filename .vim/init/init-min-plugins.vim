@@ -325,11 +325,12 @@ let g:ycm_filetype_whitelist = {
             \ 'zsh':1,
             \ }
 
-nnoremap gd :YcmCompleter GoTo<CR>
+autocmd FileType c,cpp,objc,objcpp,cuda,cs,go,java,javascript,python,rust,typescript
+            \ nnoremap gd :YcmCompleter GoTo<CR>
 
 " 重构后的结果会加入到 quickfix 中，方便查看修改
 autocmd FileType c,cpp,objc,objcpp,cuda,java,javascript,typescript,rust,cs
-            \ nnoremap gcr :YcmCompleter RefactorRename
+            \ nnoremap gcr :YcmCompleter RefactorRename 
 
 autocmd FileType c,cpp,objc,objcpp,cuda,cs,go,java,javascript,rust,typescript
             \ nnoremap gcs :YcmCompleter RestartServer<CR>
@@ -346,6 +347,8 @@ autocmd FileType c,cpp,objc,objcpp,cuda,cs,go,java,javascript,python,typescript,
 autocmd FileType java,javascript,typescript
             \ nnoremap gco :YcmCompleter OrganizeImports<CR>
 
+autocmd FileType c,cpp,objc,objcpp,cuda,cs,go,java,javascript,rust,typescript
+            \ nnoremap gcx :YcmCompleter FixIt<cr>
 
 " snippets 片段扩展
 " 通过 VimL 语言的支持 " 需要通过 Python 的支持
@@ -354,7 +357,6 @@ if has('python')
 elseif has('python3')
     Plug 'SirVer/ultisnips'
 endif
-Plug 'honza/vim-snippets'
 let g:UltiSnipsSnippetDirectories  = [ 'UltiSnips', 'mysnippets' ]
 let g:UltiSnipsExpandTrigger       = '<tab>'
 let g:UltiSnipsJumpForwardTrigger  = '<c-j>'
@@ -362,36 +364,6 @@ let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
 let g:UltiSnipsListSnippets        = '<c-l>'
 let g:UltiSnipsEditSplit           = 'vertical'
 
-Plug 'sillybun/vim-repl'
-let g:repl_program = {
-            \   'python': 'python',
-            \   'javascript': 'node',
-            \   'typescript': 'ts-node',
-            \   'r': 'R',
-            \   'lua': 'lua',
-            \   'default': 'bash',
-            \   }
-
-let g:repl_exit_commands = {
-            \   'python': 'quit()',
-            \   'bash': 'exit',
-            \   'zsh': 'exit',
-            \   'node': '.exit',
-            \   "ts-node": '.exit',
-            \   'jshell': '/exit',
-            \   'default': 'exit',
-            \   }
-
-let g:repl_predefine_python = {
-            \   'numpy': 'import numpy as np',
-            \   'matplotlib': 'from matplotlib import pyplot as plt'
-            \   }
-let g:repl_cursor_down = 1
-let g:repl_python_automerge = 1
-let g:repl_ipython_version = '7'
-nnoremap <leader>r :REPLToggle<Cr>
-let g:repl_position = 3
-let g:repl_stayatrepl_when_open = 0
 
 "----------------------------------------------------------------------
 " 结束插件安装
@@ -406,5 +378,5 @@ let g:netrw_banner=0        " disable annoying banner
 let g:netrw_browse_split=4  " open in prior window
 let g:netrw_altv=1          " open splits to the right
 let g:netrw_liststyle=3     " tree view
-let g:netrw_list_hide=netrw_gitignore#Hide()
-let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
+" let g:netrw_list_hide=netrw_gitignore#Hide()
+" let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
