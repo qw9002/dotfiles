@@ -131,7 +131,6 @@ if !exists(":DiffOrig")
 endif
 
 
-
 "----------------------------------------------------------------------
 " 文件类型微调
 "----------------------------------------------------------------------
@@ -168,10 +167,22 @@ augroup InitFileTypesGroup
 
 augroup END
 
+"----------------------------------------------------------------------
+" 终端设置，隐藏行号和侧边栏
+"----------------------------------------------------------------------
+if has('terminal') && exists(':terminal') == 2
+    if exists('##TerminalOpen')
+        augroup VimUnixTerminalGroup
+            au!
+            au TerminalOpen * setlocal nonumber signcolumn=no
+        augroup END
+    endif
+endif
+
+
 " 跳转到对应语言项目中
 augroup FileJump
     au!
-
     au BufLeave *.c    normal! mC
     au BufLeave *.html normal! mH
     au BufLeave *.js   normal! mJ

@@ -215,7 +215,7 @@ alias la='ls -a'
 alias ll='ls -l'
 alias tmux='tmux -2'
 alias vi='vim -u ~/dotfiles/.vim/init-min.vim'
-alias v='vim ~/dotfiles/.vim/init-no-plugin.vim'
+alias v='vim -u ~/dotfiles/.vim/init-no-plugin.vim'
 alias lc=leetcode
 
 # z 命令别名
