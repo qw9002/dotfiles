@@ -71,6 +71,18 @@ cnoremap <c-k> <c-\>e(strpart(getcmdline(), 0, getcmdpos() - 1))<cr>
 " vim 原组合键 使用 <c-_> 代替
 cnoremap <c-_> <c-k>
 
+function Cd()
+    if (strlen(getcmdline()) == 0)
+        return "\<esc>"
+    elseif (strlen(getcmdline()) != 0 && strlen(getcmdline()) > getcmdpos() - 1)
+        let s:cmdline = strpart(getcmdline(), 0, getcmdpos() - 1) . strpart(getcmdline(), getcmdpos())
+        return "\<c-\>e(\"" . s:cmdline . "\")" . "\<cr>"
+    else
+        return "\<c-d>"
+    endif
+endfunc
+cnoremap <expr> <c-d> Cd()
+
 "----------------------------------------------------------------------
 " TAB：创建，关闭，上一个，下一个，首个，末个，左移，右移，
 "----------------------------------------------------------------------

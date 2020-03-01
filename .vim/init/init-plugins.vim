@@ -12,6 +12,7 @@ runtime ftplugin/man.vim
 packadd! termdebug
 " html 标签跳转
 packadd! matchit
+packadd! cfilter
 
 "----------------------------------------------------------------------
 " 默认情况下的分组，可以再前面覆盖之
@@ -117,9 +118,6 @@ if index(g:bundle_group, 'basic') >= 0
     vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR>
     " 高亮在首个匹配上
     nnoremap <silent> <leader>* :keepjumps normal! mi*`i<CR>
-
-    " 筛选符合条件的 argslist 文件并保存到 args 中去, 使用 argdo 处理匹配文件
-    Plug 'nelstrom/vim-qargs'
 
     " 默认不显示 startify
     let g:startify_disable_at_vimenter    = 0
@@ -454,7 +452,8 @@ if index(g:bundle_group, 'tags') >= 0
     let g:gutentags_plus_switch = 1
 
     " 设置 universal-ctags 的参数
-    let g:gutentags_ctags_extra_args  = ['--fields=+niazSlm', '--extras=+q']
+    " let g:gutentags_ctags_extra_args  = ['--fields=+niazSlm', '--extras=+q']
+    let g:gutentags_ctags_extra_args  = ['--fields=+niazSlm']
     let g:gutentags_ctags_extra_args += ['--kinds-c++=+px']
     let g:gutentags_ctags_extra_args += ['--kinds-c=+px']
 
@@ -491,6 +490,11 @@ if index(g:bundle_group, 'leaderf') >= 0
     " 如果 vim 支持 python 则启用  Leaderf
     if has('python') || has('python3')
         Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
+
+        let g:Lf_CtagsFuncOpts = {
+                    \ 'javascript': '--kinds-javascript=fm',
+                    \ 'typescript': '--kinds-typescript=fmc',
+                    \ }
 
         " CTRL+p 打开文件模糊匹配
         let g:Lf_ShortcutF = '<c-p>'
