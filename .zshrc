@@ -214,8 +214,8 @@ alias javac='javac -J-Dfile.encoding=utf8'
 alias la='ls -a'
 alias ll='ls -l'
 alias tmux='tmux -2'
-alias vi='vim -u ~/dotfiles/.vim/init-min.vim'
-alias v='vim -u ~/dotfiles/.vim/init-no-plugin.vim'
+alias vi='vim -u ~/.vim/init-min.vim'
+alias v='vim -u ~/.vim/init-no-plugin.vim'
 alias lc=leetcode
 
 # z 命令别名
@@ -229,8 +229,8 @@ alias zb='z -b' # 快速回到父目录
 # 用什么编辑器打开
 export EDITOR='vim'
 
-alias zshconfig='${EDITOR} ~/.zshrc'
-alias ohmyzsh='${EDITOR} ${ZPLUG}/robbyrussell/oh-my-zsh/oh-my-zsh.sh'
+alias zrc='${EDITOR} ~/.zshrc'
+alias omz='${EDITOR} ${ZPLUG}/robbyrussell/oh-my-zsh/oh-my-zsh.sh'
 alias typora='open -a typora'
 
 alias -s c=${EDITOR}
