@@ -101,7 +101,7 @@ if index(g:bundle_group, 'basic') >= 0
     Plug 'tpope/vim-surround'
 
     " 交换两个或更多的单词
-    " Plug 'tpope/vim-abolish'
+    Plug 'tpope/vim-abolish'
 
     " Git 支持
     Plug 'tpope/vim-fugitive'
@@ -588,7 +588,7 @@ if index(g:bundle_group, 'leaderf') >= 0
         let g:Lf_PreviewPopupWidth = 100 " 指定 popup window / floating window 的宽度。
 
         if executable('rg')
-            xnoremap gf :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR><CR>
+            xnoremap gs :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR><CR>
             noremap gs :<C-U>Leaderf! rg 
         endif
         noremap <leader>cr :<C-U>Leaderf! --recall<CR>
@@ -619,9 +619,7 @@ if index(g:bundle_group, 'ycm') >= 0
     let g:ycm_key_invoke_completion = '<c-z>'
     " 当用户的光标位于诊断行上时用于显示完整诊断文本。默认 <leader>d
     let g:ycm_key_detailed_diagnostics = '<leader>d'
-    set completeopt=menu,menuone,popup
-
-    " noremap <c-z> <NOP>
+    set completeopt+=preview
 
     let g:ycm_server_log_level = 'info'
     " 禁用诊断功能：我们用前面更好用的 ALE 代替
@@ -655,8 +653,9 @@ if index(g:bundle_group, 'ycm') >= 0
 
     " 两个字符自动触发语义补全
     let g:ycm_semantic_triggers =  {
-                \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{4}'],
-                \ 'cs,lua,javascript,typescript': ['re!\w{4}'],
+                \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
+                \ 'cs,lua': ['re!\w{2}'],
+                \ 'javascript,typescript': ['re!([A-Z]\w|\w[A-Z]|\w{2}[A-Z]|\w{4})'],
                 \ }
 
     "----------------------------------------------------------------------

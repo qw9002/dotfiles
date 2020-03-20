@@ -30,6 +30,8 @@ cnoremap <c-n> <down>
 nnoremap 1p "1p
 nnoremap 1P "1P
 
+inoremap <m-y> <c-a>
+
 "----------------------------------------------------------------------
 " INSERT 模式下使用 EMACS 键位
 "----------------------------------------------------------------------
@@ -39,6 +41,9 @@ inoremap <c-a> <home>
 inoremap <c-e> <end>
 inoremap <m-f> <c-right>
 inoremap <m-b> <c-left>
+
+" 跳转到下一行末尾
+inoremap <c-j> <c-o>m`<c-o>2$
 
 " ctrl+k 删除到行末
 inoremap <c-k> <c-\><c-o>"_d$

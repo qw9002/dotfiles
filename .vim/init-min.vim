@@ -40,3 +40,5 @@ LoadScript init/init-style.vim
 
 " 插件加载
 LoadScript init/init-min-plugins.vim
+
+set relativenumber
