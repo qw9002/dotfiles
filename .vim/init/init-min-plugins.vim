@@ -194,14 +194,14 @@ if has('python') || has('python3')
                 \ }
 
     " 开启后不能在普通模式中使用搜索/
-    " let g:Lf_WindowPosition = 'popup'
+    let g:Lf_WindowPosition = 'popup'
     let g:Lf_PreviewInPopup = 1 " 就可以启用这个功能，缺省未启用。
     let g:Lf_PreviewHorizontalPosition = 'center' " 指定 popup window / floating window 的位置。
     let g:Lf_PreviewPopupWidth = 100 " 指定 popup window / floating window 的宽度。
 
     if executable('rg')
-        xnoremap gf :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR><CR>
-        noremap gs :<C-U>Leaderf! rg 
+        xnoremap gs :<C-U><C-R>=printf("Leaderf! rg -F -e %s", leaderf#Rg#visual())<CR><CR>
+        nnoremap gs :<C-U><C-R>=printf("Leaderf! rg -e %s", expand("<cword>"))<CR>
     endif
     noremap <leader>cr :<C-U>Leaderf! --recall<CR>
 endif
