@@ -578,8 +578,8 @@ if index(g:bundle_group, 'leaderf') >= 0
         let g:Lf_PreviewPopupWidth = 100 " 指定 popup window / floating window 的宽度。
 
         if executable('rg')
-            xnoremap gs :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR><CR>
-            noremap gs :<C-U>Leaderf! rg 
+            xnoremap gs :<C-U><C-R>=printf("Leaderf! rg -F -e %s", leaderf#Rg#visual())<CR><CR>
+            nnoremap gs :<C-U><C-R>=printf("Leaderf! rg -e %s", expand("<cword>"))<CR>
         endif
         noremap <leader>cr :<C-U>Leaderf! --recall<CR>
     endif
