@@ -55,14 +55,16 @@ if index(g:bundle_group, 'basic') >= 0
     let g:asynctasks_term_reuse = 1
     let g:asynctasks_term_focus = 0
 
-    nnoremap <leader>ar :AsyncRun 
-    nnoremap <leader>as :AsyncStop<cr>
-    nnoremap <leader>am :AsyncTaskMacro<cr>
-    nnoremap <leader>ae :AsyncTaskEdit<cr>
-    nnoremap <leader>al :AsyncTaskList<cr>
+    nnoremap <silent> <leader>ar :AsyncRun.
+    nnoremap <silent> <leader>as :AsyncStop<cr>
+    nnoremap <silent> <leader>am :AsyncTaskMacro<cr>
+    nnoremap <silent> <leader>ae :AsyncTaskEdit<cr>
+    nnoremap <silent> <leader>al :AsyncTaskList<cr>
 
-    nnoremap <leader>5 :AsyncTask file-run<cr>
-    nnoremap <leader>9 :AsyncTask file-build<cr>
+    nnoremap <silent> <leader>5 :AsyncTask file-run<cr>
+    nnoremap <silent> <leader>9 :AsyncTask file-build<cr>
+    nnoremap <silent> <leader>6 :AsyncTask project-run<cr>
+    nnoremap <silent> <leader>7 :AsyncTask project-build<cr>
 
     " 展示开始画面，显示最近编辑过的文件
     Plug 'mhinz/vim-startify'
@@ -116,8 +118,6 @@ if index(g:bundle_group, 'basic') >= 0
 
     vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR>
     vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR>
-    " 高亮在首个匹配上
-    nnoremap <silent> <leader>* :keepjumps normal! mi*`i<CR>
 
     " 默认不显示 startify
     let g:startify_disable_at_vimenter    = 0
@@ -180,8 +180,8 @@ if index(g:bundle_group, 'enhanced') >= 0
     " 配对括号和引号自动补全
     Plug 'jiangmiao/auto-pairs', {
                 \ 'for': [
-                \   'c',
-                \   'cpp',
+                \   '*.c',
+                \   '*.cpp',
                 \   'java',
                 \   'javascript',
                 \   'python',
@@ -242,7 +242,7 @@ endif
 if index(g:bundle_group, 'filetypes') >= 0
 
     " 额外语法文件
-    Plug 'justinmk/vim-syntax-extra', { 'for': ['c', 'bison', 'flex', 'cpp'] }
+    Plug 'justinmk/vim-syntax-extra', { 'for': ['*.c', 'bison', 'flex', '*.cpp'] }
 
     " C++ 语法高亮增强，支持 11/14/17 标准
     Plug 'octol/vim-cpp-enhanced-highlight', { 'for': ['c', 'cpp'] }
@@ -863,6 +863,3 @@ endif
 " 结束插件安装
 "----------------------------------------------------------------------
 call plug#end()
-
-filetype plugin on
-set omnifunc=syntaxcomplete#Complete

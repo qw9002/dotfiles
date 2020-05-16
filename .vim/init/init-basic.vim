@@ -15,7 +15,8 @@
 set nocompatible
 
 " 设置 Backspace 键模式
-set bs=eol,start,indent
+" set bs=eol,start,indent
+set bs=3
 
 " 自动缩进
 set autoindent
