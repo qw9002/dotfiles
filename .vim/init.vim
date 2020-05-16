@@ -40,5 +40,3 @@ LoadScript init/init-plugins.vim
 
 " 状态栏界面样式
 LoadScript init/init-style.vim
-
-colorscheme dracula
