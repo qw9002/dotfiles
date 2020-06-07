@@ -2,25 +2,33 @@
 "
 " init-plugins.vim -
 "
-"======================================================================
+"   - 默认情况下的分组，可以再前面覆盖之
+"   - 计算当前 vim-init 的子路径
+"   - 安装插件
+"   - 基础插件
+"   - 增强插件
+"   - 文本对象：textobj 全家桶
+"   - 文件类型扩展
+"   - 状态栏 airline
+"   - NERDTree
+"   - ale：动态语法检查
+"   - 自动生成 ctags/gtags，并提供自动索引功能
+"   - LeaderF：CtrlP / FZF 的超级代替者，文件模糊匹配，tags/函数名 选择
+"
 " vim: set ts=4 sw=4 tw=78 noet :
+"======================================================================
 
-" 调用man程序在vim内部查看命令
-runtime ftplugin/man.vim
-
-" 开启 termdebug 功能
-packadd! termdebug
-" html 标签跳转
-packadd! matchit
-packadd! cfilter
 
 "----------------------------------------------------------------------
 " 默认情况下的分组，可以再前面覆盖之
 "----------------------------------------------------------------------
 if !exists('g:bundle_group')
     let g:bundle_group  = ['basic', 'enhanced', 'textobj', 'filetypes']
-    let g:bundle_group += ['airline', 'nerdtree', 'ale']
-    let g:bundle_group += ['tags', 'leaderf', 'ycm', 'snippets']
+    " tags 标签、文件快速导航、智能补全、代码片段、语法检测
+    let g:bundle_group += ['tags', 'leaderf', 'ycm', 'snippets', 'ale']
+    " 状态栏、目录
+    let g:bundle_group += ['airline', 'nerdtree']
+    " 工具、调试，交互执行、markdown
     let g:bundle_group += ['tool']
 endif
 
@@ -36,7 +44,7 @@ endfunc
 
 
 "----------------------------------------------------------------------
-" 在 ~/.vim/bundles 下安装插件
+" 在 ~/.vim/bundles 下 安装插件
 "----------------------------------------------------------------------
 call plug#begin(get(g:, 'bundle_home', '~/.vim/bundles'))
 
@@ -107,17 +115,6 @@ if index(g:bundle_group, 'basic') >= 0
 
     " Git 支持
     Plug 'tpope/vim-fugitive'
-
-    " 可视模式下用 * 号匹配字符串
-    function! s:VSetSearch()
-        let temp = @@
-        norm! gvy
-        let @/ = '\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
-        let @@ = temp
-    endfunction
-
-    vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR>
-    vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR>
 
     " 默认不显示 startify
     let g:startify_disable_at_vimenter    = 0
@@ -255,7 +252,7 @@ endif
 
 
 "----------------------------------------------------------------------
-" airline
+" 状态栏 airline
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'airline') >= 0
     Plug 'vim-airline/vim-airline'
@@ -605,7 +602,7 @@ if index(g:bundle_group, 'ycm') >= 0
     " 触发快捷键设置
     let g:ycm_key_list_select_completion   = ['<c-n>']
     let g:ycm_key_list_previous_completion = ['<c-p>']
-    let g:ycm_key_list_stop_completion = ['<c-y>']
+    let g:ycm_key_list_stop_completion = ['<c-s>']
     let g:ycm_key_invoke_completion = '<c-z>'
     " 当用户的光标位于诊断行上时用于显示完整诊断文本。默认 <leader>d
     let g:ycm_key_detailed_diagnostics = '<leader>d'

@@ -1,4 +1,3 @@
-packadd! cfilter
 "----------------------------------------------------------------------
 " 在 ~/.vim/bundles 下安装插件
 "----------------------------------------------------------------------
@@ -49,17 +48,6 @@ Plug 'tpope/vim-abolish'
 
 " Git 支持
 Plug 'tpope/vim-fugitive'
-
-" 可视模式下用 * 号匹配字符串
-function! s:VSetSearch()
-    let temp = @@
-    norm! gvy
-    let @/ = '\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
-    let @@ = temp
-endfunction
-
-vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR>
-vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR>
 
 " 配对括号和引号自动补全
 Plug 'jiangmiao/auto-pairs'
@@ -215,7 +203,7 @@ let g:ycm_max_diagnostics_to_display = 0
 " 触发快捷键设置
 let g:ycm_key_list_select_completion   = ['<c-n>']
 let g:ycm_key_list_previous_completion = ['<c-p>']
-let g:ycm_key_list_stop_completion = ['<c-y>']
+let g:ycm_key_list_stop_completion = ['<c-s>']
 let g:ycm_key_invoke_completion = '<c-z>'
 " 当用户的光标位于诊断行上时用于显示完整诊断文本。默认 <leader>d
 let g:ycm_key_detailed_diagnostics = '<leader>d'
@@ -367,7 +355,7 @@ let g:UltiSnipsEditSplit           = 'vertical'
 call plug#end()
 
 " Provides tab-completion for all file-related tasks
-set path+=**
+" set path+=**
 
 " Tweaks for browsing
 let g:netrw_banner=0        " disable annoying banner

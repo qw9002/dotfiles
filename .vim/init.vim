@@ -29,9 +29,6 @@ LoadScript init/init-basic.vim
 " 加载终端相关配置
 LoadScript init/init-config.vim
 
-" 自定义按键
-LoadScript init/init-keymaps.vim
-
 " 设定个人的 tabsize
 LoadScript init/init-tabsize.vim
 
@@ -40,3 +37,6 @@ LoadScript init/init-plugins.vim
 
 " 状态栏界面样式
 LoadScript init/init-style.vim
+
+" 自定义按键
+LoadScript init/init-keymaps.vim

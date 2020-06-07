@@ -2,77 +2,57 @@
 "
 " init-config.vim - 正常模式下的配置，在 init-basic.vim 后调用
 "
-"======================================================================
+"   - 设置通用前缀空格键
+"   - Vim 自动把默认剪贴板和系统剪贴板的内容同步
+"   - 功能插件开启
+"   - 防止tmux下vim的背景色显示异常
+"   - 配置微调
+"   - 文件类型微调
+"   - 终端设置，隐藏行号和侧边栏
+"   - 备份设置
+"
 " vim: set ts=4 sw=4 tw=78 noet :
+"======================================================================
+
 
 "----------------------------------------------------------------------
-" 有 tmux 没有的功能键超时（毫秒）
+" 设置通用前缀空格键
 "----------------------------------------------------------------------
-if $TMUX != ''
-    set ttimeoutlen=35
-elseif &ttimeoutlen > 80 || &ttimeoutlen <= 0
-    set ttimeoutlen=85
+let mapleader="\<Space>"
+
+
+"----------------------------------------------------------------------
+" Vim 自动把默认剪贴板和系统剪贴板的内容同步
+"----------------------------------------------------------------------
+if has('clipboard')
+    set clipboard^=unnamed,unnamedplus
+elseif has('unix') && executable('xclip') && executable('xsel')
+    vnoremap <silent><m-y> y:call
+                \ system('echo -n ' . getreg('@0') . ' \| xclip -sel c')<cr>
 endif
 
 
 "----------------------------------------------------------------------
-" 终端下允许 ALT，详见：http://www.skywind.me/blog/archives/2021
-" 记得设置 ttimeout （见 init-basic.vim） 和 ttimeoutlen （上面）
+" 功能插件开启
 "----------------------------------------------------------------------
-if has('nvim') == 0 && has('gui_running') == 0
-    function! s:metacode(key)
-        exec 'set <M-'.a:key.">=\e".a:key
-    endfunc
-    for i in range(10)
-        call s:metacode(nr2char(char2nr('0') + i))
-    endfor
-    for i in range(26)
-        call s:metacode(nr2char(char2nr('a') + i))
-        call s:metacode(nr2char(char2nr('A') + i))
-    endfor
-    for c in [',', '.', '/', ';', '{', '}']
-        call s:metacode(c)
-    endfor
-    for c in ['?', ':', '-', '_', '+', '=', "'"]
-        call s:metacode(c)
-    endfor
-endif
+packadd! termdebug
+packadd! matchit
+packadd! cfilter
 
+" 调用man程序在vim内部查看命令
+runtime ftplugin/man.vim
 
-"----------------------------------------------------------------------
-" 终端下功能键设置
-"----------------------------------------------------------------------
-function! s:key_escape(name, code)
-    if has('nvim') == 0 && has('gui_running') == 0
-        exec 'set '.a:name."=\e".a:code
-    endif
-endfunc
+" 可视模式下用 * 号匹配字符串
+function! s:VSetSearch()
+    let temp = @@
+    norm! gvy
+    let @/ = '\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
+    let @@ = temp
+endfunction
 
+vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR>
+vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR>
 
-"----------------------------------------------------------------------
-" 功能键终端码矫正
-"----------------------------------------------------------------------
-call s:key_escape('<F1>', 'OP')
-call s:key_escape('<F2>', 'OQ')
-call s:key_escape('<F3>', 'OR')
-call s:key_escape('<F4>', 'OS')
-call s:key_escape('<S-F1>', '[1;2P')
-call s:key_escape('<S-F2>', '[1;2Q')
-call s:key_escape('<S-F3>', '[1;2R')
-call s:key_escape('<S-F4>', '[1;2S')
-call s:key_escape('<S-F5>', '[15;2~')
-call s:key_escape('<S-F6>', '[17;2~')
-call s:key_escape('<S-F7>', '[18;2~')
-call s:key_escape('<S-F8>', '[19;2~')
-call s:key_escape('<S-F9>', '[20;2~')
-call s:key_escape('<S-F10>', '[21;2~')
-call s:key_escape('<S-F11>', '[23;2~')
-call s:key_escape('<S-F12>', '[24;2~')
-
-" " 普通模式是方块，插入模式是竖线
-" let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-" let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
-" let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\" 
 
 "----------------------------------------------------------------------
 " 防止tmux下vim的背景色显示异常
@@ -87,22 +67,8 @@ endif
 
 
 "----------------------------------------------------------------------
-" 备份设置
-"----------------------------------------------------------------------
-
-" 无需备份
-set nobackup
-
-" 禁用交换文件
-set noswapfile
-
-" 禁用 undo文件
-set noundofile
-
-"----------------------------------------------------------------------
 " 配置微调
 "----------------------------------------------------------------------
-
 " 修正 ScureCRT/XShell 以及某些终端乱码问题，主要原因是不支持一些
 " 终端控制命令，比如 cursor shaping 这类更改光标形状的 xterm 终端命令
 " 会令一些支持 xterm 不完全的终端解析错误，显示为错误的字符，比如 q 字符
@@ -179,12 +145,15 @@ if has('terminal') && exists(':terminal') == 2
     endif
 endif
 
+"----------------------------------------------------------------------
+" 备份设置
+"----------------------------------------------------------------------
+" 无需备份
+set nobackup
 
-" 跳转到对应语言项目中
-augroup FileJump
-    au!
-    au BufLeave *.c    normal! mC
-    au BufLeave *.html normal! mH
-    au BufLeave *.js   normal! mJ
-    au BufLeave *.ts   normal! mT
-augroup END
+" 禁用交换文件
+set noswapfile
+
+" 禁用 undo文件
+set noundofile
+
