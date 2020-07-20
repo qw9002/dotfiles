@@ -168,6 +168,7 @@ nnoremap Q gq
 
 " 强制退出
 noremap <leader>Q :<c-u>qall!<cr>
+noremap <leader>S :<c-u>wall \| qall<cr>
 
 " 在命令行中展开当前文件的目录
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
@@ -192,3 +193,16 @@ nnoremap <silent>g& :%~&g<cr>
 " 可以使用 "1p 后用 u. 方式可以获取先前删除文本的内容。详情：redo-register
 nnoremap 1p "1p
 nnoremap 1P "1P
+
+
+"----------------------------------------------------------------------
+" 文件类型映射
+"----------------------------------------------------------------------
+augroup InitFileTypesMaps
+
+    " 清除同组的历史 autocommand
+    au!
+
+    au FileType vim noremap <leader>s :<c-u>w \| source %<cr>
+
+augroup END
